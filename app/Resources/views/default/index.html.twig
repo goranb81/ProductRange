@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-{% endblock %}
-
-{% block stylesheets %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
 
                 <h1>Welcome to Product Range application</h1>
-                <button type="button" class="btn btn-info btn-lg active">Users</button>
-                <button type="button" class="btn btn-info btn-lg active">Admin</button>
+                <button type="button" class="btn btn-info btn-lg active"><a href="{{  path('user_index') }}">User</a></button>
+                <button type="button" class="btn btn-info btn-lg active"><a href="{{  path('admin_index') }}">Admin</a></button>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+
 {% endblock %}
