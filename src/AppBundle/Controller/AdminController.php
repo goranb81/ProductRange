@@ -129,7 +129,7 @@ class AdminController extends Controller
         }
 
         // list of objects that represent existing products in pricelist DB table(with status active)
-        //$listOFExistingProductsActive = getlistOFExistingProductsActive($supplierId);
+        $listOFExistingProductsActive = getlistOFExistingProductsActive($supplierId);
 
         // loop throw all products and set to inactive all of them which inputdate < $dateOfStart
 //        foreach ($listOFExistingProductsActive as $productDB){
@@ -138,7 +138,7 @@ class AdminController extends Controller
 //        }
 
          // list of objects that represent existing products in pricelist DB table(with status new_product)
-        //$listOFExistingProductsActive = getlistOFExistingProductsNew($supplierId);
+        $listOFExistingProductsActive = getlistOFExistingProductsNew($supplierId);
 
         // loop throw all products and set to inactive all of them which inputdate < $dateOfStart
 //       foreach ($listOFExistingProductsNew as $productDB){
@@ -219,6 +219,20 @@ class AdminController extends Controller
         }
 
         return $arrayOfExcelProducts;
+    }
+
+    //list of objects that represent existing products in pricelist DB table(with status active)
+    private function getlistOFExistingProductsActive($supplierId){
+        $em = $this->getDoctrine()->getManager();
+        $listOfExistingProductsActive = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $supplierId, 'status'=>'active'));
+        return $listOfExistingProductsActive;
+    }
+
+    // list of objects that represent existing products in pricelist DB table(with status new_product)
+    private function getlistOFExistingProductsNew($supplierId){
+$em = $this->getDoctrine()->getManager();
+$listOfExistingProductsNew = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $supplierId, 'status'=>'new_product'));
+return $listOfExistingProductsNew;
     }
 
 }

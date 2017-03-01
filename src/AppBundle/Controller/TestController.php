@@ -40,10 +40,19 @@ class TestController extends Controller
 
         //
         //get database connection object
+//        $em = $this->getDoctrine()->getManager();
+//        $conn = $em->getConnection();
+//        //update pricelist product in DB
+//        $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=? WHERE externalProductId=?', array(100,$mysqlTimestampFormat,1));
+
+        //################################################
+        //list of objects that represent existing products in pricelist DB table(with status active)
+
         $em = $this->getDoctrine()->getManager();
-        $conn = $em->getConnection();
-        //update pricelist product in DB
-        $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=? WHERE externalProductId=?', array(100,$mysqlTimestampFormat,1));
+        $listOfExistingProductsActive = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => 4, 'status'=>'active'));
+        var_dump($listOfExistingProductsActive);
+
+
 
         return $this->render('default/index.html.twig');
     }
