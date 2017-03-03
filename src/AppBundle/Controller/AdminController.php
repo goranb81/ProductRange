@@ -29,7 +29,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/import_pricelist", name="import_pricelist")
+     * @Route("/importpricelist", name="import_pricelist")
      */
     public function importAction(Request $request)
     {
@@ -59,15 +59,24 @@ class AdminController extends Controller
         $listOFExistingProducts = $this->getListOFExistingProducts($supplierId);
 
         //list of objects that represent products from pricelist's excel file
-        $listOfExcelProducts = $this->getListOfExcelProducts('C:\ALTI 2011-01-10.xls');
+        $listOfExcelProducts = $this->getListOfExcelProducts('C:\TEST\ALTI 2011-01-10.xls');
 
         //timestamp - start import
         $dateOfStart = time();
+        var_dump('Dateof start');
+        var_dump(date("Y-m-d H:i:s", $dateOfStart));
+
+        //time delay becouse without delay
+        //dateOfStart(timestamp) is equal to product imput date(timestamp)
+        //why the timestamps are equal? script set that timestams in the same second!!!!!
+        sleep(1);
 
         //get database connection object
         $em = $this->getDoctrine()->getManager();
         $conn = $em->getConnection();
 
+        //get current DateTime. That format is compatibile to MySql timestamp type
+        $mysqlTimestampFormat = $this->getCurrentDateTime();
 
         //loop throw excel products
         foreach($listOfExcelProducts as $productExcel){
@@ -76,75 +85,112 @@ class AdminController extends Controller
             $p = 'not_found';
 
             //loop throw existing products list and check does excel product exists in DB
-            foreach($listOFExistingProducts as $productDB){
+            foreach($listOFExistingProducts as $productDB) {
+//                var_dump($productDB);
+
+
                 // compare names becouse product from excel and product from database is linked by name
                 // if name is the same then compare product status: new_product, active, inactive
-                if(strcmp( $productDB->getProductname(), $productExcel.getProductname()) == 0){
-                    //return current Unix timestamp in miliseconds(int)
-                    $timestamp = time();
-
-                    //convert timestamp from miliseconds(int) in timestamp format Y-m-d H:i:s
-                    $mysqlTimestampFormat = date("Y-m-d H:i:s", $timestamp);
-
+                $i=0;
+                if (strcmp($productDB->getProductname(), $productExcel->getProductname()) == 0) {
+                    var_dump($i++);
                     // update price and input date if status is new_product
-                    if(strcmp($productDB->getStatus(),'new_product') == 0) {
+                    if (strcmp($productDB->getStatus(), 'new_product') == 0) {
+
+                        //get current DateTime. That format is compatibile to MySql timestamp type
+                        $mysqlTimestampFormat = $this->getCurrentDateTime();
+
                         $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=? WHERE externalProductId=?',
-                                            array($productExcel.getPrice(),$mysqlTimestampFormat,$productDB.getExternalproductid()));
+                            array($productExcel->getPrice(), $mysqlTimestampFormat, $productDB->getExternalproductid()));
+
+                        //external product exists in DB
+                        $p = 'found';
+                        var_dump('new');
+                        var_dump($mysqlTimestampFormat);
+
+                        //update price and input date if status is active
+                    } elseif (strcmp($productDB->getStatus(), 'active') == 0) {
+                        var_dump('active');
+
+                        //get current DateTime. That format is compatibile to MySql timestamp type
+                        $mysqlTimestampFormat = $this->getCurrentDateTime();
+
+                        $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=? WHERE externalProductId=?',
+                            array($productExcel->getPrice(), $mysqlTimestampFormat, $productDB->getExternalproductid()));
+
+
+                        //external product exists in DB
+                        $p = 'found';
+
+                        //update price, input date and status to active if status is inactive
+                    } elseif (strcmp($productDB->getStatus(), 'inactive') == 0) {
+                        var_dump('inactive');
+
+                        //get current DateTime. That format is compatibile to MySql timestamp type
+                        $mysqlTimestampFormat = $this->getCurrentDateTime();
+
+                        $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=?, status=? WHERE externalProductId=?',
+                            array($productExcel->getPrice(), $mysqlTimestampFormat, 'active', $productDB->getExternalproductid()));
+
 
                         //external product exists in DB
                         $p = 'found';
                     }
-
-                    //update price and input date if status is active
-                }elseif(strcmp($productDB->getStatus(), 'active') == 0){
-                    $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=? WHERE externalProductId=?',
-                        array($productExcel.getPrice(),$mysqlTimestampFormat,$productDB.getExternalproductid()));
-
-                    //external product exists in DB
-                    $p = 'found';
-
-                    //update price, input date and status to active if status is inactive
-                }elseif(strcmp($productDB->getStatus(), 'inactive') == 0){
-                    $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=?, status=? WHERE externalProductId=?',
-                        array($productExcel.getPrice(),$mysqlTimestampFormat,'active',$productDB.getExternalproductid()));
-
-                    //external product exists in DB
-                    $p = 'found';
                 }
 
             }
 
-            //if productExcel doesn't exist in DB then insert productExcel into DB
-            if($p=='not_found'){
-                //return current Unix timestamp in miliseconds(int)
-                $timestamp = time();
 
-                //convert timestamp from miliseconds(int) in timestamp format Y-m-d H:i:s
-                $mysqlTimestampFormat = date("Y-m-d H:i:s", $timestamp);
+            //if productExcel doesn't exist in DB then insert productExcel into DB
+            if($p == 'not_found'){
+                var_dump('ubacivanje_novog');
+
+                //get current DateTime. That format is compatibile to MySql timestamp type
+                $mysqlTimestampFormat = $this->getCurrentDateTime();
 
                 $conn->executeUpdate('INSERT INTO pricelists(supplierId, supplierName, productName, price, inputDate, status) VALUES 
-                (?,?,?,?,?,?,?)',array($supplierId, $supplierName, $productExcel.getProductname(),$productExcel.getPrice(), $mysqlTimestampFormat,'new_product'));
+                (?,?,?,?,?,?)',array($supplierId, $supplierName, $productExcel->getProductname(),$productExcel->getPrice(), $mysqlTimestampFormat,'new_product'));
+
             }
 
         }
 
         // list of objects that represent existing products in pricelist DB table(with status active)
-        $listOFExistingProductsActive = getlistOFExistingProductsActive($supplierId);
+        $listOFExistingProductsActive = $this->getlistOFExistingProductsActive($supplierId);
 
-        // loop throw all products and set to inactive all of them which inputdate < $dateOfStart
-//        foreach ($listOFExistingProductsActive as $productDB){
-//            if($productDB.getInputDate() < $dateOfStart)
-//                $productDB.setStatus('inactive');
-//        }
+        // loop throw all products and set to inactive all of them which inputdate(timestamp) is less
+        // than timestamp which represent time when we start import pricelists into DB
+        // Products from DB which input date is less than $dateOfStart must be inactive becouse they
+        // don't exist anymore in pricelists
+        foreach ($listOFExistingProductsActive as $productDB){
+            if($productDB->getInputDate()->getTimestamp() < $dateOfStart) {
+                var_dump('update_aktivnih');
+                $conn->executeUpdate('UPDATE pricelists SET status=? WHERE externalProductId=?',
+                    array('inactive', $productDB->getExternalproductid()));
+
+            }
+        }
 
          // list of objects that represent existing products in pricelist DB table(with status new_product)
-        $listOFExistingProductsActive = getlistOFExistingProductsNew($supplierId);
+        $listOFExistingProductsNew = $this->getlistOFExistingProductsNew($supplierId);
 
-        // loop throw all products and set to inactive all of them which inputdate < $dateOfStart
-//       foreach ($listOFExistingProductsNew as $productDB){
-//        if($productDB.getInputDate() < $dateOfStart)
-//            //execute DELETE PRODUCT FROM TABLE PRICELISTS PRODUCT WHERE PRODUCTID = $productDB.getExternalId()
-//        }
+        // loop throw all products and delete all of them which inputdate < $dateOfStart
+        // It's means all product from pricelists(have status new_product)  which isn't connect to product
+        // from products table and which dateInput is older than time when we start import must be deleted
+        // That products don't exists anymore in pricelist excel file and we cannot consider to connect them to internal products
+       foreach ($listOFExistingProductsNew as $productDB){
+           var_dump("startup timestamp");
+           var_dump(date("Y-m-d H:i:s",$dateOfStart));
+            if($productDB->getInputDate()-> getTimestamp() < $dateOfStart){
+                var_dump('delete_novih');
+                var_dump("product timestamp");
+                //var_dump($productDB->getInputDate()-> getTimestamp());
+                var_dump( date("Y-m-d H:i:s", $productDB->getInputDate()-> getTimestamp()));
+                $conn->executeUpdate('DELETE FROM pricelists  WHERE externalProductId=?',
+                    array($productDB->getExternalproductid()));
+
+            }
+        }
 
 
         return $this->render('admin/import_pricelist.html.twig');
@@ -154,6 +200,9 @@ class AdminController extends Controller
     private function getListOFExistingProducts($supplierId){
         $em = $this->getDoctrine()->getManager();
         $listOfExistingProducts = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $supplierId));
+        //before send data use refresh method to be sure
+        //that entities is fetched from DB not from cache
+        $this->refreshAllEntityObjects($listOfExistingProducts);
         return $listOfExistingProducts;
     }
 
@@ -225,14 +274,38 @@ class AdminController extends Controller
     private function getlistOFExistingProductsActive($supplierId){
         $em = $this->getDoctrine()->getManager();
         $listOfExistingProductsActive = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $supplierId, 'status'=>'active'));
+        //before send data use refresh method to be sure
+        //that entities is fetched from DB not from cache
+        $this->refreshAllEntityObjects($listOfExistingProductsActive);
+
         return $listOfExistingProductsActive;
     }
 
     // list of objects that represent existing products in pricelist DB table(with status new_product)
     private function getlistOFExistingProductsNew($supplierId){
-$em = $this->getDoctrine()->getManager();
-$listOfExistingProductsNew = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $supplierId, 'status'=>'new_product'));
-return $listOfExistingProductsNew;
+        $em = $this->getDoctrine()->getManager();
+        $listOfExistingProductsNew = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $supplierId, 'status'=>'new_product'));
+        //before send data use refresh method to be sure
+        //that entities is fetched from DB not from cache
+        $this->refreshAllEntityObjects($listOfExistingProductsNew);
+        return $listOfExistingProductsNew;
+    }
+
+    private function refreshAllEntityObjects($ArrayOfObject){
+        $em = $this->getDoctrine()->getManager();
+        foreach ($ArrayOfObject as $object){
+            $em->refresh($object);
+        }
+    }
+
+    private function getCurrentDateTime(){
+        //return current Unix timestamp in miliseconds(int)
+        $timestamp = time();
+
+        //convert timestamp from miliseconds(int) in timestamp format Y-m-d H:i:s
+        $mysqlTimestampFormat = date("Y-m-d H:i:s", $timestamp);
+
+        return $mysqlTimestampFormat;
     }
 
 }
