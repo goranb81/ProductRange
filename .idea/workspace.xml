@@ -21,8 +21,8 @@
       <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="97" column="147" lean-forward="true" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="147" />
+            <state relative-caret-position="-289">
+              <caret line="97" column="12" lean-forward="true" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
                 <element signature="e#123#164#0#PHP" expanded="true" />
@@ -487,7 +487,7 @@
       <workItem from="1488532527212" duration="12723000" />
       <workItem from="1488550644732" duration="333000" />
       <workItem from="1488793180504" duration="1368000" />
-      <workItem from="1488804623173" duration="966000" />
+      <workItem from="1488804623173" duration="1687000" />
     </task>
     <servers />
   </component>
@@ -506,10 +506,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137593000" />
+    <option name="totallyTimeSpent" value="138314000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.178125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -926,8 +926,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="97" column="147" lean-forward="true" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="147" />
+        <state relative-caret-position="-289">
+          <caret line="97" column="12" lean-forward="true" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
             <element signature="e#123#164#0#PHP" expanded="true" />
