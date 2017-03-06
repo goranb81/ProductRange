@@ -90,9 +90,12 @@ class AdminController extends Controller
 
 
                 // compare names becouse product from excel and product from database is linked by name
-                // if name is the same then compare product status: new_product, active, inactive
+                // name of $productDB->getProductname() and $productExcel->getProductname() must be the same
+                // and $productDB->getStatus() must be different than trash which means we ignore product which have status trash
+
+                // if name is the same and status isn't trash then compare product status: new_product, active, inactive
                 $i=0;
-                if (strcmp($productDB->getProductname(), $productExcel->getProductname()) == 0) {
+                if (strcmp($productDB->getProductname(), $productExcel->getProductname()) == 0 and strcmp($productDB->getStatus(), 'trash') != 0) {
                     var_dump($i++);
                     // update price and input date if status is new_product
                     if (strcmp($productDB->getStatus(), 'new_product') == 0) {
