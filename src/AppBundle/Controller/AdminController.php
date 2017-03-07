@@ -63,8 +63,21 @@ class AdminController extends Controller
 
         //timestamp - start import
         $dateOfStart = time();
-        var_dump('Dateof start');
-        var_dump(date("Y-m-d H:i:s", $dateOfStart));
+
+//        ########################################################
+//        LOG
+
+//        var_dump('Date of start input');
+//        var_dump(date("Y-m-d H:i:s", $dateOfStart));
+
+//        LOG
+//        ########################################################
+
+          ########################################################
+          LOG
+
+          LOG
+          ########################################################
 
         //time delay becouse without delay
         //dateOfStart(timestamp) is equal to product imput date(timestamp)
@@ -83,17 +96,14 @@ class AdminController extends Controller
 
             //loop throw existing products list and check does excel product exists in DB
             foreach($listOFExistingProducts as $productDB) {
-//                var_dump($productDB);
-
 
                 // compare names becouse product from excel and product from database is linked by name
                 // name of $productDB->getProductname() and $productExcel->getProductname() must be the same
                 // and $productDB->getStatus() must be different than trash which means we ignore product which have status trash
 
                 // if name is the same and status isn't trash then compare product status: new_product, active, inactive
-                $i=0;
+
                 if (strcmp($productDB->getProductname(), $productExcel->getProductname()) == 0) {
-                    var_dump($i++);
 
                     // update price and input date if status is new_product
                     if (strcmp($productDB->getStatus(), 'new_product') == 0) {
@@ -106,8 +116,16 @@ class AdminController extends Controller
 
                         //external product exists in DB
                         $p = 'found';
-                        var_dump('new');
-                        var_dump($mysqlTimestampFormat);
+
+//                        ########################################################
+//                        LOG
+//
+//                        var_dump('change existing new product');
+//                        var_dump($mysqlTimestampFormat);
+//
+//                        LOG
+//                        ########################################################
+
 
                         //update price and input date if status is active
                     } elseif (strcmp($productDB->getStatus(), 'active') == 0) {
@@ -119,9 +137,17 @@ class AdminController extends Controller
                         $conn->executeUpdate('UPDATE pricelists SET price=?, inputDate=? WHERE externalProductId=?',
                             array($productExcel->getPrice(), $mysqlTimestampFormat, $productDB->getExternalproductid()));
 
-
                         //external product exists in DB
                         $p = 'found';
+
+//                        ########################################################
+//                        LOG
+//
+//                        var_dump('change existing active product');
+//                        var_dump($mysqlTimestampFormat);
+//
+//                        LOG
+//                        ########################################################
 
                         //update price, input date and status to active if status is inactive
                     } elseif (strcmp($productDB->getStatus(), 'inactive') == 0) {
@@ -136,6 +162,15 @@ class AdminController extends Controller
 
                         //external product exists in DB
                         $p = 'found';
+
+//                        ########################################################
+//                        LOG
+//
+//                        var_dump('change existing inactive product');
+//                        var_dump($mysqlTimestampFormat);
+//
+//                        LOG
+//                        ########################################################
                     }
                 }
 
@@ -144,7 +179,6 @@ class AdminController extends Controller
 
             //if productExcel doesn't exist in DB then insert productExcel into DB
             if($p == 'not_found'){
-                var_dump('ubacivanje_novog');
 
                 //get current DateTime. That format is compatibile to MySql timestamp type
                 $mysqlTimestampFormat = $this->getCurrentDateTime();
@@ -152,6 +186,14 @@ class AdminController extends Controller
                 $conn->executeUpdate('INSERT INTO pricelists(supplierId, supplierName, productName, price, inputDate, status) VALUES 
                 (?,?,?,?,?,?)',array($supplierId, $supplierName, $productExcel->getProductname(),$productExcel->getPrice(), $mysqlTimestampFormat,'new_product'));
 
+//                        ########################################################
+//                        LOG
+//
+//                        var_dump('input new product');
+//                        var_dump($mysqlTimestampFormat);
+//
+//                        LOG
+//                        ########################################################
             }
 
         }
@@ -165,7 +207,7 @@ class AdminController extends Controller
         // don't exist anymore in pricelists
         foreach ($listOFExistingProductsActive as $productDB){
             if($productDB->getInputDate()->getTimestamp() < $dateOfStart) {
-                var_dump('update_aktivnih');
+
                 $conn->executeUpdate('UPDATE pricelists SET status=? WHERE externalProductId=?',
                     array('inactive', $productDB->getExternalproductid()));
 
@@ -180,13 +222,8 @@ class AdminController extends Controller
         // from products table and which dateInput is older than time when we start import must be deleted
         // That products don't exists anymore in pricelist excel file and we cannot consider to connect them to internal products
        foreach ($listOFExistingProductsNew as $productDB){
-           var_dump("startup timestamp");
-           var_dump(date("Y-m-d H:i:s",$dateOfStart));
             if($productDB->getInputDate()-> getTimestamp() < $dateOfStart){
-                var_dump('delete_novih');
-                var_dump("product timestamp");
-                //var_dump($productDB->getInputDate()-> getTimestamp());
-                var_dump( date("Y-m-d H:i:s", $productDB->getInputDate()-> getTimestamp()));
+                
                 $conn->executeUpdate('DELETE FROM pricelists  WHERE externalProductId=?',
                     array($productDB->getExternalproductid()));
 
