@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\HelperClasses\ExcelProduct;
+use AppBundle\Entity\Pricelists;
 
 class TestController extends Controller
 {
@@ -74,8 +75,42 @@ class TestController extends Controller
 //        var_dump($timestamp);
 //        var_dump($timestamp1);
 
-        var_dump(date("Y-m-d H:i:s", 1488534204));
-        var_dump(date("Y-m-d H:i:s", 1488533808));
+//        var_dump(date("Y-m-d H:i:s", 1488534204));
+//        var_dump(date("Y-m-d H:i:s", 1488533808));
+
+        //################################################
+        //get entity using criteria using doctrine
+        // that is similar like write statement with WHERE clause
+
+
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+
+
+        //version 1 query builder
+//        $qb -> select('p')
+//              ->from('AppBundle:Pricelists', 'p')
+//              ->where('p.suppliername = :suppliername')
+//              ->andWhere('p.status <> :status')
+//              ->setParameters(array('suppliername' => 'Kodak', 'status' => 'trash'));
+//        $result = $qb->getQuery()->getArrayResult();
+//
+//        $pricelistsEntitisArray = $this->convertArrayResultIntoEntitysArray($result);
+//
+//        $this->refreshAllEntityObjects($pricelistsEntitisArray);
+//
+//        var_dump($pricelistsEntitisArray);
+
+
+        //version 2 by Entity manager becouse it returns directly array of entity's objects
+        $status = "'trash'";
+        $supplierid = 4;
+        $statement = "select p from AppBundle\Entity\Pricelists p where p.status <> " . $status . " and p.supplierid = " . $supplierid;
+        $q = $em->createQuery($statement);
+        $arrayOfProducts = $q->getResult();
+        $this->refreshAllEntityObjects($arrayOfProducts);
+        var_dump($arrayOfProducts);
+//        var_dump($statement);
 
         return $this->render('default/index.html.twig');
     }
@@ -143,4 +178,50 @@ class TestController extends Controller
 
         return $arrayOfExcelProducts;
     }
+
+    private function refreshAllEntityObjects($ArrayOfObject){
+        $em = $this->getDoctrine()->getManager();
+        foreach ($ArrayOfObject as $object){
+            $em->refresh($object);
+        }
+    }
+
+    // transform ArrayResult (we get when execute $qb->getQuery()->getArrayResult();)
+    // into array of Pricelists entity's objects
+    private function convertArrayResultIntoEntitysArray($arrayResult){
+        $entitiesArray = array();
+        foreach ($arrayResult as $element){
+            $p = new Pricelists();
+            $p->setSupplierid($element['supplierid']);
+            $p->setSuppliername($element['suppliername']);
+            $p->setProductname($element['productname']);
+            $p->setPrice($element['price']);
+            $p->setInputdate($element['inputdate']);
+            $p->setStatus($element['status']);
+            $p->getExternalproductid($element['externalproductid']);
+            $entitiesArray[] = $p;
+        }
+
+        return $entitiesArray;
+
+
+        //example of element
+//        array (size=7)
+//        'supplierid' => int 4
+//        'suppliername' => string 'Kodak' (length=5)
+//        'productname' => string 'PPPPPP' (length=6)
+//        'price' => float 144.75
+//        'inputdate' =>
+//        object(DateTime)[441]
+//        public 'date' => string '2017-03-06 14:59:36.000000' (length=26)
+//        public 'timezone_type' => int 3
+//        public 'timezone' => string 'Europe/Berlin' (length=13)
+//        'status' => string 'inactive' (length=8)
+//        'externalproductid' => int 68
+
+    }
+
+
+
+
 }

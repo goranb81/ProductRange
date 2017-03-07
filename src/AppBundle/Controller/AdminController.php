@@ -75,9 +75,6 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $conn = $em->getConnection();
 
-        //get current DateTime. That format is compatibile to MySql timestamp type
-        $mysqlTimestampFormat = $this->getCurrentDateTime();
-
         //loop throw excel products
         foreach($listOfExcelProducts as $productExcel){
 
@@ -95,8 +92,9 @@ class AdminController extends Controller
 
                 // if name is the same and status isn't trash then compare product status: new_product, active, inactive
                 $i=0;
-                if (strcmp($productDB->getProductname(), $productExcel->getProductname()) == 0 and strcmp($productDB->getStatus(), 'trash') != 0) {
+                if (strcmp($productDB->getProductname(), $productExcel->getProductname()) == 0) {
                     var_dump($i++);
+
                     // update price and input date if status is new_product
                     if (strcmp($productDB->getStatus(), 'new_product') == 0) {
 
@@ -200,9 +198,14 @@ class AdminController extends Controller
     }
 
     // get all products from table Pricelists for particularly supplier
+    // exclude products that have status trash
     private function getListOFExistingProducts($supplierId){
         $em = $this->getDoctrine()->getManager();
-        $listOfExistingProducts = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $supplierId));
+        $status = "'trash'";
+        $statement = "select p from AppBundle\Entity\Pricelists p where p.status <> " . $status . " and p.supplierid = " . $supplierId;
+        $q = $em->createQuery($statement);
+        $listOfExistingProducts = $q->getResult();
+
         //before send data use refresh method to be sure
         //that entities is fetched from DB not from cache
         $this->refreshAllEntityObjects($listOfExistingProducts);

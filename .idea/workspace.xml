@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b47187f2-b1fc-4fde-a977-c88fff166287" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TestController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TestController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,17 +22,18 @@
       <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="97" column="147" lean-forward="true" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="147" />
+            <state relative-caret-position="-441">
+              <caret line="94" column="97" lean-forward="true" selection-start-line="94" selection-start-column="97" selection-end-line="94" selection-end-column="97" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
                 <element signature="e#123#164#0#PHP" expanded="true" />
-                <marker date="1488807283913" expanded="true" signature="3822:3890" ph="UPDATE price... " />
-                <marker date="1488807283913" expanded="true" signature="4631:4699" ph="UPDATE price... " />
-                <marker date="1488807283913" expanded="true" signature="5367:5445" ph="UPDATE price... " />
-                <marker date="1488807283913" expanded="true" signature="6097:6222" ph="INSERT INTO pricelists... " />
-                <marker date="1488807283913" expanded="true" signature="7136:7192" ph="UPDATE price... " />
-                <marker date="1488807283913" expanded="true" signature="8451:8500" ph="DELETE FROM " />
+                <marker date="1488882928767" expanded="true" signature="3628:3696" ph="UPDATE price... " />
+                <marker date="1488882928767" expanded="true" signature="4437:4505" ph="UPDATE price... " />
+                <marker date="1488882928767" expanded="true" signature="5173:5251" ph="UPDATE price... " />
+                <marker date="1488882928767" expanded="true" signature="5903:6028" ph="INSERT INTO pricelists... " />
+                <marker date="1488882928767" expanded="true" signature="6942:6998" ph="UPDATE price... " />
+                <marker date="1488882928767" expanded="true" signature="8257:8306" ph="DELETE FROM " />
+                <marker date="1488882928767" expanded="true" signature="8754:8851" ph="select p fro... AppBundle" />
               </folding>
             </state>
           </provider>
@@ -39,11 +42,16 @@
       <file leaf-file-name="TestController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TestController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1309">
-              <caret line="77" column="47" lean-forward="false" selection-start-line="77" selection-start-column="47" selection-end-line="77" selection-end-column="47" />
+            <state relative-caret-position="685">
+              <caret line="105" column="25" lean-forward="false" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
                 <element signature="e#123#182#0#PHP" expanded="true" />
+                <marker date="1488882590682" expanded="true" signature="3783:3844" ph="select p fro... AppBundle" />
+                <marker date="1488882590682" expanded="true" signature="3783:3845" ph="select p fro... AppBundle" />
+                <marker date="1488882590682" expanded="true" signature="3783:3879" ph="select p fro... AppBundle" />
+                <marker date="1488882590682" expanded="true" signature="3783:3880" ph="select p fro... AppBundle" />
+                <marker date="1488882590682" expanded="true" signature="3783:3881" ph="select p fro... AppBundle" />
               </folding>
             </state>
           </provider>
@@ -72,8 +80,8 @@
       <file leaf-file-name="Pricelists.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Pricelists.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3094">
-              <caret line="182" column="34" lean-forward="false" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="34" />
+            <state relative-caret-position="429">
+              <caret line="188" column="17" lean-forward="false" selection-start-line="188" selection-start-column="11" selection-end-line="188" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -93,7 +101,6 @@
       <find>migration</find>
       <find>getlistOFExistingProducts</find>
       <find>excel</find>
-      <find>getListOfExcelProducts</find>
       <find>var_dump</find>
       <find>getlistOFExistingProductsNew</find>
       <find>getlistOFExistingProductsActive</find>
@@ -102,6 +109,8 @@
       <find>getListOFExistingProducts</find>
       <find>$mysqlTimestampFormat</find>
       <find>getCurrentDateTime</find>
+      <find>status</find>
+      <find>getListOfExcelProducts</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -165,6 +174,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -363,7 +373,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -485,6 +494,8 @@
       <workItem from="1488447003136" duration="14879000" />
       <workItem from="1488532527212" duration="12723000" />
       <workItem from="1488807185495" duration="132000" />
+      <workItem from="1488810103419" duration="123000" />
+      <workItem from="1488871518772" duration="8084000" />
     </task>
     <servers />
   </component>
@@ -503,7 +514,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135058000" />
+    <option name="totallyTimeSpent" value="145624000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -548,12 +559,13 @@
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
             <element signature="e#123#164#0#PHP" expanded="true" />
-            <marker date="1488807283913" expanded="true" signature="3822:3890" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="4631:4699" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="5367:5445" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="6097:6222" ph="INSERT INTO pricelists... " />
-            <marker date="1488807283913" expanded="true" signature="7136:7192" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="8451:8500" ph="DELETE FROM " />
+            <marker date="1488882928767" expanded="true" signature="3628:3696" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="4437:4505" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="5173:5251" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="5903:6028" ph="INSERT INTO pricelists... " />
+            <marker date="1488882928767" expanded="true" signature="6942:6998" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="8257:8306" ph="DELETE FROM " />
+            <marker date="1488882928767" expanded="true" signature="8754:8851" ph="select p fro... AppBundle" />
           </folding>
         </state>
       </provider>
@@ -886,14 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/HelperClasses/ProcessingExcel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/HelperClasses/ExcelProduct.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -902,38 +906,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/HelperClasses/ProcessingExcel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Pricelists.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3094">
-          <caret line="182" column="34" lean-forward="false" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="34" />
+        <state relative-caret-position="429">
+          <caret line="188" column="17" lean-forward="false" selection-start-line="188" selection-start-column="11" selection-end-line="188" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TestController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="47" lean-forward="false" selection-start-line="77" selection-start-column="47" selection-end-line="77" selection-end-column="47" />
+        <state relative-caret-position="685">
+          <caret line="105" column="25" lean-forward="false" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
             <element signature="e#123#182#0#PHP" expanded="true" />
+            <marker date="1488882590682" expanded="true" signature="3783:3844" ph="select p fro... AppBundle" />
+            <marker date="1488882590682" expanded="true" signature="3783:3845" ph="select p fro... AppBundle" />
+            <marker date="1488882590682" expanded="true" signature="3783:3879" ph="select p fro... AppBundle" />
+            <marker date="1488882590682" expanded="true" signature="3783:3880" ph="select p fro... AppBundle" />
+            <marker date="1488882590682" expanded="true" signature="3783:3881" ph="select p fro... AppBundle" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="97" column="147" lean-forward="true" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="147" />
+        <state relative-caret-position="-441">
+          <caret line="94" column="97" lean-forward="true" selection-start-line="94" selection-start-column="97" selection-end-line="94" selection-end-column="97" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
             <element signature="e#123#164#0#PHP" expanded="true" />
-            <marker date="1488807283913" expanded="true" signature="3822:3890" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="4631:4699" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="5367:5445" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="6097:6222" ph="INSERT INTO pricelists... " />
-            <marker date="1488807283913" expanded="true" signature="7136:7192" ph="UPDATE price... " />
-            <marker date="1488807283913" expanded="true" signature="8451:8500" ph="DELETE FROM " />
+            <marker date="1488882928767" expanded="true" signature="3628:3696" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="4437:4505" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="5173:5251" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="5903:6028" ph="INSERT INTO pricelists... " />
+            <marker date="1488882928767" expanded="true" signature="6942:6998" ph="UPDATE price... " />
+            <marker date="1488882928767" expanded="true" signature="8257:8306" ph="DELETE FROM " />
+            <marker date="1488882928767" expanded="true" signature="8754:8851" ph="select p fro... AppBundle" />
           </folding>
         </state>
       </provider>
