@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b47187f2-b1fc-4fde-a977-c88fff166287" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,18 +20,18 @@
       <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="744">
-              <caret line="225" column="16" lean-forward="false" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="16" />
+            <state relative-caret-position="221">
+              <caret line="73" column="66" lean-forward="false" selection-start-line="73" selection-start-column="66" selection-end-line="73" selection-end-column="66" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
                 <element signature="e#123#164#0#PHP" expanded="true" />
-                <marker date="1488888693235" expanded="true" signature="3870:3938" ph="UPDATE price... " />
-                <marker date="1488888693235" expanded="true" signature="4941:5009" ph="UPDATE price... " />
-                <marker date="1488888693235" expanded="true" signature="6038:6116" ph="UPDATE price... " />
-                <marker date="1488888693235" expanded="true" signature="7086:7211" ph="INSERT INTO pricelists... " />
-                <marker date="1488888693235" expanded="true" signature="8429:8485" ph="UPDATE price... " />
-                <marker date="1488888693235" expanded="true" signature="9409:9458" ph="DELETE FROM " />
-                <marker date="1488888693235" expanded="true" signature="9906:10003" ph="select p fro... AppBundle" />
+                <marker date="1488888838547" expanded="true" signature="3706:3774" ph="UPDATE price... " />
+                <marker date="1488888838547" expanded="true" signature="4777:4845" ph="UPDATE price... " />
+                <marker date="1488888838547" expanded="true" signature="5874:5952" ph="UPDATE price... " />
+                <marker date="1488888838547" expanded="true" signature="6922:7047" ph="INSERT INTO pricelists... " />
+                <marker date="1488888838547" expanded="true" signature="8265:8321" ph="UPDATE price... " />
+                <marker date="1488888838547" expanded="true" signature="9229:9278" ph="DELETE FROM " />
+                <marker date="1488888838547" expanded="true" signature="9726:9823" ph="select p fro... AppBundle" />
               </folding>
             </state>
           </provider>
@@ -342,7 +341,7 @@
       <workItem from="1488532527212" duration="12723000" />
       <workItem from="1488807185495" duration="132000" />
       <workItem from="1488810103419" duration="123000" />
-      <workItem from="1488871518772" duration="8814000" />
+      <workItem from="1488871518772" duration="8923000" />
     </task>
     <servers />
   </component>
@@ -361,7 +360,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146354000" />
+    <option name="totallyTimeSpent" value="146463000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -406,13 +405,13 @@
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
             <element signature="e#123#164#0#PHP" expanded="true" />
-            <marker date="1488888693235" expanded="true" signature="3870:3938" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="4941:5009" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="6038:6116" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="7086:7211" ph="INSERT INTO pricelists... " />
-            <marker date="1488888693235" expanded="true" signature="8429:8485" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="9409:9458" ph="DELETE FROM " />
-            <marker date="1488888693235" expanded="true" signature="9906:10003" ph="select p fro... AppBundle" />
+            <marker date="1488888838547" expanded="true" signature="3706:3774" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="4777:4845" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="5874:5952" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="6922:7047" ph="INSERT INTO pricelists... " />
+            <marker date="1488888838547" expanded="true" signature="8265:8321" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="9229:9278" ph="DELETE FROM " />
+            <marker date="1488888838547" expanded="true" signature="9726:9823" ph="select p fro... AppBundle" />
           </folding>
         </state>
       </provider>
@@ -787,18 +786,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="225" column="16" lean-forward="false" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="16" />
+        <state relative-caret-position="221">
+          <caret line="73" column="66" lean-forward="false" selection-start-line="73" selection-start-column="66" selection-end-line="73" selection-end-column="66" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
             <element signature="e#123#164#0#PHP" expanded="true" />
-            <marker date="1488888693235" expanded="true" signature="3870:3938" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="4941:5009" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="6038:6116" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="7086:7211" ph="INSERT INTO pricelists... " />
-            <marker date="1488888693235" expanded="true" signature="8429:8485" ph="UPDATE price... " />
-            <marker date="1488888693235" expanded="true" signature="9409:9458" ph="DELETE FROM " />
-            <marker date="1488888693235" expanded="true" signature="9906:10003" ph="select p fro... AppBundle" />
+            <marker date="1488888838547" expanded="true" signature="3706:3774" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="4777:4845" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="5874:5952" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="6922:7047" ph="INSERT INTO pricelists... " />
+            <marker date="1488888838547" expanded="true" signature="8265:8321" ph="UPDATE price... " />
+            <marker date="1488888838547" expanded="true" signature="9229:9278" ph="DELETE FROM " />
+            <marker date="1488888838547" expanded="true" signature="9726:9823" ph="select p fro... AppBundle" />
           </folding>
         </state>
       </provider>

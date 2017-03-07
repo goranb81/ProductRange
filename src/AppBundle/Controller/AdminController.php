@@ -73,12 +73,6 @@ class AdminController extends Controller
 //        LOG
 //        ########################################################
 
-          ########################################################
-          LOG
-
-          LOG
-          ########################################################
-
         //time delay becouse without delay
         //dateOfStart(timestamp) is equal to product imput date(timestamp)
         //why the timestamps are equal? script set that timestams in the same second!!!!!
@@ -223,7 +217,7 @@ class AdminController extends Controller
         // That products don't exists anymore in pricelist excel file and we cannot consider to connect them to internal products
        foreach ($listOFExistingProductsNew as $productDB){
             if($productDB->getInputDate()-> getTimestamp() < $dateOfStart){
-                
+
                 $conn->executeUpdate('DELETE FROM pricelists  WHERE externalProductId=?',
                     array($productDB->getExternalproductid()));
 
