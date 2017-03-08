@@ -1,0 +1,4 @@
+services:
+#    bee_input_excel.example:
+#        class: Bee\InputExcelBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -6,7 +6,7 @@
  * Time: 11:19
  */
 
-namespace AppBundle\HelperClasses;
+namespace Bee\InputExcelBundle\HelperClasses;
 
 class ProcessingExcel {
 

@@ -1,3 +1,8 @@
+bee_input_excel:
+    resource: "@BeeInputExcelBundle/Controller/"
+    type:     annotation
+    prefix:   /inputexcel
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

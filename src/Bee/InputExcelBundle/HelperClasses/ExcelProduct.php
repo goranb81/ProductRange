@@ -6,7 +6,7 @@
  * Time: 11:25
  */
 
-namespace AppBundle\HelperClasses;
+namespace Bee\InputExcelBundle\HelperClasses;
 
 
 class ExcelProduct
