@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b47187f2-b1fc-4fde-a977-c88fff166287" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/HelperClasses/ExcelProduct.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/HelperClasses/ProcessingExcel.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/BeeInputExcelBundle.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/Controller/InputExcelController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/DependencyInjection/BeeInputExcelExtension.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/DependencyInjection/Configuration.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/Resources/config/services.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/Resources/views/Default/index.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/Tests/Controller/DefaultControllerTest.php" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/.gitkeep" afterPath="" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/src/AppBundle/HelperClasses/ExcelProduct.php" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/HelperClasses/ExcelProduct.php" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/src/AppBundle/HelperClasses/ProcessingExcel.php" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/HelperClasses/ProcessingExcel.php" />
@@ -28,18 +33,18 @@
       <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="3" lean-forward="false" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+            <state relative-caret-position="153">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
-                <element signature="e#123#164#0#PHP" expanded="true" />
-                <marker date="1488971208703" expanded="true" signature="3862:3930" ph="UPDATE price... " />
-                <marker date="1488971208703" expanded="true" signature="4979:5047" ph="UPDATE price... " />
-                <marker date="1488971208703" expanded="true" signature="6120:6198" ph="UPDATE price... " />
-                <marker date="1488971208703" expanded="true" signature="7222:7348" ph="INSERT INTO pricelists... " />
-                <marker date="1488971208703" expanded="true" signature="8614:8670" ph="UPDATE price... " />
-                <marker date="1488971208703" expanded="true" signature="9610:9659" ph="DELETE FROM " />
-                <marker date="1488971208703" expanded="true" signature="10137:10234" ph="select p fro... AppBundle" />
+                <element signature="e#123#182#0#PHP" expanded="true" />
+                <marker date="1488974997302" expanded="true" signature="3820:3888" ph="UPDATE price... " />
+                <marker date="1488974997302" expanded="true" signature="4937:5005" ph="UPDATE price... " />
+                <marker date="1488974997302" expanded="true" signature="6078:6156" ph="UPDATE price... " />
+                <marker date="1488974997302" expanded="true" signature="7180:7306" ph="INSERT INTO pricelists... " />
+                <marker date="1488974997302" expanded="true" signature="8572:8628" ph="UPDATE price... " />
+                <marker date="1488974997302" expanded="true" signature="9568:9617" ph="DELETE FROM " />
+                <marker date="1488974997302" expanded="true" signature="10095:10192" ph="select p fro... AppBundle" />
               </folding>
             </state>
           </provider>
@@ -183,11 +188,11 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/TestController.php" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/Bee/InputExcelBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/Bee/InputExcelBundle/HelperClasses/ExcelProduct.php" />
         <option value="$PROJECT_DIR$/src/Bee/InputExcelBundle/HelperClasses/ProcessingExcel.php" />
         <option value="$PROJECT_DIR$/src/Bee/InputExcelBundle/Controller/InputExcelController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
       </list>
     </option>
   </component>
@@ -235,128 +240,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="var" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="var" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cache" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bee" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="InputExcelBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProductRange" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -487,7 +370,7 @@
       <workItem from="1488871518772" duration="9586000" />
       <workItem from="1488889518405" duration="1209000" />
       <workItem from="1488960079202" duration="6045000" />
-      <workItem from="1488972309364" duration="1985000" />
+      <workItem from="1488972309364" duration="2733000" />
     </task>
     <servers />
   </component>
@@ -506,13 +389,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156365000" />
+    <option name="totallyTimeSpent" value="157113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.178125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.178125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -928,18 +811,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="3" lean-forward="false" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+        <state relative-caret-position="153">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
-            <element signature="e#123#164#0#PHP" expanded="true" />
-            <marker date="1488971208703" expanded="true" signature="3862:3930" ph="UPDATE price... " />
-            <marker date="1488971208703" expanded="true" signature="4979:5047" ph="UPDATE price... " />
-            <marker date="1488971208703" expanded="true" signature="6120:6198" ph="UPDATE price... " />
-            <marker date="1488971208703" expanded="true" signature="7222:7348" ph="INSERT INTO pricelists... " />
-            <marker date="1488971208703" expanded="true" signature="8614:8670" ph="UPDATE price... " />
-            <marker date="1488971208703" expanded="true" signature="9610:9659" ph="DELETE FROM " />
-            <marker date="1488971208703" expanded="true" signature="10137:10234" ph="select p fro... AppBundle" />
+            <element signature="e#123#182#0#PHP" expanded="true" />
+            <marker date="1488974997302" expanded="true" signature="3820:3888" ph="UPDATE price... " />
+            <marker date="1488974997302" expanded="true" signature="4937:5005" ph="UPDATE price... " />
+            <marker date="1488974997302" expanded="true" signature="6078:6156" ph="UPDATE price... " />
+            <marker date="1488974997302" expanded="true" signature="7180:7306" ph="INSERT INTO pricelists... " />
+            <marker date="1488974997302" expanded="true" signature="8572:8628" ph="UPDATE price... " />
+            <marker date="1488974997302" expanded="true" signature="9568:9617" ph="DELETE FROM " />
+            <marker date="1488974997302" expanded="true" signature="10095:10192" ph="select p fro... AppBundle" />
           </folding>
         </state>
       </provider>
