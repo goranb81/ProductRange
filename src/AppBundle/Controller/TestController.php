@@ -103,16 +103,16 @@ class TestController extends Controller
 
 
         //version 2 by Entity manager becouse it returns directly array of entity's objects
-        $status = "'trash'";
-        $supplierid = 4;
-        $statement = "select p from AppBundle\Entity\Pricelists p where p.status <> " . $status . " and p.supplierid = " . $supplierid;
-        $q = $em->createQuery($statement);
-        $arrayOfProducts = $q->getResult();
-        $this->refreshAllEntityObjects($arrayOfProducts);
-        var_dump($arrayOfProducts);
+//        $status = "'trash'";
+//        $supplierid = 4;
+//        $statement = "select p from AppBundle\Entity\Pricelists p where p.status <> " . $status . " and p.supplierid = " . $supplierid;
+//        $q = $em->createQuery($statement);
+//        $arrayOfProducts = $q->getResult();
+//        $this->refreshAllEntityObjects($arrayOfProducts);
+//        var_dump($arrayOfProducts);
 //        var_dump($statement);
 
-        return $this->render('default/index.html.twig');
+        return $this->render('default/test.html.twig');
     }
 
 

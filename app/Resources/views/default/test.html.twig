@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello test</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}"/>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+
+        <div class="container">
+            <div class="jumbotron">
+                <h2>
+                    Hello and welcome to bootstrap!!!
+                </h2>
+            </div>
+        </div>
+
+    {% endblock %}
+    {% block javascript %}
+        <script src="{{ asset('assets/jQuery-3.1.1/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{ asset('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+
+</body>
+</html>
