@@ -6,48 +6,49 @@
  * Time: 11:25
  */
 
-namespace Bee\InputExcelBundle\HelperClasses;
+namespace Bee\InputExcelBundle\HelperClasses {
 
 
-class ExcelProduct
-{
-    private $productname;
-
-    private $price;
-
-    /**
-     * @return mixed
-     */
-    public function getProductname()
+    class ExcelProduct
     {
-        return $this->productname;
+        private $productname;
+
+        private $price;
+
+        /**
+         * @return mixed
+         */
+        public function getProductname()
+        {
+            return $this->productname;
+        }
+
+        /**
+         * @param mixed $productname
+         */
+        public function setProductname($productname)
+        {
+            $this->productname = $productname;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getPrice()
+        {
+            return $this->price;
+        }
+
+        /**
+         * @param mixed $price
+         */
+        public function setPrice($price)
+        {
+            $this->price = $price;
+        }
+
+
+
+
     }
-
-    /**
-     * @param mixed $productname
-     */
-    public function setProductname($productname)
-    {
-        $this->productname = $productname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param mixed $price
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-    }
-
-
-
-
 }

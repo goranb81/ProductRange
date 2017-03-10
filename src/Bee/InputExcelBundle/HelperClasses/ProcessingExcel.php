@@ -6,12 +6,13 @@
  * Time: 11:19
  */
 
-namespace Bee\InputExcelBundle\HelperClasses;
+namespace Bee\InputExcelBundle\HelperClasses {
 
-class ProcessingExcel {
+    class ProcessingExcel {
 
-    public function getListOfExcelProducts($excelFile){
+        public function getListOfExcelProducts($excelFile){
 
+        }
     }
 }
 

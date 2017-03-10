@@ -11,7 +11,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\HelperClasses\ExcelProduct;
+use Bee\InputExcelBundle\HelperClasses\ExcelProduct;
 use AppBundle\Entity\Pricelists;
 
 class TestController extends Controller
@@ -111,6 +111,14 @@ class TestController extends Controller
 //        $this->refreshAllEntityObjects($arrayOfProducts);
 //        var_dump($arrayOfProducts);
 //        var_dump($statement);
+
+        // test bee_input_excel_productdb service
+//        $em = $this->container->get('doctrine');
+//        var_dump($em);
+        $productDB = $this->get('bee_input_excel_productdb');
+        var_dump($productDB->getListOFExistingProducts(4));
+
+
 
         return $this->render('default/test.html.twig');
     }

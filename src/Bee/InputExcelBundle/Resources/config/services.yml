@@ -2,3 +2,14 @@ services:
 #    bee_input_excel.example:
 #        class: Bee\InputExcelBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+    bee_input_excel_productdb:
+        class: Bee\InputExcelBundle\ServiceClasses\ProductDB
+        arguments: [ '@doctrine' ]
+
+    bee_input_excel_productexcel:
+            class: Bee\InputExcelBundle\ServiceClasses\ProductExcel
+
+    bee_input_excel_inputexcel:
+                 class: Bee\InputExcelBundle\ServiceClasses\InputExcel
+                 arguments: [ '@bee_input_excel_productexcel' , '@bee_input_excel_productdb' , '@doctrine' ]
