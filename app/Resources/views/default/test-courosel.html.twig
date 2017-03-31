@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello test</title>
+    {% block stylesheets %}
+        {#<link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}"/>#}
+        {#<link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_superhero.min.css') }}"/>#}
+        <link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_united.min.css') }}"/>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+       <div class="container">
+           <div id="carousel-demo" class="carousel slide" data-ride="carousel">
+               <ol class="carousel-indicators">
+                   <li data-target="#carousel-demo" data-slide-to="0" class="active"></li>
+                   <li data-target="#carousel-demo" data-slide-to="1"></li>
+               </ol>
+               <div class="carousel-inner">
+                   <div class="item active">
+                       <img alt="First slide" src="image-url" />
+                       <div class="carousel-caption">
+                           <h3>Caption Heading One</h3>
+                           <p>Caption Text One</p>
+                       </div>
+                   </div>
+                   <div class="item">
+                       <img alt="Second slide" src="image-url" />
+                       <div class="carousel-caption">
+                           <h3>Caption Heading Two</h3>
+                           <p>Caption Text Two</p>
+                       </div>
+                   </div>
+               </div>
+               <a class="left carousel-control" href="#carousel-demo" data-slide="prev">
+                   <span class="glyphicon glyphicon-chevron-left"></span>
+               </a>
+               <a class="right carousel-control" href="#carousel-demo" data-slide="next">
+                   <span class="glyphicon glyphicon-chevron-right"></span>
+               </a>
+           </div>
+       </div>
+
+    {% endblock %}
+    {% block javascript %}
+        <script src="{{ asset('assets/jQuery-3.1.1/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{ asset('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+
+</body>
+</html>

@@ -19,12 +19,29 @@ use AppBundle\Entity\Pricelists;
 class AdminController extends Controller
 {
     /**
+     * Show admin index page
+     *
      * @Route("/", name="admin_index")
      */
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('admin/admin_base.html.twig');
+        return $this->render('admin/admin_index.html.twig');
+    }
+
+    /**
+     * Show Import pricelist page
+     *
+     * @Route("/import_pricelist_page", name="import_pricelist_page")
+     */
+    public function importpricelistAction(Request $request){
+        $em = $this->getDoctrine()->getEntityManager();
+        $listOfSupplier = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+
+        // get list of filenames from excelpricelists directory
+        $arrayOfExcelFilenames = $this->getFilesFromPricelistDirectory();
+
+        return $this->render('admin/import_pricelist.html.twig', array('suppliers' => $listOfSupplier, 'arrayFilenames' => $arrayOfExcelFilenames));
     }
 
 //    /**
@@ -344,4 +361,19 @@ class AdminController extends Controller
 //        return $mysqlTimestampFormat;
 //    }
 
+    public function getFilesFromPricelistDirectory(){
+        $dir = $this->getParameter('excelpricelist_directory');
+        $arrayOfExcelFilenames = array();
+        if ($handle = opendir($dir)) {
+
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != ".." && is_file($dir.'/'.$entry)) {
+                    $arrayOfExcelFilenames[] = $entry;
+                }
+            }
+            closedir($handle);
+        }
+
+        return $arrayOfExcelFilenames;
+    }
 }

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class InputExcelController extends Controller
+class ImportExcelController extends Controller
 {
 //    /**
 //     * @Route("/")
@@ -41,17 +41,19 @@ class InputExcelController extends Controller
                 status)
         */
 
-        //provide from Form supplierId and supplierName
-        $supplierId = 4;
-        $supplierName = 'Kodak';
-        $excelFilename = 'C:\ALTI 2011-01-10.xls';
+        //predefined directory where are stored pricelists
+        $dir = $this->getParameter('excelpricelist_directory');
+        //provide from Form supplierId, supplierName and excel pricelist filename
+        $supplierId = $request->request->get('asupplierid');
+        $supplierName = $request->request->get('asupplier_name');
+        $excelFilename = $request->request->get('apricelist_filename');
 
         // get input excel file service
         // set parameters
         $inputExcel = $this->get('bee_input_excel_inputexcel');
         $inputExcel->setSupplierId($supplierId);
         $inputExcel->setSupplierName($supplierName);
-        $inputExcel->setExcelFileName($excelFilename);
+        $inputExcel->setExcelFileName($dir.'/'.$excelFilename);
 
         // execute function that inpux excel file content
         $inputExcel->inputExcelFile();

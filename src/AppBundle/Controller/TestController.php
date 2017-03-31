@@ -115,12 +115,15 @@ class TestController extends Controller
         // test bee_input_excel_productdb service
 //        $em = $this->container->get('doctrine');
 //        var_dump($em);
-        $productDB = $this->get('bee_input_excel_productdb');
-        var_dump($productDB->getListOFExistingProducts(4));
+//        $productDB = $this->get('bee_input_excel_productdb');
+//        var_dump($productDB->getListOFExistingProducts(4));
 
+        // ###################################################
+        // test pricelist directory
 
+        $dir = $this->getParameter('excelpricelist_directory');
 
-        return $this->render('default/test.html.twig');
+        return $this->render('default/test.html.twig', array('dir'=>$dir));
     }
 
 

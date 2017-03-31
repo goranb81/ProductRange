@@ -72,7 +72,7 @@ class ProductExcel
             $excelProduct = new ExcelProduct();
 
             //get name and price
-            $name = $sheetRow['B'];
+            $name = $sheetRow['K'];
             $price = $sheetRow['I'];
 
             //change type of price to float

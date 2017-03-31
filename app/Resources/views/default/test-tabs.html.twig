@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello test</title>
+    {% block stylesheets %}
+        {#<link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}"/>#}
+        {#<link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_superhero.min.css') }}"/>#}
+        <link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_united.min.css') }}"/>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+       <div class="container">
+           <ul class="nav nav-tabs" role="tablist">
+
+           </ul>
+
+           <!-- TAB NAVIGATION -->
+           <ul class="nav nav-tabs" role="tablist">
+               <li class="active"><a href="#tab1" role="tab" data-toggle="tab">Tab1</a></li>
+               <li><a href="#tab2" role="tab" data-toggle="tab">Tab2</a></li>
+               <li><a href="#tab3" role="tab" data-toggle="tab">Tab3</a></li>
+           </ul>
+           <!-- TAB CONTENT -->
+           <div class="tab-content">
+               <div class="active tab-pane fade in" id="tab1">
+                   <h2>Tab1</h2>
+                   <p>Lorem ipsum.</p>
+               </div>
+               <div class="tab-pane fade" id="tab2">
+                   <h2>Tab2</h2>
+                   <p>Lorem ipsum.</p>
+               </div>
+               <div class="tab-pane fade" id="tab3">
+                   <h2>Tab3</h2>
+                   <p>Lorem ipsum.</p>
+               </div>
+           </div>
+
+       </div>
+
+    {% endblock %}
+    {% block javascript %}
+        <script src="{{ asset('assets/jQuery-3.1.1/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{ asset('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+
+</body>
+</html>
