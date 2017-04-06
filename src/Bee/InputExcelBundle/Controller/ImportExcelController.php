@@ -4,6 +4,7 @@ namespace Bee\InputExcelBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ImportExcelController extends Controller
@@ -47,6 +48,8 @@ class ImportExcelController extends Controller
         $supplierId = $request->request->get('asupplierid');
         $supplierName = $request->request->get('asupplier_name');
         $excelFilename = $request->request->get('apricelist_filename');
+        $nameColumn = $request->request->get('anameColumn');
+        $priceColumn = $request->request->get('apriceColumn');
 
         // get input excel file service
         // set parameters
@@ -54,11 +57,15 @@ class ImportExcelController extends Controller
         $inputExcel->setSupplierId($supplierId);
         $inputExcel->setSupplierName($supplierName);
         $inputExcel->setExcelFileName($dir.'/'.$excelFilename);
+        $inputExcel->setNameColumn($nameColumn);
+        $inputExcel->setPriceColumn($priceColumn);
 
         // execute function that inpux excel file content
-        $inputExcel->inputExcelFile();
-
-        return $this->render('admin/import_pricelist.html.twig');
+        $result = $inputExcel->inputExcelFile();
+        $response = new JsonResponse();
+        $response->setData(array('result' => $result));
+        return $response;
+//        return $this->render('admin/import_pricelist.html.twig');
     }
 
 }

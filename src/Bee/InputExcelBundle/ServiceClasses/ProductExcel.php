@@ -17,6 +17,42 @@ class ProductExcel
 {
     protected $excelFileName;
 
+    protected $nameColumn;
+
+    protected $priceColumn;
+
+    /**
+     * @return mixed
+     */
+    public function getPriceColumn()
+    {
+        return $this->priceColumn;
+    }
+
+    /**
+     * @param mixed $priceColumn
+     */
+    public function setPriceColumn($priceColumn)
+    {
+        $this->priceColumn = $priceColumn;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNameColumn()
+    {
+        return $this->nameColumn;
+    }
+
+    /**
+     * @param mixed $nameColumn
+     */
+    public function setNameColumn($nameColumn)
+    {
+        $this->nameColumn = $nameColumn;
+    }
+
     /**
      * @return mixed
      */
@@ -72,8 +108,8 @@ class ProductExcel
             $excelProduct = new ExcelProduct();
 
             //get name and price
-            $name = $sheetRow['K'];
-            $price = $sheetRow['I'];
+            $name = $sheetRow[$this->getNameColumn()];
+            $price = $sheetRow[$this->getPriceColumn()];
 
             //change type of price to float
             settype($price, 'float');

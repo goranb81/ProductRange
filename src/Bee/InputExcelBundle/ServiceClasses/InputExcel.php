@@ -22,6 +22,42 @@ class InputExcel
 
     protected $excelFileName;
 
+    protected $nameColumn;
+
+    /**
+     * @return mixed
+     */
+    public function getNameColumn()
+    {
+        return $this->nameColumn;
+    }
+
+    /**
+     * @param mixed $nameColumn
+     */
+    public function setNameColumn($nameColumn)
+    {
+        $this->nameColumn = $nameColumn;
+    }
+
+    protected $priceColumn;
+
+    /**
+     * @return mixed
+     */
+    public function getPriceColumn()
+    {
+        return $this->priceColumn;
+    }
+
+    /**
+     * @param mixed $priceColumn
+     */
+    public function setPriceColumn($priceColumn)
+    {
+        $this->priceColumn = $priceColumn;
+    }
+
     protected $em;
 
     public $doctrine;
@@ -119,9 +155,14 @@ class InputExcel
         // list of objects that represent existing products in pricelist DB table(with status active inactive and new_product exclude status trash )
         $listOFExistingProducts = $this->pricelistEntityUtility->getListOFExistingProducts($this->getSupplierId());
 
-
+        //set excel pricelist filename
+        //set name column
+        //select price column
+        $this->excelProductUtility->setExcelFileName($this->getExcelFileName());
+        $this->excelProductUtility->setPriceColumn($this->getPriceColumn());
+        $this->excelProductUtility->setNameColumn($this->getNameColumn());
         //list of objects that represent products from pricelist's excel file
-        $listOfExcelProducts = $this->excelProductUtility->getListOfExcelProducts('C:\ALTI 2011-01-10.xls');
+        $listOfExcelProducts = $this->excelProductUtility->getListOfExcelProducts();
 
         //timestamp - start import
         $dateOfStart = time();
@@ -284,6 +325,8 @@ class InputExcel
 
             }
         }
+
+        return 'Import pricelist process finished!';
     }
 
     private function getCurrentDateTime(){
