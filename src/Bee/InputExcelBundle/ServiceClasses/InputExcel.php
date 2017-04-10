@@ -225,7 +225,7 @@ class InputExcel
 
                         //update price and input date if status is active
                     } elseif (strcmp($productDB->getStatus(), 'active') == 0) {
-                        var_dump('active');
+//                        var_dump('active');
 
                         //get current DateTime. That format is compatibile to MySql timestamp type
                         $mysqlTimestampFormat = $this->getCurrentDateTime();
@@ -247,7 +247,7 @@ class InputExcel
 
                         //update price, input date and status to active if status is inactive
                     } elseif (strcmp($productDB->getStatus(), 'inactive') == 0) {
-                        var_dump('inactive');
+//                        var_dump('inactive');
 
                         //get current DateTime. That format is compatibile to MySql timestamp type
                         $mysqlTimestampFormat = $this->getCurrentDateTime();

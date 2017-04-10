@@ -76,73 +76,51 @@
         //if we confirm yes(result = true) call ajax and import excel pricelist into DB
         if (result == true) {
 
+            //reson for doing that: we don't refresh page after we use modal
+            //on second using of modal modal has some values of his last state
+            //if we want to have modal value's like we first start modal we must to set that value again
+            $("#status").text('Import pricelist process is running...');
+            $('.progress-bar').addClass('progress-bar-striped');
+            $('.progress-bar').addClass('active');
+
             //show modal contains information about current process's (import pricelist) progress bar
             $("#progressbar").modal({backdrop: 'static', keyboard: false}, 'show');
 
             // disable dialog box's close button
             document.getElementById('closebtn').disabled = true;
 
-            var status = progressBarAction();
-            console.log(status);
-            if(status == 'finish'){
-                var elem = document.getElementById("prog-bar");
-                var width = 0;
-                elem.setAttribute("aria-valuenow", width);
-                elem.style.width = width + '%';
-                console.log(elem.style.width);
-                console.log($("#prog-bar").attr("aria-valuenow"));
-            }
-
             // when start import disable button Start import
             // reason for that is to prevent user to start import before
             // current import is finished
             // document.getElementById("import").disabled = true;
-            // $.ajax({
-            //         url: selected_button.data('url'),
-            //         type: 'post',
-            //         dataType: 'json',
-            //         data: {asupplier_name: supplier_name, asupplierid: supplierid, anameColumn: nameColumn, apriceColumn: priceColumn, apricelist_filename: pricelist_filename}
-            //     }).done(function (response) {
-            //         console.log(response.result);
-            //         // enable button after proces import pricelist is finished
-            //         // document.getElementById("import").disabled = false;
-            //
-            //         // hide modal when import pricelist process finished
-            //         // $("#progressbar").modal('hide');
-            //
-            //         // enable background drop and keyboard esc drop
-            //         // $("#progressbar").modal({backdrop: true, keyboard: true});
-            //
-            //         // enable dialog box's close button
-            //         document.getElementById('closebtn').disabled = false;
-            //
-            //         // set modal body with result of import pricelist process (get throw Ajax)
-            //         $("#status").text(response.result + ' You can close dialog box and continue your work.');
-            //         // alert(response.result);
-            //     }).fail(function (jqXHR, textStatus, errorThrown) {
-            //         alert('Error : ' + errorThrown);
-            //     });
+
+            $.ajax({
+                    url: selected_button.data('url'),
+                    type: 'post',
+                    dataType: 'json',
+                    data: {asupplier_name: supplier_name, asupplierid: supplierid, anameColumn: nameColumn, apriceColumn: priceColumn, apricelist_filename: pricelist_filename}
+                }).done(function (response) {
+                    console.log(response.result);
+                    // enable button after proces import pricelist is finished
+                    // document.getElementById("import").disabled = false;
+
+                    // hide modal when import pricelist process finished
+                    // $("#progressbar").modal('hide');
+
+                    // enable background drop and keyboard esc drop
+                    // $("#progressbar").modal({backdrop: true, keyboard: true});
+
+                    // enable dialog box's close button
+                    document.getElementById('closebtn').disabled = false;
+
+                    // set modal body with result of import pricelist process (get throw Ajax)
+                    $("#status").text(response.result + ' You can close dialog box and continue your work.');
+                    $(".progress-bar").removeClass('progress-bar-striped');
+                    $(".progress-bar").removeClass('active');
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('Error : ' + errorThrown);
+                });
         }
 
-    }
-
-    // this function change width of progress bar
-    // on that way we simulate progress bar action
-    function progressBarAction(){
-        var elem = document.getElementById("prog-bar");
-        var width = 1;
-        var id = setInterval(frame, 10);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                // width = 0;
-                // elem.setAttribute("aria-valuenow", width);
-                // elem.style.width = width + '%';
-            } else {
-                width++;
-                elem.setAttribute("aria-valuenow", width);
-                elem.style.width = width + '%';
-            }
-        }
     }
 
