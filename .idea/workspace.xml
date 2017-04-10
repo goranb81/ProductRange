@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b47187f2-b1fc-4fde-a977-c88fff166287" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/admin/import_pricelist.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/admin/import_pricelist.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bee/InputExcelBundle/ServiceClasses/InputExcel.php" afterPath="$PROJECT_DIR$/src/Bee/InputExcelBundle/ServiceClasses/InputExcel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assets/JS/import_pricelist.js" afterPath="$PROJECT_DIR$/web/assets/JS/import_pricelist.js" />
-    </list>
+    <list default="true" id="b47187f2-b1fc-4fde-a977-c88fff166287" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +21,8 @@
             <state relative-caret-position="721">
               <caret line="165" column="74" lean-forward="false" selection-start-line="165" selection-start-column="36" selection-end-line="165" selection-end-column="74" />
               <folding>
-                <marker date="1491829823644" expanded="true" signature="189:8306" ph="{% block body ...%}" />
-                <marker date="1491829823644" expanded="false" signature="1758:1769" ph="..." />
+                <marker date="1491848168998" expanded="true" signature="189:8306" ph="{% block body ...%}" />
+                <marker date="1491848168998" expanded="false" signature="1758:1769" ph="..." />
               </folding>
             </state>
           </provider>
@@ -61,12 +56,12 @@
             <state relative-caret-position="269">
               <caret line="172" column="18" lean-forward="false" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="18" />
               <folding>
-                <marker date="1491842181636" expanded="true" signature="5838:5906" ph="UPDATE price... " />
-                <marker date="1491842181636" expanded="true" signature="6911:6979" ph="UPDATE price... " />
-                <marker date="1491842181636" expanded="true" signature="8010:8088" ph="UPDATE price... " />
-                <marker date="1491842181636" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
-                <marker date="1491842181636" expanded="true" signature="10458:10514" ph="UPDATE price... " />
-                <marker date="1491842181636" expanded="true" signature="11457:11506" ph="DELETE FROM " />
+                <marker date="1491848169400" expanded="true" signature="5838:5906" ph="UPDATE price... " />
+                <marker date="1491848169400" expanded="true" signature="6911:6979" ph="UPDATE price... " />
+                <marker date="1491848169400" expanded="true" signature="8010:8088" ph="UPDATE price... " />
+                <marker date="1491848169400" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
+                <marker date="1491848169400" expanded="true" signature="10458:10514" ph="UPDATE price... " />
+                <marker date="1491848169400" expanded="true" signature="11457:11506" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -177,8 +172,8 @@
         <option value="$PROJECT_DIR$/src/Bee/InputExcelBundle/ServiceClasses/ProductExcel.php" />
         <option value="$PROJECT_DIR$/src/Bee/InputExcelBundle/Controller/ImportExcelController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/admin/import_pricelist.html.twig" />
-        <option value="$PROJECT_DIR$/web/assets/JS/import_pricelist.js" />
         <option value="$PROJECT_DIR$/src/Bee/InputExcelBundle/ServiceClasses/InputExcel.php" />
+        <option value="$PROJECT_DIR$/web/assets/JS/import_pricelist.js" />
       </list>
     </option>
   </component>
@@ -390,7 +385,7 @@
       <workItem from="1491375326996" duration="673000" />
       <workItem from="1491376618602" duration="35369000" />
       <workItem from="1491805943527" duration="8624000" />
-      <workItem from="1491825392668" duration="6115000" />
+      <workItem from="1491825392668" duration="6531000" />
     </task>
     <servers />
   </component>
@@ -409,10 +404,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="337962000" />
+    <option name="totallyTimeSpent" value="338378000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24296875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -470,12 +465,12 @@
         <state relative-caret-position="3043">
           <caret line="187" column="55" lean-forward="true" selection-start-line="187" selection-start-column="55" selection-end-line="187" selection-end-column="55" />
           <folding>
-            <marker date="1491842181636" expanded="true" signature="5838:5906" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="6911:6979" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="8010:8088" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
-            <marker date="1491842181636" expanded="true" signature="10458:10514" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="11457:11506" ph="DELETE FROM " />
+            <marker date="1491848169400" expanded="true" signature="5838:5906" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="6911:6979" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="8010:8088" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
+            <marker date="1491848169400" expanded="true" signature="10458:10514" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="11457:11506" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -501,8 +496,8 @@
         <state relative-caret-position="2737">
           <caret line="161" column="41" lean-forward="false" selection-start-line="161" selection-start-column="33" selection-end-line="161" selection-end-column="41" />
           <folding>
-            <marker date="1491829823644" expanded="true" signature="189:8306" ph="{% block body ...%}" />
-            <marker date="1491829823644" expanded="false" signature="1758:1769" ph="..." />
+            <marker date="1491848168998" expanded="true" signature="189:8306" ph="{% block body ...%}" />
+            <marker date="1491848168998" expanded="false" signature="1758:1769" ph="..." />
           </folding>
         </state>
       </provider>
@@ -530,12 +525,12 @@
         <state relative-caret-position="5576">
           <caret line="328" column="50" lean-forward="false" selection-start-line="328" selection-start-column="50" selection-end-line="328" selection-end-column="50" />
           <folding>
-            <marker date="1491842181636" expanded="true" signature="5838:5906" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="6911:6979" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="8010:8088" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
-            <marker date="1491842181636" expanded="true" signature="10458:10514" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="11457:11506" ph="DELETE FROM " />
+            <marker date="1491848169400" expanded="true" signature="5838:5906" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="6911:6979" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="8010:8088" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
+            <marker date="1491848169400" expanded="true" signature="10458:10514" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="11457:11506" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -561,8 +556,8 @@
         <state relative-caret-position="68">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding>
-            <marker date="1491829823644" expanded="true" signature="189:8306" ph="{% block body ...%}" />
-            <marker date="1491829823644" expanded="false" signature="1758:1769" ph="..." />
+            <marker date="1491848168998" expanded="true" signature="189:8306" ph="{% block body ...%}" />
+            <marker date="1491848168998" expanded="false" signature="1758:1769" ph="..." />
           </folding>
         </state>
       </provider>
@@ -605,12 +600,12 @@
         <state relative-caret-position="4743">
           <caret line="287" column="34" lean-forward="false" selection-start-line="287" selection-start-column="34" selection-end-line="287" selection-end-column="34" />
           <folding>
-            <marker date="1491842181636" expanded="true" signature="5838:5906" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="6911:6979" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="8010:8088" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
-            <marker date="1491842181636" expanded="true" signature="10458:10514" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="11457:11506" ph="DELETE FROM " />
+            <marker date="1491848169400" expanded="true" signature="5838:5906" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="6911:6979" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="8010:8088" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
+            <marker date="1491848169400" expanded="true" signature="10458:10514" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="11457:11506" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -634,8 +629,8 @@
         <state relative-caret-position="68">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding>
-            <marker date="1491829823644" expanded="true" signature="189:8306" ph="{% block body ...%}" />
-            <marker date="1491829823644" expanded="false" signature="1758:1769" ph="..." />
+            <marker date="1491848168998" expanded="true" signature="189:8306" ph="{% block body ...%}" />
+            <marker date="1491848168998" expanded="false" signature="1758:1769" ph="..." />
           </folding>
         </state>
       </provider>
@@ -678,12 +673,12 @@
         <state relative-caret-position="4743">
           <caret line="287" column="34" lean-forward="false" selection-start-line="287" selection-start-column="34" selection-end-line="287" selection-end-column="34" />
           <folding>
-            <marker date="1491842181636" expanded="true" signature="5838:5906" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="6911:6979" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="8010:8088" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
-            <marker date="1491842181636" expanded="true" signature="10458:10514" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="11457:11506" ph="DELETE FROM " />
+            <marker date="1491848169400" expanded="true" signature="5838:5906" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="6911:6979" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="8010:8088" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
+            <marker date="1491848169400" expanded="true" signature="10458:10514" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="11457:11506" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -707,8 +702,8 @@
         <state relative-caret-position="986">
           <caret line="58" column="26" lean-forward="false" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
           <folding>
-            <marker date="1491829823644" expanded="true" signature="189:8306" ph="{% block body ...%}" />
-            <marker date="1491829823644" expanded="false" signature="1758:1769" ph="..." />
+            <marker date="1491848168998" expanded="true" signature="189:8306" ph="{% block body ...%}" />
+            <marker date="1491848168998" expanded="false" signature="1758:1769" ph="..." />
           </folding>
         </state>
       </provider>
@@ -750,12 +745,12 @@
         <state relative-caret-position="4743">
           <caret line="287" column="34" lean-forward="false" selection-start-line="287" selection-start-column="34" selection-end-line="287" selection-end-column="34" />
           <folding>
-            <marker date="1491842181636" expanded="true" signature="5838:5906" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="6911:6979" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="8010:8088" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
-            <marker date="1491842181636" expanded="true" signature="10458:10514" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="11457:11506" ph="DELETE FROM " />
+            <marker date="1491848169400" expanded="true" signature="5838:5906" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="6911:6979" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="8010:8088" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
+            <marker date="1491848169400" expanded="true" signature="10458:10514" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="11457:11506" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -867,8 +862,8 @@
         <state relative-caret-position="721">
           <caret line="165" column="74" lean-forward="false" selection-start-line="165" selection-start-column="36" selection-end-line="165" selection-end-column="74" />
           <folding>
-            <marker date="1491829823644" expanded="true" signature="189:8306" ph="{% block body ...%}" />
-            <marker date="1491829823644" expanded="false" signature="1758:1769" ph="..." />
+            <marker date="1491848168998" expanded="true" signature="189:8306" ph="{% block body ...%}" />
+            <marker date="1491848168998" expanded="false" signature="1758:1769" ph="..." />
           </folding>
         </state>
       </provider>
@@ -888,12 +883,12 @@
         <state relative-caret-position="269">
           <caret line="172" column="18" lean-forward="false" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="18" />
           <folding>
-            <marker date="1491842181636" expanded="true" signature="5838:5906" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="6911:6979" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="8010:8088" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
-            <marker date="1491842181636" expanded="true" signature="10458:10514" ph="UPDATE price... " />
-            <marker date="1491842181636" expanded="true" signature="11457:11506" ph="DELETE FROM " />
+            <marker date="1491848169400" expanded="true" signature="5838:5906" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="6911:6979" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="8010:8088" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="9058:9183" ph="INSERT INTO pricelists... " />
+            <marker date="1491848169400" expanded="true" signature="10458:10514" ph="UPDATE price... " />
+            <marker date="1491848169400" expanded="true" signature="11457:11506" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
