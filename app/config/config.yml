@@ -38,6 +38,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+            # other form themes
+            - 'VichUploaderBundle:Form:fields.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -74,3 +77,11 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        excel_file:
+            uri_prefix:         /uploads/excelpricelists
+            upload_destination: '%kernel.root_dir%/../web/uploads/excelpricelists'
