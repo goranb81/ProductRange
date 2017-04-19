@@ -15,6 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Forms\FormUploadPricelist;
 use AppBundle\Entity\Priselistfiles;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * @Route("/admin")
@@ -70,13 +73,30 @@ class AdminController extends Controller
      */
     public function uploadpricelistAction(Request $request){
 
-        $formUpload = new FormUploadPricelist();
-        $form = $this->createForm(FormUploadPricelist::class, $formUpload);
+//        $formUpload = new FormUploadPricelist();
+//        $form = $this->createForm(FormUploadPricelist::class, $formUpload);
 
 //        $pricelistfile->setId(1);
 //        $pricelistfile->setExcelName("excel name");
 //        $pricelistfile->setSupplierName("Kimtek");
-       $form = $this->createForm(FormUploadPricelist::class, $formUpload);
+//       $form = $this->createForm(FormUploadPricelist::class, $formUpload);
+        $em = $this->getDoctrine()->getEntityManager();
+        $pricelistfiles = $em->getRepository('AppBundle\Entity\Pricelistfiles')->findBy(array('id'=>1));
+//        $pricelistfiles = $em->getReference('AppBundle\Entity\Pricelistfiles', 1);
+//        var_dump($pricelistfiles);
+//        die();
+//        $priselistfiles = new Priselistfiles();
+//        $priselistfiles->setSupplierName('Kimtec');
+//        $priselistfiles->setExcelName('excel.xls');
+
+        $form = $this->createFormBuilder($pricelistfiles)->add('excelFile', VichFileType::class, [
+            'required' => false,
+            'allow_delete' => true, // optional, default is true
+            'download_link' => true, // optional, default is true
+//            'download_uri' => '...', // optional, if not provided - will automatically resolved using storage
+        ])
+            ->add('supplierName', TextType::class)
+            ->add('upload', SubmitType::class, array('label' => 'Upload pricelist'))->getForm();
 
         $form->handleRequest($request);
 

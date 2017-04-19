@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-// src/AppBundle/Entity/User.php
+// src/AppBundle/Entity/Users.php
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

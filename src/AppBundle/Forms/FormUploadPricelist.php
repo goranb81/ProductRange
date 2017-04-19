@@ -23,7 +23,8 @@ class FormUploadPricelist extends AbstractType
     {
         // ...
 
-        $builder->add('excelfile', VichFileType::class, [
+        $builder
+            ->add('excelfile', VichFileType::class, [
             'required' => false,
             'allow_delete' => true, // optional, default is true
             'download_link' => true, // optional, default is true
