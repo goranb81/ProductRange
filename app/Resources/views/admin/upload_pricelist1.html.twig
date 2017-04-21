@@ -1,0 +1,80 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{%  block stylesheets %}
+    {{  parent() }}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/marginANDpadding.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid">
+
+        {#part-one headline#}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Welcome to Upload excel pricelist page</h1>
+                {# <button type="button" class="btn btn-info btn-lg active"><a href="{{  path('logout') }}">Import excel pricelist</a></button> #}
+            </div>
+        </div>
+
+        {#empty space between two rows#}
+        <div class="row">
+            <br>
+            <br>
+        </div>
+
+        {#form-part#}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+
+
+
+                <form role="form" class="form-horizontal" method="post" id="formid" enctype="multipart/form-data">
+                    {#supplier selector#}
+                    <div class="form-group margin_padding">
+                        <label for="supplier">Supplier name:</label>
+                        <select class="form-control" id="supplier">
+                            {% for supplier in suppliers %}
+                                <option value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    {# excel pricelist file selector #}
+                    <div class-="form-group margin_padding">
+                    <label for="excel">Excel pricelist file:</label>
+                    <label class="btn btn-default btn-file" style="width: 100%">
+                    <input type="file" hidden id="pricelist_filename">
+                    </label>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    {#import excel pricelist to DB #}
+                    <div class="form-group margin_padding" id="file_div">
+                        <label for="import">Upload pricelist:</label>
+                        <br>
+                        <button type="submit" class="btn btn-primary pull-right col-md-6" data-url="{{ path('upload_pricelist_page1') }}" id="upload">upload</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+    <script src="{{ asset('assets/JS/upload_pricelist.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
+{% endblock %}

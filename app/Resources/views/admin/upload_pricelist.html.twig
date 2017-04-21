@@ -1,0 +1,20 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{#Upload pricelist files with Symfony form#}
+
+{%  block stylesheets %}
+    {{  parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+{% endblock %}

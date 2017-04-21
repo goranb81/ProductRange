@@ -12,6 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Pricelists;
+use AppBundle\Entity\Pricelistfiles;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/admin")
@@ -378,13 +383,16 @@ class AdminController extends Controller
     }
 
     /**
-     * Show Upload pricelist file page
+     * Show Upload pricelist file page. This action is not in use. This action is refer to Symfony form
      *
      * @Route("/upload_pricelist_page", name="upload_pricelist_page")
      */
     public function uploadpricelistAction(Request $request){
 
-        $form = $this->createFormBuilder(new Priselistfiles())->add('excelFile', VichFileType::class, [
+        $pricelistfile = new Pricelistfiles();
+
+        //create form
+        $form = $this->createFormBuilder($pricelistfile)->add('excelFile', VichFileType::class, [
             'required' => false,
             'allow_delete' => true, // optional, default is true
             'download_link' => true, // optional, default is true
@@ -396,9 +404,91 @@ class AdminController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+
+            //we set excel size to constant value becouse without that value
+            //app throw error excel_size value don't be null
+            $pricelistfile->setExcelSize('12');
+
+            $em->persist($pricelistfile);
+            $em->flush();
 //           return $this->redirectToRoute('task_success');
         }
 
         return $this->render('admin/upload_pricelist.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * Show Upload pricelist file page
+     *
+     * @Route("/upload_pricelist_page1", name="upload_pricelist_page1")
+     */
+    public function uploadpricelist1Action(Request $request){
+        $em = $this->getDoctrine()->getEntityManager();
+        $listOfSupplier = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+
+        $supplierName = $request->request->get('asupplier_name');
+        var_dump($supplierName);
+
+//        $uploadedFIle = $request->files->get('pricelist_filename');
+        if (!empty($_FILES["pricelist_filename"])) {
+            $uploadedFIle = $_FILES["pricelist_filename"];
+            var_dump($uploadedFIle);
+        }
+
+
+
+
+//        $uploadedFile = new UploadedFile();
+
+
+//        $pricelistfile = new Pricelistfiles();
+//
+//        //create form
+//        $form = $this->createFormBuilder($pricelistfile)->add('excelFile', VichFileType::class, [
+//            'required' => false,
+//            'allow_delete' => true, // optional, default is true
+//            'download_link' => true, // optional, default is true
+////            'download_uri' => '...', // optional, if not provided - will automatically resolved using storage
+//        ])
+//            ->add('supplierName', TextType::class)
+//            ->add('upload', SubmitType::class, array('label' => 'Upload pricelist'))->getForm();
+//
+//        $form->handleRequest($request);
+//
+//        if($form->isSubmitted() && $form->isValid()){
+//            $em = $this->getDoctrine()->getManager();
+//
+//            //we set excel size to constant value becouse without that value
+//            //app throw error excel_size value don't be null
+//            $pricelistfile->setExcelSize('12');
+//
+//            $em->persist($pricelistfile);
+//            $em->flush();
+////           return $this->redirectToRoute('task_success');
+//        }
+
+        return $this->render('admin/upload_pricelist1.html.twig', array('suppliers' => $listOfSupplier));
+
+    }
+
+    /**
+     * Show Upload pricelist file page
+     *
+     * @Route("/upload", name="upload")
+     */
+    public function uploadAction(Request $request){
+
+        $supplierName = $request->request->get('asupplier_name');
+        var_dump($supplierName);
+
+//        $uploadedFIle = $request->files->get('pricelist_filename');
+        if (!empty($_FILES["pricelist_filename"])) {
+            $uploadedFIle = $_FILES["pricelist_filename"];
+            var_dump($uploadedFIle);
+        }
+
+        return $this->render('admin/upload_pricelist1.html.twig', array('suppliers' => $listOfSupplier));
+
     }
 }
