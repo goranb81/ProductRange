@@ -1,0 +1,54 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Pricelistfiles
+ *
+ * @ORM\Table(name="pricelistfiles")
+ * @ORM\Entity
+ */
+class Pricelistfiles
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="supplier_name", type="string", length=255, nullable=false)
+     */
+    private $supplierName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="excel_name", type="string", length=255, nullable=false)
+     */
+    private $excelName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="excel_size", type="integer", nullable=false)
+     */
+    private $excelSize;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

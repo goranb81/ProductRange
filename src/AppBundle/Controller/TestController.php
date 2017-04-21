@@ -121,9 +121,17 @@ class TestController extends Controller
         // ###################################################
         // test pricelist directory
 
-        $dir = $this->getParameter('excelpricelist_directory');
+//        $dir = $this->getParameter('excelpricelist_directory');
+//
+//        return $this->render('default/test.html.twig', array('dir'=>$dir));
 
-        return $this->render('default/test.html.twig', array('dir'=>$dir));
+        // ###################################################
+        // test Pricelistfiles entity
+
+//        $em = $this->getDoctrine()->getManager();
+//        $pricelistfile = $em->getRepository('AppBundle\Entity\Pricelistfiles');
+//        var_dump($pricelistfile);
+//        die();
     }
 
 
