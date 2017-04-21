@@ -74,3 +74,15 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        excel_file:
+            uri_prefix:         /uploads/excelpricelists
+            upload_destination: '%kernel.root_dir%/../web/uploads/excelpricelists'
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true

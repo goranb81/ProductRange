@@ -376,4 +376,29 @@ class AdminController extends Controller
 
         return $arrayOfExcelFilenames;
     }
+
+    /**
+     * Show Upload pricelist file page
+     *
+     * @Route("/upload_pricelist_page", name="upload_pricelist_page")
+     */
+    public function uploadpricelistAction(Request $request){
+
+        $form = $this->createFormBuilder(new Priselistfiles())->add('excelFile', VichFileType::class, [
+            'required' => false,
+            'allow_delete' => true, // optional, default is true
+            'download_link' => true, // optional, default is true
+//            'download_uri' => '...', // optional, if not provided - will automatically resolved using storage
+        ])
+            ->add('supplierName', TextType::class)
+            ->add('upload', SubmitType::class, array('label' => 'Upload pricelist'))->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+//           return $this->redirectToRoute('task_success');
+        }
+
+        return $this->render('admin/upload_pricelist.html.twig', array('form' => $form->createView()));
+    }
 }
