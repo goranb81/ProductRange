@@ -6,14 +6,14 @@
  * and open the template in the editor.
  */
 
-// src/AppBundle/Entity/Users.php
+// src/AppBundle/Entity/User.php
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="users")
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  */
 class User implements UserInterface, \Serializable

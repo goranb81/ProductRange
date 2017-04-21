@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\Pricelists;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -80,8 +81,8 @@ class AdminController extends Controller
 //        $pricelistfile->setExcelName("excel name");
 //        $pricelistfile->setSupplierName("Kimtek");
 //       $form = $this->createForm(FormUploadPricelist::class, $formUpload);
-        $em = $this->getDoctrine()->getEntityManager();
-        $pricelistfiles = $em->getRepository('AppBundle\Entity\Pricelistfiles')->findBy(array('id'=>1));
+//        $em = $this->getDoctrine()->getEntityManager();
+//        $pricelistfiles = $em->getRepository('AppBundle\Entity\Priselistfiles')->findBy(array('id'=>1));
 //        $pricelistfiles = $em->getReference('AppBundle\Entity\Pricelistfiles', 1);
 //        var_dump($pricelistfiles);
 //        die();
@@ -89,7 +90,7 @@ class AdminController extends Controller
 //        $priselistfiles->setSupplierName('Kimtec');
 //        $priselistfiles->setExcelName('excel.xls');
 
-        $form = $this->createFormBuilder($pricelistfiles)->add('excelFile', VichFileType::class, [
+        $form = $this->createFormBuilder(new Priselistfiles())->add('excelFile', VichFileType::class, [
             'required' => false,
             'allow_delete' => true, // optional, default is true
             'download_link' => true, // optional, default is true

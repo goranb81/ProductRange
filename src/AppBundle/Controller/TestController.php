@@ -23,9 +23,9 @@ class TestController extends Controller
     {
         //################################################
         // get list of existing products from DB find out by supplierid
-//        $em = $this->getDoctrine()->getManager();
-//        $listOfExistingProducts = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => 4));
-//        var_dump($listOfExistingProducts);
+        $em = $this->getDoctrine()->getManager();
+        $listOfExistingProducts = $em->getRepository('AppBundle\Entity\Priselistfiles')->findAll();
+        var_dump($listOfExistingProducts);
 
 
 
@@ -83,8 +83,8 @@ class TestController extends Controller
         // that is similar like write statement with WHERE clause
 
 
-        $em = $this->getDoctrine()->getManager();
-        $qb = $em->createQueryBuilder();
+//        $em = $this->getDoctrine()->getManager();
+//        $qb = $em->createQueryBuilder();
 
 
         //version 1 query builder
@@ -121,9 +121,9 @@ class TestController extends Controller
         // ###################################################
         // test pricelist directory
 
-        $dir = $this->getParameter('excelpricelist_directory');
-
-        return $this->render('default/test.html.twig', array('dir'=>$dir));
+//        $dir = $this->getParameter('excelpricelist_directory');
+//
+//        return $this->render('default/test.html.twig', array('dir'=>$dir));
     }
 
 
