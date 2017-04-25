@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{%  block stylesheets %}
+    {{  parent() }}
+    <link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_united.min.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Second navbar for categories -->
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Home</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ path('import_pricelist_page') }}">Import Excel pricelist</a></li>
+                        <li><a href="{{ path('upload_pricelist_page') }}">Upload pricelist files</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Works</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="{{ path('logout') }}">Logout</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </nav><!-- /.navbar -->
+    </div><!-- /.container-fluid -->
+
+    {% if name is defined %}
+        <p>Name: {{ name }} </p>
+    {% endif %}
+
+    <form name="input" action="" method="post">
+
+        Name:
+        <input type="text" name="name"/>
+
+        <input type="submit" name="submit" value="Submit">
+
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+    <script src="{{ asset('assets/jQuery-3.1.1/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+{% endblock %}

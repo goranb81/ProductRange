@@ -1,6 +1,6 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{#Upload pricelist files with Symfony form#}
+{#NOTICE: Upload pricelist files with Symfony form#}
 
 {%  block stylesheets %}
     {{  parent() }}
@@ -9,6 +9,44 @@
 {% block body %}
     {{ parent() }}
 
+    {#part-one headline#}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Welcome to Upload pricelist file page</h1>
+        </div>
+    </div>
+
+    {#empty space between two rows#}
+    <div class="row">
+        <br>
+        <br>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            {{ form_start(form) }}
+
+            {{ form_label(form.excelFile) }}
+            {{ form_errors(form.excelFile) }}
+            {{ form_widget(form.excelFile) }}
+
+            <br>
+            <br>
+
+            {{ form_label(form.supplierName) }}
+            {{ form_errors(form.supplierName) }}
+            {{ form_widget(form.supplierName) }}
+
+            <br>
+            <br>
+
+
+            {{ form_widget(form.upload) }}
+
+
+            {{ form_end(form) }}
+        </div>
+    </div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}

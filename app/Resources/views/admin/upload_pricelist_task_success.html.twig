@@ -1,0 +1,18 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{#Page that shows if we correct upload pricelist file#}
+
+{%  block stylesheets %}
+    {{  parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <h1> Pricelist file was successfuly uploaded.</h1>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+{% endblock %}

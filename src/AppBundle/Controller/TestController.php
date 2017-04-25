@@ -34,11 +34,11 @@ class TestController extends Controller
         //Update pricelist product in DB
 
         //return current Unix timestamp in miliseconds(int)
-        $timestamp = time();
+//        $timestamp = time();
 
         //convert timestamp from miliseconds(int) in DateTime format Y-m-d H:i:s
         //we use DateTime to insert timestamp into MySql
-        $mysqlTimestampFormat = date("Y-m-d H:i:s", $timestamp);
+//        $mysqlTimestampFormat = date("Y-m-d H:i:s", $timestamp);
         //var_dump($mysqlTimestampFormat);
 
         //
@@ -83,8 +83,8 @@ class TestController extends Controller
         // that is similar like write statement with WHERE clause
 
 
-        $em = $this->getDoctrine()->getManager();
-        $qb = $em->createQueryBuilder();
+//        $em = $this->getDoctrine()->getManager();
+//        $qb = $em->createQueryBuilder();
 
 
         //version 1 query builder
@@ -132,6 +132,20 @@ class TestController extends Controller
 //        $pricelistfile = $em->getRepository('AppBundle\Entity\Pricelistfiles');
 //        var_dump($pricelistfile);
 //        die();
+
+        // ###################################################
+        // test non Symfony Form - use /admin/test_form.html.twig
+        $post = Request::createFromGlobals();
+
+        if ($post->request->has('submit')) {
+            $name = $post->request->get('name');
+            var_dump($post->request->get('name'));
+        } else {
+            $name = 'Not submitted yet';
+            var_dump($post->request->get('name'));
+        }
+
+        return $this->render('test_form.html.twig', array('name' => $name));
     }
 
 
