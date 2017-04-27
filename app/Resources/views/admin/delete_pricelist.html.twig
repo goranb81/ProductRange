@@ -1,0 +1,95 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{%  block stylesheets %}
+    {{  parent() }}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/marginANDpadding.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid">
+
+        {#part-one headline#}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Welcome to Delete pricelist files page</h1>
+            </div>
+        </div>
+
+        {#empty space between two rows#}
+        <div class="row">
+            <br>
+            <br>
+        </div>
+
+        {#form-part#}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <form role="form" class="form-horizontal" method="post" id="formid">
+                    {#supplier selector#}
+                    <div class="form-group margin_padding">
+                        <label for="supplier">Supplier name:</label>
+                        <select class="form-control" id="supplier">
+                            {% for supplier in suppliers %}
+                                <option value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    {#import excel pricelist to DB #}
+                    <div class="form-group margin_padding" id="file_div">
+                        <label for="delete">Delete pricelist:</label>
+                        <br>
+                        <button type="submit" class="btn btn-primary pull-right col-md-6" data-url="{{ path('deletepricelist') }}" id="delete">delete</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    {#Modal progress bar#}
+    <div class="modal fade in" id="progressbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content modal-edit">
+                <div class="modal-header">
+                    <button id="closebtn" type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Please wait until delete pricelist process is finish.</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div id="prog-bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                            {#<span class="sr-only">70% Complete</span>#}
+                        </div>
+                    </div>
+                    <h4 id="status">Delete pricelist process is running...</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#TESTING#}
+    {#<div class="progress">#}
+    {#<div id="prog" class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:1%">#}
+
+    {#</div>#}
+    {#</div>#}
+
+    {#<button class="btn btn-primary pull-right col-md-6"  id="bar">start progres bar</button>#}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+    <script src="{{ asset('assets/JS/delete_pricelist.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
+{% endblock %}

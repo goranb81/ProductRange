@@ -23,8 +23,11 @@
 //    }
 //}
 
-//echo 'Proba1';
-//var_dump($files);
+echo 'Proba1';
+$i=5;
+$m=12;
+$r = $m + $i;
+var_dump($r);
 
 //$dir = '%kernel.root_dir%/../web/uploads/excelpricelist';
 //echo $dir;

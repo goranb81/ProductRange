@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CONFIG>
-  <Compiler Value="C:\lazarus\fpc\3.0.2\bin\i386-win32\fpc.exe" Date="1247517510"/>
-  <Params Value=" -Twince -Parm -CpARMV3 -MObjFPC -Scghi -Os3 -WG -l -vewnhibq -Fid:\data\bor8246\Desktop\Lazarus\lib\arm-wince -FuC:\lazarus\lcl\units\arm-wince\wince -FuC:\lazarus\lcl\units\arm-wince -FuC:\lazarus\components\lazutils\lib\arm-wince -FuC:\lazarus\packager\units\arm-wince -Fud:\data\bor8246\Desktop\Lazarus\ -FUd:\data\bor8246\Desktop\Lazarus\lib\arm-wince\ -dLCL -dLCLwince project1.lpr"/>
-</CONFIG>

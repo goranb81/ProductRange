@@ -43,8 +43,7 @@ class AdminController extends Controller
      * @Route("/import_pricelist_page", name="import_pricelist_page")
      */
     public function importpricelistAction(Request $request){
-        $em = $this->getDoctrine()->getEntityManager();
-        $listOfSupplier = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+        $listOfSupplier = $this->getAllSuppliers();
 
         // get list of filenames from excelpricelists directory
         $arrayOfExcelFilenames = $this->getFilesFromPricelistDirectory();
@@ -77,8 +76,7 @@ class AdminController extends Controller
      */
     public function uploadpricelistAction(Request $request){
 //        get list of objects that represent all suppliers
-        $em = $this->getDoctrine()->getEntityManager();
-        $listOfSupplier = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+        $listOfSupplier = $this->getAllSuppliers();
 
 //        array of supplier name. we use that array like choices
         $suppliers = array();
@@ -144,8 +142,7 @@ class AdminController extends Controller
      */
     public function uploadpricelist1Action(Request $request){
 //        $uploadedFile = new UploadedFile();
-        $em = $this->getDoctrine()->getEntityManager();
-        $listOfSupplier = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+        $listOfSupplier = $this->getAllSuppliers();
 
 //        print_r($_POST);
 //        print_r($_FILES);
@@ -195,6 +192,53 @@ class AdminController extends Controller
         return $this->render('admin/upload_pricelist1.html.twig');
 //        , array('suppliers' => $listOfSupplier, 'name' => $name, 'supplier' => $supplier)
 
+    }
+
+    /**
+     * This controller action shows Delete pricelist file page
+     *
+     * @Route("/delete_pricelist_page", name="delete_pricelist_page")
+     */
+    public function deletefilesAction(Request $request){
+        $listOfSuppliers = $this->getAllSuppliers();
+        return $this->render('admin/delete_pricelist.html.twig', array('suppliers' => $listOfSuppliers));
+    }
+
+    /**
+     *This controller action delete pricelist files of particularly supplier or
+     *delete all files from upload directory /web/uploads/excelpricelists
+     *
+     * @Route("/deletepricelist", name="deletepricelist")
+     */
+    public function deletepricelistfilesAction(Request $request){
+//        get supplier name
+        $supplierName = $request->request->get('asupplier_name');
+        $em = $this->getDoctrine()->getEntityManager();
+        $pricelistfiles = $em->getRepository("AppBundle\Entity\Pricelistfiles")->findBy(array('supplierName' => $supplierName));
+
+//        delete all entity from array of suppliers
+        foreach ($pricelistfiles as $pricelist){
+            $em->remove($pricelist);
+            $em->flush();
+        }
+//        when we delete from table productrange.pricelists
+//        all pricelists rows automatically we delete files from
+//        /web/uploads/excelpricelists
+//        This is ability of vich bundle
+//        $em->flush();
+
+       $response = new JsonResponse();
+       $response->setData(array('result' => 'OK'));
+       return $response;
+    }
+
+
+
+    public function getAllSuppliers()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $listOfSupplier = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+        return $listOfSupplier;
     }
 
 }
