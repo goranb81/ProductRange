@@ -94,7 +94,7 @@ function deletePricelist(result,supplier_name, supplierid, pricelist_filename, n
             document.getElementById('closebtn').disabled = false;
 
             // set modal body with result of import pricelist process (get throw Ajax)
-            $("#status").text(' You can close dialog box and continue your work.');
+            $("#status").text('You can close dialog box and continue your work.');
             $(".progress-bar").removeClass('progress-bar-striped');
             $(".progress-bar").removeClass('active');
         }).fail(function (jqXHR, textStatus, errorThrown) {

@@ -135,17 +135,21 @@ class TestController extends Controller
 
         // ###################################################
         // test non Symfony Form - use /admin/test_form.html.twig
-        $post = Request::createFromGlobals();
+//        $post = Request::createFromGlobals();
+//
+//        if ($post->request->has('submit')) {
+//            $name = $post->request->get('name');
+//            var_dump($post->request->get('name'));
+//        } else {
+//            $name = 'Not submitted yet';
+//            var_dump($post->request->get('name'));
+//        }
+//
+//        return $this->render('test_form.html.twig', array('name' => $name));
 
-        if ($post->request->has('submit')) {
-            $name = $post->request->get('name');
-            var_dump($post->request->get('name'));
-        } else {
-            $name = 'Not submitted yet';
-            var_dump($post->request->get('name'));
-        }
-
-        return $this->render('test_form.html.twig', array('name' => $name));
+        // ###################################################
+        // Linking products page
+        return $this->render('admin/linking_products.html.twig');
     }
 
 
