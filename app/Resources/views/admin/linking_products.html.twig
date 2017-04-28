@@ -135,20 +135,17 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>Kamera</td>
-                        <td>12,33</td>
-                    </tr>
-                    {#{%  for product in products %}#}
-                        {#<tr>#}
-                            {#<td>{{  product.internalproductid }}</td>#}
-                            {#<td>{{  product.groups }}</td>#}
-                            {#<td>{{  product.productname }}</td>#}
-                            {#<td>{{  product.manufacturername }}</td>#}
-                            {#<td>{{  product.inputdate|date("d/m/Y")}}</td>#}
-                            {#<td>{{  product.price }}</td>#}
-                        {#</tr>#}
-                    {#{% endfor %}#}
+                    {#<tr>#}
+                        {#<td>Kamera</td>#}
+                        {#<td>12,33</td>#}
+                    {#</tr>#}
+                    {%  for product in exproducts %}
+                        <tr>
+                            <td>{{  product.productname }}</td>
+                            <td>{{  product.price }}</td>
+
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 

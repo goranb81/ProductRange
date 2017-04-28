@@ -152,7 +152,9 @@ class TestController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $products = $em->getRepository('AppBundle\Entity\Products')->findAll();
         $suppliers = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
-        return $this->render('admin/linking_products.html.twig', array('products' => $products, 'suppliers' => $suppliers));
+        $externalProducts =  $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('suppliername'=>'Alti'));
+        return $this->render('admin/linking_products.html.twig', array('products' => $products, 'suppliers' => $suppliers, 'exproducts' => $externalProducts));
+
     }
 
 
