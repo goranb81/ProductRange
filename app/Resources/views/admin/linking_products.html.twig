@@ -3,6 +3,7 @@
 {%  block stylesheets %}
     {{  parent() }}
     <link rel="stylesheet" href="{{  asset('assets/CSS/marginANDpadding.css') }}"/>
+    <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -12,39 +13,46 @@
         <div class="row">
             <h3>Internal products</h3>
 
-            <div class="col-md-6">
-                <label>Part of name:</label>
-                <input type="text"/>
-            </div>
-            <div class="col-md-6">
-                <button class="button-block">search</button>
-            </div>
+            {#Old version code#}
+            {#<div class="col-md-6">#}
+                {#<label>Part of name:</label>#}
+                {#<input type="text"/>#}
+            {#</div>#}
+            {#<div class="col-md-6">#}
+                {#<button class="button-block">search</button>#}
+            {#</div>#}
 
-            <table class="table-responsive table table-bordered">
-                <tr>
-                    <th>id</th>
-                    <th>group</th>
-                    <th>name</th>
-                    <th>manufacturer</th>
-                    <th>input date</th>
-                    <th>price</th>
-                </tr>
+            <table class="table-responsive table table-bordered" id="internal_table">
 
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>group</th>
+                        <th>name</th>
+                        <th>manufacturer</th>
+                        <th>input date</th>
+                        <th>price</th>
+                    </tr>
+                </thead>
 
-                <tr>
-                <td>1</td>
-                    <td>12</td>
-                    <td></td>
-                    <td>Kimtec</td>
-                    <td>12-04-1999</td>
-                    <td>123.33</td>
-                </tr>
+                <tbody>
+                    {%  for product in products %}
+                        <tr>
+                            <td>{{  product.internalproductid }}</td>
+                            <td>{{  product.groups }}</td>
+                            <td>{{  product.productname }}</td>
+                            <td>{{  product.manufacturername }}</td>
+                            <td>{{  product.inputdate|date("d/m/Y")}}</td>
+                            <td>{{  product.price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
 
         </div>
 
         {#linking part#}
-        <d  iv class="row">
+        <div class="row">
             <h3>Linking</h3>
             <div class="col-md-4">
                 <h5>External product</h5>
@@ -104,30 +112,44 @@
 
             </div>
 
+        </div>
 
         {#external products (products from excel pricelist) part#}
         <div class="row">
             <h3>External products</h3>
 
-            <div class="col-md-12">
+            <div class="col-md-2">
                 <label>Supplier</label>
-                <select>
-                    {#{% for supplier in suppliers %}#}
-                        {#<option value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>#}
-                    {#{% endfor %}#}
-                    <option>Kimtec</option>
+                <select class="form-control" id="supplier_choose">
+                    {% for supplier in suppliers %}
+                        <option value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
+                    {% endfor %}
                 </select>
             </div>
-            <table class="table-responsive table table-bordered">
-                <tr>
-                    <th>product name</th>
-                    <th>price</th>
-                </tr>
+            <table class="table-responsive table table-bordered" id="external_table">
+                <thead>
+                    <tr>
+                        <th>product name</th>
+                        <th>price</th>
+                    </tr>
+                </thead>
 
-                <tr>
-                    <td>Kamera</td>
-                    <td>12,33</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>Kamera</td>
+                        <td>12,33</td>
+                    </tr>
+                    {#{%  for product in products %}#}
+                        {#<tr>#}
+                            {#<td>{{  product.internalproductid }}</td>#}
+                            {#<td>{{  product.groups }}</td>#}
+                            {#<td>{{  product.productname }}</td>#}
+                            {#<td>{{  product.manufacturername }}</td>#}
+                            {#<td>{{  product.inputdate|date("d/m/Y")}}</td>#}
+                            {#<td>{{  product.price }}</td>#}
+                        {#</tr>#}
+                    {#{% endfor %}#}
+                </tbody>
             </table>
 
             <div class="col-md-6">
@@ -168,4 +190,6 @@
     <script src="{{ asset('assets/JS/linking_products_pricelist.js') }}"></script>
     <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
     <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/js/jquery.dataTables.min.js') }}"></script>
+
 {% endblock %}
