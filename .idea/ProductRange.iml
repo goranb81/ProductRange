@@ -26,16 +26,6 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHP" type="php">
-        <CLASSES>
-          <root url="file://C:/Program Files/Java/jdk1.8.0_101/jre/bin" />
-        </CLASSES>
-        <SOURCES>
-          <root url="file://C:/Program Files/Java/jdk1.8.0_101/jre/bin" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="jQuery 1.1." level="project" />
   </component>
 </module>

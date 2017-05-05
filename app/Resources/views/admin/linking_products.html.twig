@@ -4,6 +4,7 @@
     {{  parent() }}
     <link rel="stylesheet" href="{{  asset('assets/CSS/marginANDpadding.css') }}"/>
     <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
+    <link rel="stylesheet" href="{{  asset('assets/CSS/linking_products_pricelist.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -58,56 +59,61 @@
                 <h5>External product</h5>
 
                 <div class="col-md-12">
-                    <label>supplier</label>
-                    <label></label>
+                    <label>id:     </label>
+                    <label id="le_id"></label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>product name</label>
-                    <label></label>
+                    <label>supplier:     </label>
+                    <label id="lsupplier_name"></label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>price</label>
-                    <label></label>
+                    <label>product name: </label>
+                    <label id="lproduct_name"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>price:        </label>
+                    <label id="lprice"></label>
                 </div>
 
             </div>
 
             <div class="col-md-4">
-                <button class="button-block">Link products</button>
+                <button id="btn_link" data-url="{{ path('link_products') }}" class="button-block">Link products</button>
             </div>
 
             <div class="col-md-4">
                 <h5>Internal products</h5>
                 <div class="col-md-12">
-                    <label>id</label>
-                    <label></label>
+                    <label>id:</label>
+                    <label id="lid"></label>
                 </div>
 
                  <div class="col-md-12">
-                    <label>group</label>
-                    <label></label>
+                    <label>group:</label>
+                    <label id="lgroup"></label>
                  </div>
 
                  <div class="col-md-12">
-                    <label>name</label>
-                    <label></label>
+                    <label>name:</label>
+                    <label id="liproduct_name"></label>
                 </div>
 
                  <div class="col-md-12">
-                    <label>manufacturer</label>
-                    <label></label>
+                    <label>manufacturer:</label>
+                    <label id="lmanufacturer"></label>
                  </div>
 
                 <div class="col-md-12">
-                    <label>input date</label>
-                    <label></label>
+                    <label>input date:</label>
+                    <label id="linput_date"></label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>price</label>
-                    <label></label>
+                    <label>price:</label>
+                    <label id="liprice"></label>
                 </div>
 
             </div>
@@ -122,13 +128,14 @@
                 <label>Supplier</label>
                 <select class="form-control" id="supplier_choose">
                     {% for supplier in suppliers %}
-                        <option value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
+                        <option data-url="{{ path('get_all_products') }}" value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
                     {% endfor %}
                 </select>
             </div>
             <table class="table-responsive table table-bordered" id="external_table">
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>product name</th>
                         <th>price</th>
                     </tr>
@@ -141,6 +148,7 @@
                     {#</tr>#}
                     {%  for product in exproducts %}
                         <tr>
+                            <td>{{  product.externalproductid }}</td>
                             <td>{{  product.productname }}</td>
                             <td>{{  product.price }}</td>
 
@@ -150,7 +158,7 @@
             </table>
 
             <div class="col-md-6">
-                <button class="button-block">send to trash</button>
+                <button id="send_trash" class="button-block">send to trash</button>
             </div>
         </div>
 
@@ -165,7 +173,7 @@
                     <button id="closebtn" type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
 
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Please wait until delete pricelist process is finish.</h4>
+                    <h4 class="modal-title" id="myModalLabel">Please wait until load of pricelist table element is finish.</h4>
 
                 </div>
                 <div class="modal-body">

@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AppBundle\Entity\Suppliers;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Entity\Internalexternal;
 
 /**
  * @Route("/admin")
@@ -231,6 +232,81 @@ class AdminController extends Controller
        $response->setData(array('result' => 'OK'));
        return $response;
     }
+
+    /**
+     * @Route("/linking_products_page", name="linking_products_page")
+     */
+    public function linkProductsPageAction(Request $request){
+        // Linking products page
+        $em = $this->getDoctrine()->getEntityManager();
+        $products = $em->getRepository('AppBundle\Entity\Products')->findAll();
+        $suppliers = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+        $externalProducts =  $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $suppliers[0]->getSupplierid(), 'status' => 'new_product'));
+        return $this->render('admin/linking_products.html.twig', array('products' => $products, 'suppliers' => $suppliers, 'exproducts' => $externalProducts));
+    }
+
+
+    /**
+     * @Route("/get_all_products", name="get_all_products")
+     */
+    public function getAllProductsAction(Request $request){
+//        get ID from AJAX
+//        linking_products.html.twig -> id="supplier_choose" select element
+//        linking_products_pricelists.js
+        $id = $request->request->get('id');
+
+//        get all products from DB with particularly ID and status new_product
+        $em = $this->getDoctrine()->getEntityManager();
+        $pricelistsProducts = $em->getRepository("AppBundle\Entity\Pricelists")->findBy(array('supplierid' => $id, 'status' => 'new_product'));
+
+//        serialize product array of object
+        $pricelistsProductsJson = $this->get('serializer')->serialize($pricelistsProducts, 'json');
+
+        $response = new JsonResponse();
+        $response->setData(array('products'=>$pricelistsProductsJson));
+        return $response;
+
+    }
+
+    /**
+     * @Route("/link_products", name="link_products")
+     */
+    public function linkProductsAction(Request $request){
+//        get external product info and internal product info from AJAX
+//        linking_products_pricelists.js
+        $internalProductID = $request->request->get('aexternal_product');
+        $externalProductID = $request->request->get('ainternal_product');
+
+        //get Entity Manager
+        $em = $this->getDoctrine()->getEntityManager();
+
+//        create Internalexternal object
+        $internalexternal = new Internalexternal();
+
+        //notice findBy return array of Objects
+        $externalProducts = $em->getRepository("AppBundle\Entity\Pricelists")->findBy(array('externalproductid' => $externalProductID));
+        $internalProducts = $em->getRepository("AppBundle\Entity\Products")->findBy(array('internalproductid' => $internalProductID));
+
+//        status of external(pricelists) products became active
+//        reson: external product was linking on internal products
+//        and change status from new_product to active
+        $externalProducts[0]->setStatus('active');
+        $em->flush();
+
+//        set property
+        $internalexternal->setExternalproductid($externalProducts[0]);
+        $internalexternal->setInternalproductid($internalProducts[0]);
+
+        $em->persist($internalexternal);
+        $em->flush();
+
+        $message = "Linking products is finished successfuly.";
+        $response = new JsonResponse();
+        $response->setData(array('message'=>$message));
+        return $response;
+    }
+
+
 
 
 
