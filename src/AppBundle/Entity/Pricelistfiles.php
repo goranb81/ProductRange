@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Pricelistfiles
@@ -17,6 +18,8 @@ class Pricelistfiles
 {
     /**
      * @var string
+     *
+     * @Assert\NotBlank(message = "The supplier name is not defined")
      *
      * @ORM\Column(name="supplier_name", type="string", length=255, nullable=false)
      */
@@ -55,6 +58,8 @@ class Pricelistfiles
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Assert\NotBlank(message = "The excel name is not defined")
      *
      * @Vich\UploadableField(mapping="excel_file", fileNameProperty="excelName", size="excelSize")
      *

@@ -8,16 +8,17 @@
  */
 
     $(document).ready(function(){
-        element_on();
+        // this action import excel pricelist file into DB
+        import_pricelist_into_DB();
+
+        // fill Excel pricelist files select button
+        // with file names after choose supplier
+        fill_excel_pricelist_files();
+
     });
 
-    function element_on(){
-        submit_on();
-    }
-
-    //this function is execute
-    //after action on submit button
-    function submit_on(){
+    // this action import excel pricelist file into DB
+    function import_pricelist_into_DB(){
 
         $('#file_div').on("click", "#import", function(){
             // get data from form fields
@@ -75,26 +76,27 @@
     function importExcelPricelist(result,supplier_name, supplierid, pricelist_filename, nameColumn, priceColumn, selected_button){
         //if we confirm yes(result = true) call ajax and import excel pricelist into DB
         if (result == true) {
+            if(validate(supplier_name, supplierid, pricelist_filename, nameColumn, priceColumn)){
+                //reson for doing that: we don't refresh page after we use modal
+                //on second using of modal modal has some values of his last state
+                //if we want to have modal value's like we first start modal we must to set that value again
+                $("#myModalLabel").text("Please wait until import pricelist process is finish.");
+                $("#status").text('Import pricelist process is running...');
+                $('.progress-bar').addClass('progress-bar-striped');
+                $('.progress-bar').addClass('active');
 
-            //reson for doing that: we don't refresh page after we use modal
-            //on second using of modal modal has some values of his last state
-            //if we want to have modal value's like we first start modal we must to set that value again
-            $("#status").text('Import pricelist process is running...');
-            $('.progress-bar').addClass('progress-bar-striped');
-            $('.progress-bar').addClass('active');
+                //show modal contains information about current process's (import pricelist) progress bar
+                $("#progressbar").modal({backdrop: 'static', keyboard: false}, 'show');
 
-            //show modal contains information about current process's (import pricelist) progress bar
-            $("#progressbar").modal({backdrop: 'static', keyboard: false}, 'show');
+                // disable dialog box's close button
+                document.getElementById('closebtn').disabled = true;
 
-            // disable dialog box's close button
-            document.getElementById('closebtn').disabled = true;
+                // when start import disable button Start import
+                // reason for that is to prevent user to start import before
+                // current import is finished
+                // document.getElementById("import").disabled = true;
 
-            // when start import disable button Start import
-            // reason for that is to prevent user to start import before
-            // current import is finished
-            // document.getElementById("import").disabled = true;
-
-            $.ajax({
+                $.ajax({
                     url: selected_button.data('url'),
                     type: 'post',
                     dataType: 'json',
@@ -120,7 +122,85 @@
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     alert('Error : ' + errorThrown);
                 });
+            }
+
         }
 
     }
+
+    function validate(supplier_name, supplierid, pricelist_filename, nameColumn, priceColumn){
+        if(supplier_name == '' || supplier_name == null || supplier_name == undefined){
+            bootbox.alert("Supplier name isn't correct.")
+            return false;
+        }
+        else if(supplierid == '' || supplierid == null || supplierid == undefined){
+            bootbox.alert("Supplier id isn't correct.")
+            return false;
+        }else if(pricelist_filename == '' || pricelist_filename == null || pricelist_filename == undefined){
+            bootbox.alert("Pricelist filename isn't correct.")
+            return false;
+        }else if(nameColumn == '' || nameColumn == null || nameColumn == undefined){
+            bootbox.alert("Column name isn't correct.")
+            return false;
+        }else if(priceColumn == '' || priceColumn == null || priceColumn == undefined){
+            bootbox.alert("Column price isn't correct.")
+            return false;
+        }
+    }
+
+    // fill Excel pricelist files select button
+    // with file names after choose supplier
+    function fill_excel_pricelist_files(){
+        $('#supplier').change(function () {
+
+            //reson for doing that: we don't refresh page after we use modal
+            //on second using of modal modal has some values of his last state
+            //if we want to have modal value's like we first start modal we must to set that value again
+            $("#myModalLabel").text("Please wait until pricelist file's names load is finish.");
+            $("#status").text("Load pricelist file's names...");
+            $('.progress-bar').addClass('progress-bar-striped');
+            $('.progress-bar').addClass('active');
+
+            //show modal contains information about current process
+            $("#progressbar").modal({backdrop: 'static', keyboard: false}, 'show');
+
+            // disable dialog box's close button
+            document.getElementById('closebtn').disabled = true;
+
+            // AJAX call
+            $.ajax({
+                url: $(this).find(':selected').data('url'),
+                type: 'post',
+                dataType: 'json',
+                data: {name: $(this).find(':selected').text()}
+            }).done(function (response) {
+
+                // clear pricelist filenames
+                // clear from select HTML element all option element
+                $('#excel').empty();
+
+                // fill select checkbox with filenames for certain supplier
+                fill_pricelist_filenames(response.pricelist_filenames);
+
+                // enable dialog box's close button
+                document.getElementById('closebtn').disabled = false;
+
+                // set modal body with result of import pricelist process (get throw Ajax)
+                $("#status").text('Pricelist filenames was load. You can close dialog box and continue your work.');
+                $(".progress-bar").removeClass('progress-bar-striped');
+                $(".progress-bar").removeClass('active');
+
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert('Error : ' + errorThrown);
+            });
+        });
+    }
+
+    // fill select checkbox with filenames for certain supplier
+    function fill_pricelist_filenames(filenames){
+        for(i=0;i<filenames.length;i++){
+            $('#excel').append($('<option></option>').text(filenames[i]));
+        }
+    }
+
 

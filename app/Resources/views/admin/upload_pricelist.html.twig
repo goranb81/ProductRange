@@ -9,6 +9,7 @@
 {% block body %}
     {{ parent() }}
 
+    <div class="container well">
     {#part-one headline#}
     <div class="row">
         <div class="col-md-12 text-center">
@@ -51,8 +52,11 @@
     {{ form_widget(form) }}
     {{ form_end(form) }}
 
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}
     {{  parent() }}
+    <script src="{{ asset('assets/JS/upload_pricelists.js') }}"></script>
 {% endblock %}

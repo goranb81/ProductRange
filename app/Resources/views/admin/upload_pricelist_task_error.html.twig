@@ -9,15 +9,17 @@
 {% block body %}
     {{ parent() }}
 
-    {#center succes message message#}
+    {#center error message#}
     <div class="container">
         <div class="row col-md-2"></div>
         <div class="row col-md-8 well">
-            <h4 class="text-center"> Pricelist file was successfuly uploaded.</h4>
+            <h4>Error:</h4>
+            <h4>{{ error }}</h4>
+            <br>
+            <h4>Choose upload pricelist files option from the navigation bar. Make sure that you choose your pricelist file.</h4>
         </div>
         <div class="row col-md-2"></div>
     </div>
-
 
 {% endblock %}
 

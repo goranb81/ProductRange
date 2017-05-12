@@ -149,12 +149,22 @@ class TestController extends Controller
 
         // ###################################################
         // Linking products page
-        $em = $this->getDoctrine()->getEntityManager();
-        $products = $em->getRepository('AppBundle\Entity\Products')->findAll();
-        $suppliers = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
-        $externalProducts =  $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $suppliers[0]->getSupplierid(), 'status' => 'new_product'));
-        return $this->render('admin/linking_products.html.twig', array('products' => $products, 'suppliers' => $suppliers, 'exproducts' => $externalProducts));
+//        $em = $this->getDoctrine()->getEntityManager();
+//        $products = $em->getRepository('AppBundle\Entity\Products')->findAll();
+//        $suppliers = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
+//        $externalProducts =  $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $suppliers[0]->getSupplierid(), 'status' => 'new_product'));
+//        return $this->render('admin/linking_products.html.twig', array('products' => $products, 'suppliers' => $suppliers, 'exproducts' => $externalProducts));
 
+        // ###################################################
+        // Get all Pricelists Entity's
+//        $em = $this->getDoctrine()->getEntityManager();
+//        $pricelistfiles = $em->getRepository('AppBundle\Entity\Pricelistfiles')->findAll();
+//        var_dump($pricelistfiles);
+
+        // ###################################################
+        // Get global variables $x, $y
+        var_dump($GLOBALS['x']);
+        var_dump($GLOBALS['y']);
     }
 
 

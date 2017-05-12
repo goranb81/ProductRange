@@ -4,12 +4,14 @@
     {{  parent() }}
     <link rel="stylesheet" href="{{  asset('assets/CSS/marginANDpadding.css') }}"/>
     <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
+    {#apply datatable theme#}
     <link rel="stylesheet" href="{{  asset('assets/CSS/linking_products_pricelist.css') }}"/>
 {% endblock %}
 
 {% block body %}
     {{ parent() }}
-    <div class="container-fluid">
+    <div class="container well" style="padding-left: 30px; padding-right: 30px";>
+
         {#internal products part#}
         <div class="row">
             <h3>Internal products</h3>
@@ -43,7 +45,7 @@
                             <td>{{  product.groups }}</td>
                             <td>{{  product.productname }}</td>
                             <td>{{  product.manufacturername }}</td>
-                            <td>{{  product.inputdate|date("d/m/Y")}}</td>
+                            <td>{{  product.inputdate|date("d-m-Y")}}</td>
                             <td>{{  product.price }}</td>
                         </tr>
                     {% endfor %}
@@ -81,7 +83,7 @@
             </div>
 
             <div class="col-md-4">
-                <button id="btn_link" data-url="{{ path('link_products') }}" class="button-block">Link products</button>
+                <button id="btn_link" data-url="{{ path('link_products') }}" class="btn btn-primary">Link products</button>
             </div>
 
             <div class="col-md-4">
@@ -158,7 +160,7 @@
             </table>
 
             <div class="col-md-6">
-                <button id="send_trash" class="button-block">send to trash</button>
+                <button id="send_trash" class="btn btn-primary" data-url="{{ path('trash_product') }}">send to trash</button>
             </div>
         </div>
 

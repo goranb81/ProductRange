@@ -25,13 +25,28 @@ $(document).ready(function (){
 
     // send external(priselist) product into trash
     sent_to_trash();
+
+    //provide double size of search filter - internal table
+    $('#internal_table_filter').children().children().width(500);
+
+    /*provide double size of search filter - external table*/
+    $('#external_table_filter').children().children().width(500);
+
 });
 
 // get all products from DB pricelits table
 // condition is supplier ID
-// fill the table
+// fill the external products table
 function list_products_pricelits(){
   $('#supplier_choose').change(function () {
+      //remove from Linking part info about external product
+      //sometimes that part is fill
+      remove_info();
+
+      // when we change supplier we load new products
+      // there is no row which is selected
+      sel_external_table_row = null;
+
       //reson for doing that: we don't refresh page after we use modal
       //on second using of modal modal has some values of his last state
       //if we want to have modal value's like we first start modal we must to set that value again
@@ -52,6 +67,7 @@ function list_products_pricelits(){
           dataType: 'json',
           data: {id: this.value}
       }).done(function (response) {
+
           add_table_rows_from_JSONdata(response.products);
 
           // enable dialog box's close button
@@ -61,6 +77,7 @@ function list_products_pricelits(){
           $("#status").text('Pricelist table data is load. You can close dialog box and continue your work.');
           $(".progress-bar").removeClass('progress-bar-striped');
           $(".progress-bar").removeClass('active');
+
       }).fail(function (jqXHR, textStatus, errorThrown) {
           alert('Error : ' + errorThrown);
       });
@@ -220,7 +237,7 @@ function link_products(){
     $('#btn_link').click(function () {
         //variable for confirmation
 
-        var external_product = {
+        var internal_product = {
             id: $('#lid').text(),
             group: $('#lgroup').text(),
             name: $('#liproduct_name').text(),
@@ -228,7 +245,7 @@ function link_products(){
             input_date: $('#linput_date').text(),
             price: $('#liprice').text()
         };
-        var internal_product = {
+        var external_product = {
             id: $("#le_id").text(),
             supplier_name: $("#lsupplier_name").text(),
             name: $("#lproduct_name").text(),
@@ -237,18 +254,18 @@ function link_products(){
 
         var type = 'linking';
         var title = 'Are you want to linking products?';
-        var message = 'External product' + '<br>'
-            + 'id: ' + external_product.id + '<br>'
-            + 'group: ' + external_product.group + '<br>'
-            + 'name: ' + external_product.name + '<br>'
-            + 'manufacturer: ' + external_product.manufacturer + '<br>'
-            + 'price: ' + external_product.price + '<br><br>';
-
-        message += 'Internal product: '
+        var message = 'Internal product' + '<br>'
             + 'id: ' + internal_product.id + '<br>'
-            + 'supplier name: ' + internal_product.supplier_name + '<br>'
+            + 'group: ' + internal_product.group + '<br>'
             + 'name: ' + internal_product.name + '<br>'
-            + 'price: ' + internal_product.price;
+            + 'manufacturer: ' + internal_product.manufacturer + '<br>'
+            + 'price: ' + internal_product.price + '<br><br>';
+
+        message += 'External product: '
+            + 'id: ' + external_product.id + '<br>'
+            + 'supplier name: ' + external_product.supplier_name + '<br>'
+            + 'name: ' + external_product.name + '<br>'
+            + 'price: ' + external_product.price;
 
         // confirmation dialog box
         confirmAction(type, title, message, external_product, internal_product);
@@ -274,6 +291,7 @@ function confirmAction(type, title, message, external_product, internal_product)
             switch (type) {
                 case 'linking':
                     link(result, external_product, internal_product);
+                    break;
                 case 'trash':
                     trash(result, external_product);
                     break;
@@ -287,7 +305,7 @@ function link(result, external_product, internal_product){
     // YES option on confirmation box
     if(result == true){
         // to call Ajax we can fulfill following condition:
-        // row in external table must be is_selected_external
+        // row in external table must be selected
         // row in internal table must be selected
 
 
@@ -335,8 +353,9 @@ function validate(external_product, internal_product, type){
 
     if (type === 'linking') {
         return validate_linking(external_product, internal_product);
-    } else if (type === 'trash') {
-        return validate_trash(external_product);
+    }
+    else if (type === 'trash') {
+         return validate_trash(external_product);
     }
 
 }
@@ -345,13 +364,13 @@ function validate_linking(external_product, internal_product){
     //     // to call Ajax we can fulfill following condition:
     //     // row in external table must be is_selected_external
     //     // row in internal table must be selected
-    if(sel_external_table_row == null && sel_internal_table_row == null){
+    if(is_selected_internal == false && is_selected_external == false){
         bootbox.alert("Both external and internal table's row is not selected. Both external and internal product's info is incorrect!" );
         return false;
-    }else if(sel_external_table_row == null){
+    }else if(is_selected_external == false){
         bootbox.alert("External table's row is not selected. External product's info is incorrect!" );
         return false;
-    }else if(sel_internal_table_row == null){
+    }else if(is_selected_internal == false){
         bootbox.alert("Internal table's row is not selected. Internal product's info is incorrect!" );
         return false;
     }else
@@ -370,7 +389,7 @@ function validate_linking(external_product, internal_product){
 function validate_trash(external_product){
         // to call Ajax we can fulfill following condition:
         // row in external table must be is_selected_external
-    if(sel_external_table_row == null) {
+    if(is_selected_external == false) {
         bootbox.alert("External table's row is not selected. External product's info is incorrect!");
         return false;
     }else // external product's id must be defined
@@ -386,22 +405,19 @@ function sent_to_trash(){
         //variable for confirmation
 
         var external_product = {
-            id: $('#lid').text(),
-            group: $('#lgroup').text(),
-            name: $('#liproduct_name').text(),
-            manufacturer: $('#lmanufacturer').text(),
-            input_date: $('#linput_date').text(),
-            price: $('#liprice').text()
+            id: $("#le_id").text(),
+            supplier_name: $("#lsupplier_name").text(),
+            name: $("#lproduct_name").text(),
+            price: $("#lprice").text()
         };
 
         var type = 'trash';
         var title = 'Are you want to trash product?';
-        var message = 'External product' + '<br>'
+        message = 'External product: '
             + 'id: ' + external_product.id + '<br>'
-            + 'group: ' + external_product.group + '<br>'
+            + 'supplier name: ' + external_product.supplier_name + '<br>'
             + 'name: ' + external_product.name + '<br>'
-            + 'manufacturer: ' + external_product.manufacturer + '<br>'
-            + 'price: ' + external_product.price + '<br><br>';
+            + 'price: ' + external_product.price;
 
         // confirmation dialog box
         confirmAction(type, title, message, external_product, null);
@@ -419,35 +435,36 @@ function trash(result, external_product){
             $('#send_trash').attr("disabled", true);
 
             // AJAX call
-            // $.ajax({
-            //     url: $('#send_trash').data('url'),
-            //     type: 'post',
-            //     dataType: 'json',
-            //     data: {aexternal_product: external_product, ainternal_product: internal_product}
-            // }).done(function (response) {
-            //     // deselect internal table row
-            //     // deselect external table row
-            //     // reson: after linked products, products info still has values
-            //     // when we deselect rows we suspend possibility to try link already linked products
-            //     $(sel_internal_table_row).removeClass('selected');
-            //     $(sel_external_table_row).removeClass('selected');
-            //
-            //     // remove info in Linking part
-            //     remove_info_internal();
-            //     // remove info in Linking part
-            //     remove_info();
-            //
-            //     // delete row(linked external product) from table
-            //     external_table.row(sel_external_table_row).remove().draw();
-            //
-            //     // enable link btn after linked process is finished
-            //     $('#btn_link').attr("disabled", false);
-            //
-            //     bootbox.alert(response.message);
-            //
-            // }).fail(function (jqXHR, textStatus, errorThrown) {
-            //     alert('Error : ' + errorThrown);
-            // });
+            $.ajax({
+                url: $('#send_trash').data('url'),
+                type: 'post',
+                dataType: 'json',
+                data: {aexternal_product: external_product}
+            }).done(function (response) {
+                // deselect internal table row
+                // deselect external table row
+                // reson: after trashed products, products info still has values
+                // when we deselect rows we suspend possibility to try link or trash
+                // already trashed product
+                $(sel_internal_table_row).removeClass('selected');
+                $(sel_external_table_row).removeClass('selected');
+
+                // remove info in Linking part
+                remove_info_internal();
+                // remove info in Linking part
+                remove_info();
+
+                // delete row(linked external product) from table
+                external_table.row(sel_external_table_row).remove().draw();
+
+                // enable link btn after linked process is finished
+                $('#send_trash').attr("disabled", false);
+
+                bootbox.alert(response.message);
+
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert('Error : ' + errorThrown);
+            });
         }
     }
 }
