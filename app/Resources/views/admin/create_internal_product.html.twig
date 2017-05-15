@@ -1,0 +1,202 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{%  block stylesheets %}
+    {{  parent() }}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/marginANDpadding.css') }}"/>
+    <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
+    {#apply datatable theme#}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/linking_products_pricelist.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container well" style="padding-left: 30px; padding-right: 30px";>
+
+        {#internal products part#}
+        <div class="row">
+            <h3>Internal products</h3>
+
+            {#Old version code#}
+            {#<div class="col-md-6">#}
+            {#<label>Part of name:</label>#}
+            {#<input type="text"/>#}
+            {#</div>#}
+            {#<div class="col-md-6">#}
+            {#<button class="button-block">search</button>#}
+            {#</div>#}
+
+            <table class="table-responsive table table-bordered" id="internal_table">
+
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>group</th>
+                    <th>name</th>
+                    <th>manufacturer</th>
+                    <th>input date</th>
+                    <th>price</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {%  for product in products %}
+                    <tr>
+                        <td>{{  product.internalproductid }}</td>
+                        <td>{{  product.groups }}</td>
+                        <td>{{  product.productname }}</td>
+                        <td>{{  product.manufacturername }}</td>
+                        <td>{{  product.inputdate|date("d-m-Y")}}</td>
+                        <td>{{  product.price }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        {#linking part#}
+        <div class="row">
+            <h3>Linking</h3>
+            <div class="col-md-4">
+                <h5>External product</h5>
+
+                <div class="col-md-12">
+                    <label>id:     </label>
+                    <label id="le_id"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>supplier:     </label>
+                    <label id="lsupplier_name"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>product name: </label>
+                    <label id="lproduct_name"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>price:        </label>
+                    <label id="lprice"></label>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <button id="btn_link" data-url="{{ path('link_products') }}" class="btn btn-primary">Link products</button>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Internal products</h5>
+                <div class="col-md-12">
+                    <label>id:</label>
+                    <label id="lid"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>group:</label>
+                    <label id="lgroup"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>name:</label>
+                    <label id="liproduct_name"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>manufacturer:</label>
+                    <label id="lmanufacturer"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>input date:</label>
+                    <label id="linput_date"></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>price:</label>
+                    <label id="liprice"></label>
+                </div>
+
+            </div>
+
+        </div>
+
+        {#external products (products from excel pricelist) part#}
+        <div class="row">
+            <h3>External products</h3>
+
+            <div class="col-md-2">
+                <label>Supplier</label>
+                <select class="form-control" id="supplier_choose">
+                    {% for supplier in suppliers %}
+                        <option data-url="{{ path('get_all_products') }}" value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <table class="table-responsive table table-bordered" id="external_table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>product name</th>
+                    <th>price</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {#<tr>#}
+                {#<td>Kamera</td>#}
+                {#<td>12,33</td>#}
+                {#</tr>#}
+                {%  for product in exproducts %}
+                    <tr>
+                        <td>{{  product.externalproductid }}</td>
+                        <td>{{  product.productname }}</td>
+                        <td>{{  product.price }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="col-md-6">
+                <button id="send_trash" class="btn btn-primary" data-url="{{ path('trash_product') }}">send to trash</button>
+            </div>
+        </div>
+
+    </div>
+
+    {#Modal progress bar#}
+    <div class="modal fade in" id="progressbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content modal-edit">
+                <div class="modal-header">
+                    <button id="closebtn" type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Please wait until load of pricelist table element is finish.</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div id="prog-bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                            {#<span class="sr-only">70% Complete</span>#}
+                        </div>
+                    </div>
+                    <h4 id="status">Delete pricelist process is running...</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+    <script src="{{ asset('assets/JS/linking_products_pricelist.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/js/jquery.dataTables.min.js') }}"></script>
+
+{% endblock %}
