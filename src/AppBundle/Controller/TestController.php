@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use Symfony\Bridge\Doctrine;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -163,8 +164,10 @@ class TestController extends Controller
 
         // ###################################################
         // Get global variables $x, $y
-        var_dump($GLOBALS['x']);
-        var_dump($GLOBALS['y']);
+//        var_dump($GLOBALS['x']);
+//        var_dump($GLOBALS['y']);
+
+        return $this->render('test_skladiste.html.twig');
     }
 
 

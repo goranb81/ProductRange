@@ -12,159 +12,93 @@
     {{ parent() }}
     <div class="container well" style="padding-left: 30px; padding-right: 30px";>
 
-        {#internal products part#}
-        <div class="row">
-            <h3>Internal products</h3>
 
-            {#Old version code#}
-            {#<div class="col-md-6">#}
-            {#<label>Part of name:</label>#}
-            {#<input type="text"/>#}
-            {#</div>#}
-            {#<div class="col-md-6">#}
-            {#<button class="button-block">search</button>#}
-            {#</div>#}
+            <div class="row col-md-8">
+                <h4>Create internal product</h4>
 
-            <table class="table-responsive table table-bordered" id="internal_table">
-
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>group</th>
-                    <th>name</th>
-                    <th>manufacturer</th>
-                    <th>input date</th>
-                    <th>price</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {%  for product in products %}
-                    <tr>
-                        <td>{{  product.internalproductid }}</td>
-                        <td>{{  product.groups }}</td>
-                        <td>{{  product.productname }}</td>
-                        <td>{{  product.manufacturername }}</td>
-                        <td>{{  product.inputdate|date("d-m-Y")}}</td>
-                        <td>{{  product.price }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
-        </div>
-
-        {#linking part#}
-        <div class="row">
-            <h3>Linking</h3>
-            <div class="col-md-4">
-                <h5>External product</h5>
-
-                <div class="col-md-12">
-                    <label>id:     </label>
-                    <label id="le_id"></label>
+                <div class="row">
+                    <label class="col-md-4">group:</label>
+                    <select class="form-control col-md-8" id="group">
+                        {% for group in groups %}
+                            <option value="{{ group.id }}">{{ group.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
-                <div class="col-md-12">
-                    <label>supplier:     </label>
-                    <label id="lsupplier_name"></label>
-                </div>
-
-                <div class="col-md-12">
-                    <label>product name: </label>
-                    <label id="lproduct_name"></label>
-                </div>
-
-                <div class="col-md-12">
-                    <label>price:        </label>
-                    <label id="lprice"></label>
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-                <button id="btn_link" data-url="{{ path('link_products') }}" class="btn btn-primary">Link products</button>
-            </div>
-
-            <div class="col-md-4">
-                <h5>Internal products</h5>
-                <div class="col-md-12">
-                    <label>id:</label>
-                    <label id="lid"></label>
-                </div>
-
-                <div class="col-md-12">
-                    <label>group:</label>
-                    <label id="lgroup"></label>
-                </div>
-
-                <div class="col-md-12">
-                    <label>name:</label>
-                    <label id="liproduct_name"></label>
-                </div>
-
-                <div class="col-md-12">
+                <div class="">
                     <label>manufacturer:</label>
-                    <label id="lmanufacturer"></label>
+                    <select class="form-control" id="manufacturer">
+                        {% for manufacturer in manufacturers %}
+                            <option value="{{ manufacturer.manufacturerId }}">{{ manufacturer.manufacturerName }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
-                <div class="col-md-12">
-                    <label>input date:</label>
-                    <label id="linput_date"></label>
+                <div class="">
+                    <label>name:</label>
+                    <input type="text" id="product_name"/>
                 </div>
 
-                <div class="col-md-12">
+                <div class="">
                     <label>price:</label>
-                    <label id="liprice"></label>
+                    <input type="text" id="price"/>
                 </div>
 
             </div>
 
+        <br>
+        <br>
+
+        <div class="row col-md-12" id="btn_div">
+            <button data-url="{{ path('create_internal_products') }}" id="btn_create"  class="btn btn-primary">Create product</button>
+            {#data-url="{{ path('') }}"#}
         </div>
 
-        {#external products (products from excel pricelist) part#}
-        <div class="row">
-            <h3>External products</h3>
+        <br>
 
-            <div class="col-md-2">
-                <label>Supplier</label>
-                <select class="form-control" id="supplier_choose">
-                    {% for supplier in suppliers %}
-                        <option data-url="{{ path('get_all_products') }}" value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <table class="table-responsive table table-bordered" id="external_table">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>product name</th>
-                    <th>price</th>
-                </tr>
-                </thead>
 
-                <tbody>
-                {#<tr>#}
-                {#<td>Kamera</td>#}
-                {#<td>12,33</td>#}
-                {#</tr>#}
-                {%  for product in exproducts %}
-                    <tr>
-                        <td>{{  product.externalproductid }}</td>
-                        <td>{{  product.productname }}</td>
-                        <td>{{  product.price }}</td>
-
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
-            <div class="col-md-6">
-                <button id="send_trash" class="btn btn-primary" data-url="{{ path('trash_product') }}">send to trash</button>
-            </div>
-        </div>
 
     </div>
+
+     <div class="container well" style="padding-left: 30px; padding-right: 30px">
+         {#internal products table#}
+         <div class="row col-md-12">
+             <h4>Internal products table</h4>
+
+             <table class="table-responsive table table-bordered" id="internal_table">
+
+                 <thead>
+                 <tr>
+                     <th>id</th>
+                     <th>group id</th>
+                     <th>group name</th>
+                     <th>name</th>
+                     <th>manufacturer</th>
+                     <th>input date</th>
+                     <th>price</th>
+                 </tr>
+                 </thead>
+
+                 <tbody>
+                 {%  for product in products %}
+                     <tr>
+                         <td>{{  product.internalproductid }}</td>
+                         <td>{{  product.groups }}</td>
+                         <td>{{  product.groupname }}</td>
+                         <td>{{  product.productname }}</td>
+                         <td>{{  product.manufacturername }}</td>
+                         <td>{{  product.inputdate|date("d-m-Y")}}</td>
+                         <td>{{  product.price }}</td>
+                     </tr>
+                 {% endfor %}
+                 </tbody>
+             </table>
+
+         </div>
+     </div>
+
+
+
 
     {#Modal progress bar#}
     <div class="modal fade in" id="progressbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -194,7 +128,7 @@
 
 {% block javascripts %}
     {{  parent() }}
-    <script src="{{ asset('assets/JS/linking_products_pricelist.js') }}"></script>
+    <script src="{{ asset('assets/JS/create_internal_product.js') }}"></script>
     <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
     <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
     <script src="{{ asset('assets/DataTables/js/jquery.dataTables.min.js') }}"></script>

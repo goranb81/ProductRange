@@ -1,0 +1,566 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{%  block stylesheets %}
+    {{  parent() }}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/marginANDpadding.css') }}"/>
+    <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
+    {#apply datatable theme#}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/linking_products_pricelist.css') }}"/>
+    <link rel="stylesheet" href="{{  asset('assets/CSS/test_skladiste.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div id="container1" class="container" style="padding-left: 5px; padding-right: 5px";>
+
+
+        <div class = "row">
+            <div class="row">
+            <h3>Prikaz mape skladista 58004</h3>
+            </div>
+            <div class="row">
+
+                    <label style="width:175px">Kupac:</label>
+                    <select style="width:175px">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+
+
+                    <label style="width:175px">Narudzba:</label>
+                <select style="width:175px">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+
+
+                    <label style="width:175px">Stavka:</label>
+                <select style="width:175px">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+
+            </div>
+        </div>
+
+        {#Shows two table that represent stock#}
+        {#<div class="row">#}
+
+            {#<table  class="table-bordered table" id="stock_table1">#}
+                {#class="table-responsive table table-bordered"#}
+
+                {#<thead>#}
+                {#<tr>#}
+                    {#<th>HJ01</th>#}
+                    {#<th>HJ02</th>#}
+                    {#<th>HJ03</th>#}
+                    {#<th>HJ04</th>#}
+                    {#<th>HJ05</th>#}
+                    {#<th>HJ06</th>#}
+                    {#<th>HJ07</th>#}
+                    {#<th>HJ08</th>#}
+                    {#<th>HJ09</th>#}
+                    {#<th>HJ10</th>#}
+                    {#<th>HJ11</th>#}
+                    {#<th>HJ12</th>#}
+                    {#<th>HJ03</th>#}
+                    {#<th>HJ14</th>#}
+                    {#<th>HJ15</th>#}
+                    {#<th>HJ16</th>#}
+                    {#<th>HJ17</th>#}
+                {#</tr>#}
+                {#</thead>#}
+
+                {#<tbody>#}
+                    {#<tr>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                    {#</tr>#}
+
+                    {#<tr>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                    {#</tr>#}
+
+                    {#<tr>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                    {#</tr>#}
+
+                    {#<tr>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                    {#</tr>#}
+
+                    {#<tr>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                        {#<td></td>#}
+                    {#</tr>#}
+
+                {#</tbody>#}
+            {#</table>#}
+
+            {#<table  class="table-bordered table" id="stock_table2">#}
+                {#class="table-responsive table table-bordered"#}
+
+                {#<thead>#}
+                {#<tr>#}
+                    {#<th>HJ18</th>#}
+                    {#<th>HJ19</th>#}
+                    {#<th>HJ20</th>#}
+                    {#<th>HJ22</th>#}
+                    {#<th>HJ23</th>#}
+                    {#<th>HJ25</th>#}
+                    {#<th>HJ27</th>#}
+                    {#<th>HJ30</th>#}
+                    {#<th>HJ31</th>#}
+                    {#<th>HJ33</th>#}
+                    {#<th>HJ35</th>#}
+                    {#<th>HJ36</th>#}
+                    {#<th>HJ37</th>#}
+                    {#<th>HJ39</th>#}
+                    {#<th>HJ41</th>#}
+                    {#<th>HJ43</th>#}
+                {#</tr>#}
+                {#</thead>#}
+
+                {#<tbody>#}
+                {#<tr>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                {#</tr>#}
+
+                {#<tr>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                {#</tr>#}
+
+                {#<tr>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                {#</tr>#}
+
+                {#<tr>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                {#</tr>#}
+
+                {#<tr>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                    {#<td></td>#}
+                {#</tr>#}
+
+                {#</tbody>#}
+            {#</table>#}
+            <div>
+            <table  class="table-bordered well" id="stock_table">
+                {#class="table-responsive table table-bordered"#}
+
+                <thead>
+                <tr>
+                    <th>HJ01</th>
+                    <th>HJ02</th>
+                    <th>HJ03</th>
+                    <th>HJ04</th>
+                    <th>HJ05</th>
+                    <th>HJ06</th>
+                    <th>HJ07</th>
+                    <th>HJ08</th>
+                    <th>HJ09</th>
+                    <th>HJ10</th>
+                    <th>HJ11</th>
+                    <th>HJ12</th>
+                    <th>HJ03</th>
+                    <th>HJ14</th>
+                    <th>HJ15</th>
+                    <th>HJ16</th>
+                    <th>HJ17</th>
+                    <th>HJ18</th>
+                    <th>HJ19</th>
+                    <th>HJ20</th>
+                    <th>HJ22</th>
+                    <th>HJ23</th>
+                    <th>HJ25</th>
+                    <th>HJ27</th>
+                    <th>HJ30</th>
+                    <th>HJ31</th>
+                    <th>HJ33</th>
+                    <th>HJ35</th>
+                    <th>HJ36</th>
+                    <th>HJ37</th>
+                    <th>HJ39</th>
+                    <th>HJ41</th>
+                    <th>HJ43</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    {#Modal progress bar#}
+    <div class="modal fade in" id="progressbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content modal-edit">
+                <div class="modal-header">
+                    <button id="closebtn" type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Please wait until load of pricelist table element is finish.</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div id="prog-bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                            {#<span class="sr-only">70% Complete</span>#}
+                        </div>
+                    </div>
+                    <h4 id="status">Delete pricelist process is running...</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+    <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/test_skladiste.html.twig.js') }}"></script>
+
+{% endblock %}

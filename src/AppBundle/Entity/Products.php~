@@ -22,6 +22,13 @@ class Products
     /**
      * @var string
      *
+     * @ORM\Column(name="groupname", type="string", length=50, nullable=true)
+     */
+    private $groupname;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="productName", type="string", length=500, nullable=false)
      */
     private $productname;

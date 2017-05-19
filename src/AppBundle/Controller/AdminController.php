@@ -8,10 +8,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Pricelists;
+use AppBundle\Entity\Products;
 use AppBundle\Entity\Pricelistfiles;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AppBundle\Entity\Suppliers;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\Internalexternal;
+use AppBundle\Entity\Groups;
+use AppBundle\Entity\Manufacturers;
 
 /**
  * @Route("/admin")
@@ -43,7 +46,8 @@ class AdminController extends Controller
      *
      * @Route("/import_pricelist_page", name="import_pricelist_page")
      */
-    public function importpricelistAction(Request $request){
+    public function importpricelistAction(Request $request)
+    {
         $listOfSupplier = $this->getAllSuppliers();
 
         // get list of filenames from excelpricelists directory
@@ -54,7 +58,8 @@ class AdminController extends Controller
 
 
 //    get all filenames from pricelist's directory
-    public function getFilesFromPricelistDirectoryByEntity($name){
+    public function getFilesFromPricelistDirectoryByEntity($name)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
 //        array of pricelists entity
@@ -62,7 +67,7 @@ class AdminController extends Controller
         $pricelists = $em->getRepository('AppBundle\Entity\Pricelistfiles')->findBy(array('supplierName' => $name));
 
         $arrayOfExcelFilenames = array();
-        foreach ($pricelists as $pricelist){
+        foreach ($pricelists as $pricelist) {
             $arrayOfExcelFilenames[] = $pricelist->getExcelName();
         }
         return $arrayOfExcelFilenames;
@@ -70,13 +75,14 @@ class AdminController extends Controller
 
 //    !!!!! We don't use this function. Instead this we use getFilesFromPricelistDirectoryByEntity()
 //    get all filenames from pricelists directory
-    public function getFilesFromPricelistDirectory(){
+    public function getFilesFromPricelistDirectory()
+    {
         $dir = $this->getParameter('excelpricelist_directory');
         $arrayOfExcelFilenames = array();
         if ($handle = opendir($dir)) {
 
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && is_file($dir.'/'.$entry)) {
+                if ($entry != "." && $entry != ".." && is_file($dir . '/' . $entry)) {
                     $arrayOfExcelFilenames[] = $entry;
                 }
             }
@@ -91,7 +97,8 @@ class AdminController extends Controller
      *
      * @Route("/get_supplier_pricelist_filenames", name="get_supplier_pricelist_filenames")
      */
-    public function getSupplierPricelistFilenamesAction(Request $request){
+    public function getSupplierPricelistFilenamesAction(Request $request)
+    {
         //get name from Ajax
         $name = $request->request->get('name');
 
@@ -108,13 +115,14 @@ class AdminController extends Controller
      *
      * @Route("/upload_pricelist_page", name="upload_pricelist_page")
      */
-    public function uploadpricelistAction(Request $request){
+    public function uploadpricelistAction(Request $request)
+    {
 //        get list of objects that represent all suppliers
         $listOfSupplier = $this->getAllSuppliers();
 
 //        array of supplier name. we use that array like choices
         $suppliers = array();
-        foreach ($listOfSupplier as $supplier){
+        foreach ($listOfSupplier as $supplier) {
             $suppliers[$supplier->getSuppliername()] = $supplier->getSuppliername();
         }
 
@@ -134,8 +142,8 @@ class AdminController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
-            if($form->isValid()){
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
                 //we set excel size to constant value becouse without that value
@@ -147,7 +155,7 @@ class AdminController extends Controller
 
                 return $this->render('admin/upload_pricelist_task_success.html.twig');
 
-            }else{
+            } else {
                 //get validator
                 $validator = $this->get('validator');
 
@@ -156,7 +164,7 @@ class AdminController extends Controller
 //                in Entity to validate form fields
                 $errors = $validator->validate($pricelistfile);
 
-                return $this->render('admin/upload_pricelist_task_error.html.twig', array('error'=> $errors));
+                return $this->render('admin/upload_pricelist_task_error.html.twig', array('error' => $errors));
             }
         }
         return $this->render('admin/upload_pricelist.html.twig', array('form' => $form->createView()));
@@ -226,14 +234,15 @@ class AdminController extends Controller
      *
      * @Route("/delete_pricelist_page", name="delete_pricelist_page")
      */
-    public function deletefilesAction(Request $request){
+    public function deletefilesAction(Request $request)
+    {
 
         $listOfSuppliers = $this->getAllSuppliers();
 
         // Get all Pricelists Entity's
         $em = $this->getDoctrine()->getEntityManager();
-        $pricelistfiles = $em->getRepository('AppBundle\Entity\Pricelistfiles')->findBy(array('supplierName'=>$listOfSuppliers[0]->getSuppliername()));
-        return $this->render('admin/delete_pricelist.html.twig', array('suppliers' => $listOfSuppliers, 'files'=>$pricelistfiles));
+        $pricelistfiles = $em->getRepository('AppBundle\Entity\Pricelistfiles')->findBy(array('supplierName' => $listOfSuppliers[0]->getSuppliername()));
+        return $this->render('admin/delete_pricelist.html.twig', array('suppliers' => $listOfSuppliers, 'files' => $pricelistfiles));
     }
 
     /**
@@ -242,7 +251,8 @@ class AdminController extends Controller
      *
      * @Route("/deletepricelist", name="deletepricelist")
      */
-    public function deletepricelistfilesAction(Request $request){
+    public function deletepricelistfilesAction(Request $request)
+    {
 //        get supplier name
         $supplierName = $request->request->get('asupplier_name');
         $em = $this->getDoctrine()->getEntityManager();
@@ -254,14 +264,14 @@ class AdminController extends Controller
 //        This is ability of vich bundle
 
 //        delete all entity from array of suppliers
-        foreach ($pricelistfiles as $pricelist){
+        foreach ($pricelistfiles as $pricelist) {
             $em->remove($pricelist);
             $em->flush();
         }
 
-       $response = new JsonResponse();
-       $response->setData(array('result' => 'OK'));
-       return $response;
+        $response = new JsonResponse();
+        $response->setData(array('result' => 'OK'));
+        return $response;
     }
 
     /**
@@ -269,7 +279,8 @@ class AdminController extends Controller
      *
      * @Route("/deletepricelist_selected", name="deletepricelist_selected")
      */
-    public function deletepricelistfilesSelectedAction(Request $request){
+    public function deletepricelistfilesSelectedAction(Request $request)
+    {
 //        get supplier name
         $arrayIDs = $request->request->get('parrayIDs');
 
@@ -277,7 +288,7 @@ class AdminController extends Controller
 
         $priselistfilesArray = array();
 
-        foreach ($arrayIDs as $id){
+        foreach ($arrayIDs as $id) {
             $pricelistfile = $em->getRepository("AppBundle\Entity\Pricelistfiles")->find($id);
             $priselistfilesArray[] = $pricelistfile;
         }
@@ -289,7 +300,7 @@ class AdminController extends Controller
 //        This is ability of vich bundle
 
 //        delete all entity from array of suppliers
-        foreach ($priselistfilesArray as $pricelist){
+        foreach ($priselistfilesArray as $pricelist) {
             $em->remove($pricelist);
             $em->flush();
         }
@@ -303,12 +314,13 @@ class AdminController extends Controller
     /**
      * @Route("/linking_products_page", name="linking_products_page")
      */
-    public function linkProductsPageAction(Request $request){
+    public function linkProductsPageAction(Request $request)
+    {
         // Linking products page
         $em = $this->getDoctrine()->getEntityManager();
         $products = $em->getRepository('AppBundle\Entity\Products')->findAll();
         $suppliers = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
-        $externalProducts =  $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $suppliers[0]->getSupplierid(), 'status' => 'new_product'));
+        $externalProducts = $em->getRepository('AppBundle\Entity\Pricelists')->findBy(array('supplierid' => $suppliers[0]->getSupplierid(), 'status' => 'new_product'));
         return $this->render('admin/linking_products.html.twig', array('products' => $products, 'suppliers' => $suppliers, 'exproducts' => $externalProducts));
     }
 
@@ -316,7 +328,8 @@ class AdminController extends Controller
     /**
      * @Route("/get_all_products", name="get_all_products")
      */
-    public function getAllProductsAction(Request $request){
+    public function getAllProductsAction(Request $request)
+    {
 //        get ID from AJAX
 //        linking_products.html.twig -> id="supplier_choose" select element
 //        linking_products_pricelists.js
@@ -330,7 +343,7 @@ class AdminController extends Controller
         $pricelistsProductsJson = $this->get('serializer')->serialize($pricelistsProducts, 'json');
 
         $response = new JsonResponse();
-        $response->setData(array('products'=>$pricelistsProductsJson));
+        $response->setData(array('products' => $pricelistsProductsJson));
         return $response;
 
     }
@@ -338,7 +351,8 @@ class AdminController extends Controller
     /**
      * @Route("/get_all_files", name="get_all_files")
      */
-    public function getAllFilesAction(Request $request){
+    public function getAllFilesAction(Request $request)
+    {
 //        get name from AJAX
 //        delete_pricelist.html.twig -> id="supplier" select element
 //        delete_pricelist.js
@@ -352,7 +366,7 @@ class AdminController extends Controller
         $pricelistsProductsJson = $this->get('serializer')->serialize($files, 'json');
 
         $response = new JsonResponse();
-        $response->setData(array('files'=>$pricelistsProductsJson));
+        $response->setData(array('files' => $pricelistsProductsJson));
         return $response;
 
     }
@@ -361,12 +375,16 @@ class AdminController extends Controller
      * Link external with internal product
      * @Route("/link_products", name="link_products")
      */
-    public function linkProductsAction(Request $request){
+    public function linkProductsAction(Request $request)
+    {
 //        get external product info and internal product info from AJAX
 //        linking_products_pricelists.js
-        $internalProductID = $request->request->get('ainternal_product');
-        $externalProductID = $request->request->get('aexternal_product');
+        $internalProduct = $request->request->get('ainternal_product');
+        $externalProduct = $request->request->get('aexternal_product');
 
+        $internalProductID=$internalProduct['id'];
+        $externalProductID=$externalProduct['id'];
+        
         //get Entity Manager
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -392,7 +410,7 @@ class AdminController extends Controller
 
         $message = "Linking products is finished successfuly.";
         $response = new JsonResponse();
-        $response->setData(array('message'=>$message));
+        $response->setData(array('message' => $message));
         return $response;
     }
 
@@ -400,7 +418,8 @@ class AdminController extends Controller
      * Put external products in trash state
      * @Route("/trash_product", name="trash_product")
      */
-    public function trashProductAction(Request $request){
+    public function trashProductAction(Request $request)
+    {
 //        get external product info from AJAX
 //        linking_products_pricelists.js
         $externalProductID = $request->request->get('aexternal_product');
@@ -419,7 +438,7 @@ class AdminController extends Controller
 
         $message = "Product was put in trash.";
         $response = new JsonResponse();
-        $response->setData(array('message'=>$message));
+        $response->setData(array('message' => $message));
         return $response;
     }
 
@@ -427,7 +446,8 @@ class AdminController extends Controller
      * Get all pricelist's files
      * @Route("/all_files", name="all_files")
      */
-    public function allFilesAction(Request $request){
+    public function allFilesAction(Request $request)
+    {
 //        get external product info from AJAX
 //        linking_products_pricelists.js
         $externalProductID = $request->request->get('aexternal_product');
@@ -446,10 +466,9 @@ class AdminController extends Controller
 
         $message = "Product was put in trash.";
         $response = new JsonResponse();
-        $response->setData(array('message'=>$message));
+        $response->setData(array('message' => $message));
         return $response;
     }
-
 
 
     public function getAllSuppliers()
@@ -457,6 +476,123 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $listOfSupplier = $em->getRepository('AppBundle\Entity\Suppliers')->findAll();
         return $listOfSupplier;
+    }
+
+
+    /**
+     * Get all pricelist's files
+     * @Route("/create_internal_products_page", name="create_internal_products_page")
+     */
+    public function createInternalProductsPageAction(Request $request)
+    {
+
+        //get Entity Manager
+        $em = $this->getDoctrine()->getEntityManager();
+
+//    array - all groups
+        $groups = $em->getRepository("AppBundle\Entity\Groups")->findAll();
+
+//        set first Groups object with id = 0 and name = ''
+        $firstElement = new Groups();
+        $firstElement->setName('');
+
+//        add firstElement on the top of array
+        array_unshift($groups, $firstElement);
+
+//        array - all manufacturers
+        $manufacturers = $em->getRepository("AppBundle\Entity\Manufacturers")->findAll();
+
+//        set first Groups object with id = 0 and name = ''
+        $firstElementManufacturer = new Manufacturers();
+        $firstElementManufacturer->setManufacturername('');
+
+//        add firstElement on the top of array
+        array_unshift($manufacturers, $firstElementManufacturer);
+
+//        array - all products
+        $products = $em->getRepository("AppBundle\Entity\Products")->findAll();
+
+        return $this->render('admin/create_internal_product.html.twig', array('groups'=>$groups, 'manufacturers'=>$manufacturers, 'products'=>$products));
+    }
+
+    /**
+     * Create internal product action called by Ajax call
+     * @Route("/create_internal_products", name="create_internal_products")
+     */
+    public function createInternalProductsAction(Request $request)
+    {
+//        get parametar from Ajax
+        $groupid = $request->request->get('agroupid');
+        $groupname = $request->request->get('agroupname');
+        $manufacturerid = $request->request->get('amanufacturerid');
+        $manufacturername = $request->request->get('amanufacturername');;
+        $productname = $request->request->get('aproductname');
+        $productprice = $request->request->get('aproductprice');
+
+//        Is this product already exists?
+        $em = $this->getDoctrine()->getEntityManager();
+        $internalProduct = $em->getRepository('AppBundle\Entity\Products')->findBy(array('productname'=>$productname));
+
+        $response = new JsonResponse();
+        //        Is this product already exists?
+        if($internalProduct == null){
+//            insert product into DB
+//            $queryBuilder = $em->createQueryBuilder();
+//            $query = $queryBuilder
+//                ->insert('products')
+//                ->values(
+//                    array(
+//                        'groups' => '?',
+//                        'groupname' => '?',
+//                        'productName' => '?',
+//                        'manufacturerId' => '?',
+//                        'manufacturerName' => '?',
+//                        'price' => '?'
+//                    ))->setParameter(1, $groupid)
+//                     ->setParameter(2, $groupname)
+//                     ->setParameter(3, $productname)
+//                     ->setParameter(4, $manufacturerid)
+//                     ->setParameter(5, $manufacturername)
+//                     ->setParameter(7, $productprice)
+//                     ->getQuery();
+//            $query->execute();
+//            $em->flush();
+
+            $newInternalProduct = $this->createProductEntity($groupid, $groupname, $manufacturerid, $manufacturername, $productname, $productprice);
+            $em->persist($newInternalProduct);
+            $em->flush();
+            $message = 'New internal product successfully created.';
+            $response->setData(array('message'=>$message));
+            return $response;
+        }else{
+//            return message that product already exist in DB
+            $message = 'Internal product already exist in DB! Check in product table!';
+            $response->setData(array('message'=>$message));
+            return $response;
+        }
+    }
+
+    private function createProductEntity($groupid, $groupname, $manufacturerid, $manufacturername, $productname, $productprice){
+        $product = new Products();
+        $product->setGroups($groupid);
+        $product->setGroupname($groupname);
+        $product->setManufacturerid($manufacturerid);
+        $product->setManufacturername($manufacturername);
+        $product->setInputdate($this->getCurrentDateTime());
+        $product->setProductname($productname);
+        $product->setPrice($productprice);
+
+        return $product;
+    }
+
+    private function getCurrentDateTime(){
+        //return current Unix timestamp in miliseconds(int)
+        $timestamp = time();
+
+        //convert timestamp from miliseconds(int) in timestamp format Y-m-d H:i:s
+        $mysqlTimestampFormat = date("Y-m-d H:i:s", $timestamp);
+
+        return new \DateTime($mysqlTimestampFormat);
     }
 
 }

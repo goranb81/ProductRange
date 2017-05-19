@@ -22,6 +22,13 @@ class Products
     /**
      * @var string
      *
+     * @ORM\Column(name="groupname", type="string", length=50, nullable=true)
+     */
+    private $groupname;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="productName", type="string", length=500, nullable=false)
      */
     private $productname;
@@ -87,6 +94,30 @@ class Products
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    /**
+     * Set groupname
+     *
+     * @param string $groupname
+     *
+     * @return Products
+     */
+    public function setGroupname($groupname)
+    {
+        $this->groupname = $groupname;
+
+        return $this;
+    }
+
+    /**
+     * Get groupname
+     *
+     * @return string
+     */
+    public function getGroupname()
+    {
+        return $this->groupname;
     }
 
     /**

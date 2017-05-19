@@ -145,7 +145,7 @@
         }else if(priceColumn == '' || priceColumn == null || priceColumn == undefined){
             bootbox.alert("Column price isn't correct.")
             return false;
-        }
+        }else return true;
     }
 
     // fill Excel pricelist files select button

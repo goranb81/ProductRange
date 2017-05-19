@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Bridge\Doctrine;
 //$dir = 'c:\lazarus';
 //if ($handle = opendir($dir)) {
 //    while (false !== ($entry = readdir($handle))) {
@@ -23,13 +24,14 @@
 //    }
 //}
 
-echo 'Proba1';
-$i=5;
-$m=12;
-$r = $m + $i;
-var_dump($r);
+//echo 'Proba1';
+//$i=5;
+//$m=12;
+//$r = $m + $i;
+//var_dump($r);
 
 //$dir = '%kernel.root_dir%/../web/uploads/excelpricelist';
 //echo $dir;
 
+echo 'Validation script ready.';
 ?>
