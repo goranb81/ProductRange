@@ -17,6 +17,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Pricelistfiles
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="supplierid", type="integer", nullable=true)
+     */
+    private $supplierid;
+
+    /**
      * @var string
      *
      * @Assert\NotBlank(message = "The supplier name is not defined")
@@ -54,6 +61,20 @@ class Pricelistfiles
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * Set supplierid
+     *
+     * @param integer $supplierid
+     *
+     * @return Pricelistfiles
+     */
+    public function setSupplierid($supplierid)
+    {
+        $this->supplierid = $supplierid;
+
+        return $this;
+    }
 
 
     /**

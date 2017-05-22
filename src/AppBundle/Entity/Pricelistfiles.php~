@@ -13,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Pricelistfiles
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="supplierid", type="integer", nullable=true)
+     */
+    private $supplierid;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="supplier_name", type="string", length=255, nullable=false)

@@ -35,7 +35,7 @@ function delete_all(){
     $('#file_div').on("click", "#delete", function(){
         // get data from form fields
         var supplier_name = $("#supplier option:selected").text();
-        // var supplierid = $("#supplier").val();
+        var supplierid = $("#supplier").val();
 
         // console.log(supplier_name);
         // console.log(supplierid);
@@ -45,7 +45,7 @@ function delete_all(){
         var title = "Are you want to delete?";
         var message = supplier_name + "'s pricelist files.";
 
-        confirmAction(type, title, message, null, supplier_name, null, null, null, null, $(this));
+        confirmAction(type, title, message, null, supplierid, null, null, null, $(this));
 
         // we return false to prevent page reloading
         return false;
@@ -106,7 +106,7 @@ function deletePricelist(result,supplier_name, supplierid, pricelist_filename, n
             url: selected_button.data('url'),
             type: 'post',
             dataType: 'json',
-            data: {asupplier_name: supplier_name}
+            data: {asupplierid: supplierid}
         }).done(function (response) {
             //file table is load content
             // when we select supplier

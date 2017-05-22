@@ -25,32 +25,28 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            {{ form_start(form) }}
+            <form role="form" class="form-horizontal" method="post" action="{{ path('upload_pricelist') }}" id="form" enctype="multipart/form-data" >
+                <h4>Excel file</h4>
+                <button class="btn btn-primary"><input type="file" id="file_id" name="excel_file"/></button>
 
-            {{ form_label(form.excelFile) }}
-            {{ form_errors(form.excelFile) }}
-            {{ form_widget(form.excelFile) }}
+                <br>
+                <br>
 
-            <br>
-            <br>
+                <label for="supplier">Supplier name:</label>
+                <select class="form-control" id="supplier" name="supplier">
+                    {% for supplier in suppliers %}
+                    <option value="{{ supplier.supplierid }}">{{ supplier.suppliername }}</option>
+                    {% endfor %}
+                </select>
 
-            {{ form_label(form.supplierName) }}
-            {{ form_errors(form.supplierName) }}
-            {{ form_widget(form.supplierName) }}
+                <br>
+                <br>
 
-            <br>
-            <br>
+                <button type="submit" class="btn btn-primary pull-right" {#data-url="{{ path('import_pricelist') }}"#} id="upload">upload file</button>
+            </form>
 
-
-            {{ form_widget(form.upload) }}
-
-
-            {{ form_end(form) }}
         </div>
     </div>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
 
     </div>
 
@@ -59,4 +55,6 @@
 {% block javascripts %}
     {{  parent() }}
     <script src="{{ asset('assets/JS/upload_pricelists.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
 {% endblock %}

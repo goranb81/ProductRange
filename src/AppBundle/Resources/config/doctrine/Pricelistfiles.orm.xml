@@ -4,6 +4,11 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
+    <field name="supplierid" type="integer" column="supplierid" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
     <field name="supplierName" type="string" column="supplier_name" length="255" nullable="false">
       <options>
         <option name="fixed"/>
