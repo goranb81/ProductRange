@@ -45,8 +45,7 @@ function delete_all(){
         var title = "Are you want to delete?";
         var message = supplier_name + "'s pricelist files.";
 
-        confirmAction(type, title, message, null, supplierid, null, null, null, $(this));
-
+        confirmAction(type, title, message, null, supplier_name, supplierid, null, null, null, $(this));
         // we return false to prevent page reloading
         return false;
     });

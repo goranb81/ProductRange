@@ -6,10 +6,10 @@
  * ajax contains in this file use
  * AppBundle...
  */
-
+var table = null;
 $(document).ready(function () {
     //apply
-    $("#internal_table").DataTable();
+    table = $("#internal_table").DataTable();
 
     // create new internal product
     create_internal_product();
@@ -47,6 +47,7 @@ function create_internal_product(){
     });
 }
 
+// Frorm field confirmation
 function confirmAction(type, title, message, groupid, groupname, manufacturerid, manufacturername, productname, productprice, selected_button){
     bootbox.confirm({
         title: title,
@@ -71,6 +72,7 @@ function confirmAction(type, title, message, groupid, groupname, manufacturerid,
     });
 }
 
+// create internal product AJAX call
 function createInternalProduct(result, groupid, groupname, manufacturerid, manufacturername, productname, productprice, selected_button){
     if(result == true){
         if(validate(groupid, groupname, manufacturerid, manufacturername, productname, productprice)){
@@ -87,6 +89,15 @@ function createInternalProduct(result, groupid, groupname, manufacturerid, manuf
                 dataType: 'json',
                 data: { agroupid: groupid, agroupname: groupname, amanufacturerid: manufacturerid, amanufacturername: manufacturername, aproductname: productname, aproductprice: productprice}
             }).done(function (response) {
+
+                if(response.message == 'Internal product already exist in DB! Check in product table!'){
+                    // do nothing becouse internal product with that name exists in DB
+                }else{
+                    // internal product with that name does not exist in DB
+                    // add new product like column into table
+                    table.row.add([response.id, groupid, groupname, productname, manufacturername, response.date, productprice]).draw();
+                }
+
                 // fill dialog info with status information of realized operation
                 // prepare dialog info to be able to close
                 prepare_to_close_dialog_info('You can close dialog box and continue your work.', response);

@@ -535,6 +535,12 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $internalProduct = $em->getRepository('AppBundle\Entity\Products')->findBy(array('productname'=>$productname));
 
+//        internal product id of new product
+        $id = null;
+
+//        internal product input date
+        $date = null;
+
         $response = new JsonResponse();
         //        Is this product already exists?
         if($internalProduct == null){
@@ -563,8 +569,12 @@ class AdminController extends Controller
             $newInternalProduct = $this->createProductEntity($groupid, $groupname, $manufacturerid, $manufacturername, $productname, $productprice);
             $em->persist($newInternalProduct);
             $em->flush();
+            $id = $newInternalProduct->getInternalproductid();
+//            from DateTime object create string in format 'Y-m-d'
+            $format_date = $newInternalProduct->getInputdate()->format('Y-m-d');
             $message = 'New internal product successfully created.';
-            $response->setData(array('message'=>$message));
+//            send message and internal product id (provide id is neccessery when we add new row into table)
+            $response->setData(array('message'=>$message, 'id'=>$id, 'date'=> $format_date));
             return $response;
         }else{
 //            return message that product already exist in DB
@@ -591,7 +601,7 @@ class AdminController extends Controller
         //return current Unix timestamp in miliseconds(int)
         $timestamp = time();
 
-        //convert timestamp from miliseconds(int) in timestamp format Y-m-d H:i:s
+        //convert timestamp from miliseconds(int) in timestamp format Y-m-d H:i:s (this is string)
         $mysqlTimestampFormat = date("Y-m-d H:i:s", $timestamp);
 
         return new \DateTime($mysqlTimestampFormat);
