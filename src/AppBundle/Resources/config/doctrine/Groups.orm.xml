@@ -9,5 +9,10 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="parentid" type="smallint" column="parentid" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

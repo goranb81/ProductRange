@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/jsTree/themes/default/style.min.css') }} " />
+{% endblock %}
+
 {% block body %}
     <div class="container-fluid">
         <div class="row">
@@ -9,9 +13,43 @@
                 <button type="button" class="btn btn-info btn-lg active"><a href="{{  path('homepage') }}">Home</a></button>
             </div>
         </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                {#contener for tree#}
+                <div id="jstree_div">\
+                    {{ tree | raw }}
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    {% for n in number %}
+                        <li>{{ n }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+
+            </div>
+        </div>
     </div>
 {% endblock %}
 
-{% block stylesheets %}
-
+{% block javascripts %}
+    <script src="{{ asset('assets/jQuery-3.1.1/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/user_page.js') }}"></script>
+    <script src="{{ asset('assets/jsTree/jstree.min.js') }}"></script>
 {% endblock %}
