@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_united.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/jsTree/themes/default/style.min.css') }} " />
+    <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
+    {#add style to DataTable#}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/linking_products_pricelist.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -28,28 +32,95 @@
         <br>
 
         <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    {% for n in number %}
-                        <li>{{ n }}</li>
-                    {% endfor %}
-                </ul>
+            <div class="col-md-12" id="ids">
+                <h3>Internal products table</h3>
+
+                <table class="table-responsive table table-bordered" id="internal_table">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>group id</th>
+                        <th>group name</th>
+                        <th>name</th>
+                        <th>manufacturer</th>
+                        <th>input date</th>
+                        <th>price</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <br>
-        <br>
-
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" id="ids">
+                <h3>Suppliers products</h3>
+                <table class="table-responsive table table-bordered" id="external_table">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>product name</th>
+                        <th>price</th>
+                        <th>supplier id</th>
+                        <th>supplier name</th>
+                        <th>input date</th>
+                        <th>status</th>
+                    </tr>
+                    </thead>
 
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {#Modal progress bar#}
+    <div class="modal fade in" id="progressbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content modal-edit">
+                <div class="modal-header">
+                    <button id="closebtn" type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Please wait until load of pricelist table element is finish.</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div id="prog-bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                            {#<span class="sr-only">70% Complete</span>#}
+                        </div>
+                    </div>
+                    <h4 id="status">Delete pricelist process is running...</h4>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
+    {#var route contain URL of controller action get_all_descendants
+    we use this URL in AJAX call#}
+    <script>
+        var route = "{{ path('get_all_descendants') }}";
+    </script>
+
+    {#var route contain URL of controller action gget_all_suppliers_external_products
+    we use this URL in AJAX call#}
+    <script>
+        var route1 = "{{ path('get_all_suppliers_external_products') }}";
+    </script>
+
     <script src="{{ asset('assets/jQuery-3.1.1/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('assets/JS/user_page.js') }}"></script>
     <script src="{{ asset('assets/jsTree/jstree.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/js/jquery.dataTables.min.js') }}"></script>
 {% endblock %}

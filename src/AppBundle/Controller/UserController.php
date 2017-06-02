@@ -26,47 +26,20 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $groupsEntity = $em->getRepository('AppBundle\Entity\Groups')->findAll();
 
-        /*convert array of Groups entity into array of node's arrays*/
-        $datas = $this->getArrayOFArrayNodes($groupsEntity);
-
-        /*generate tree HTML from array of node's arrays into*/
-        $treeHTML = $this->generatePageTree($datas);
+        /*generate tree HTML from array of node's array of entity*/
+        $treeHTML = $this->generatePageTree($groupsEntity);
 
         return $this->render('user/user_base.html.twig', array('tree'=>$treeHTML));
-    }
-
-    /*convert array of Groups entity into following format
-    $datas = array(
-    array('id' => 1, 'parent' => 0, 'name' => 'Page 1'),
-    array('id' => 2, 'parent' => 1, 'name' => 'Page 1.1'),
-    array('id' => 3, 'parent' => 2, 'name' => 'Page 1.1.1'),
-    array('id' => 4, 'parent' => 3, 'name' => 'Page 1.1.1.1'),
-    array('id' => 5, 'parent' => 3, 'name' => 'Page 1.1.1.2'),
-    array('id' => 6, 'parent' => 1, 'name' => 'Page 1.2'));*/
-    private function getArrayOFArrayNodes($groupsEntity){
-        $datas = array();
-        foreach ($groupsEntity as $entity){
-            $datas[] = $this->convertEntityToNodeArray($entity);
-        }
-        return $datas;
-    }
-
-    private function convertEntityToNodeArray($entity){
-        $nodeArray = array();
-        $nodeArray['id'] = $entity->getId();
-        $nodeArray['parent'] = $entity->getParentid();
-        $nodeArray['name'] = $entity->getName();
-        return $nodeArray;
     }
 
     private function generatePageTree($datas, $parent = 0, $depth=0){
         if($depth > 1000) return ''; // Make sure not to have an endless recursion
         $tree = '<ul>';
         for($i=0, $ni=count($datas); $i < $ni; $i++){
-            if($datas[$i]['parent'] == $parent){
-                $tree .= '<li ' . 'id="' . $datas[$i]['id'] . '"' . '>';
-                $tree .= $datas[$i]['name'];
-                $tree .= $this->generatePageTree($datas, $datas[$i]['id'], $depth+1);
+            if($datas[$i]->getParentid() == $parent){
+                $tree .= '<li ' . 'id="' . $datas[$i]->getId() . '"' . '>';
+                $tree .= $datas[$i]->getName();
+                $tree .= $this->generatePageTree($datas, $datas[$i]->getId(), $depth+1);
                 $tree .= '</li>';
             }
         }
@@ -78,19 +51,94 @@ class UserController extends Controller
      * @Route("/get_all_descendants", name="get_all_descendants")
      */
     public function getAllDescandantsAction(Request $request){
-            /*this function returns all descandants + $parent (ID which represent start point of search)
-            becouse of that we delete from array value of ID that represent start point of search*/
-            $arrayOfDescandentNodeIDs = $this->listOfDescendants($datas, $parent, $depth=0);
+        $em = $this->getDoctrine()->getEntityManager();
 
-                /*delete $parent from $arrayOfDescandentNodeIDs*/
-            if(($key = array_search($arrayOfDescandentNodeIDs, $parent)) !== false) {
-                unset($arrayOfDescandentNodeIDs[$key]);
-            }
+        /*retrive id of node to find out all descendants which don't have children*/
+        /*NOTICE: $parentid is ARRAY!!!!!*/
+        $parent = $request->request->get('nodeid');
+        $parent_id = (int) $parent[0];
+
+        /*get entity Groups by $parentid*/
+        $parentEntity = $em->getRepository('AppBundle\Entity\Groups')->find($parent_id);
+
+        $groupsEntity = $em->getRepository('AppBundle\Entity\Groups')->findAll();
+
+            /*this function returns all descandants + $parentEntity (node which represent start point of search)*/
+            $arrayOfDescandentNodes = $this->listOfDescendants($groupsEntity, $parentEntity, $depth=0);
+
+            /*delete nodes that have children*/
+            $arrayOfDescandentNodes = $this->delete_node_have_children($arrayOfDescandentNodes);
+
+            /*order $arrayOfDescandentNodes ascending by ID*/
+            usort($arrayOfDescandentNodes, array($this,"compare"));
+
+          /*  get internal products for selected node
+            NOTICE: there are products which group ID = {array of IDs of nodes that don't have children}*/
+          $internalProductsOfSelectedNode = $this->getinternalProductsOfSelectedNode($arrayOfDescandentNodes);
+
+          $message = '';
+          if(count($internalProductsOfSelectedNode)>0) $message = "Fill internal products table process is finished.";
+          else $message = "Fill internal products table process is finished. There is no internal products belongs to selected node.";
+
+            //serialize files array of object
+            $internalProductsOfSelectedNodeJson = $this->get('serializer')->serialize($internalProductsOfSelectedNode, 'json');
 
             $response = new JsonResponse();
-            $response->setData(array('descandentsIDs'=>$arrayOfDescandentNodeIDs));
+            $response->setData(array('internalProductsOfSelectedNode'=>$internalProductsOfSelectedNodeJson, 'message'=>$message));
             return $response;
      }
+
+    private function getinternalProductsOfSelectedNode($arrayOfDescandentNodes){
+        $nodeIDs  = array();
+        foreach ($arrayOfDescandentNodes as $nodeEntity){
+            $nodeIDs[] = $nodeEntity->getId();
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $internalProductsOfSelectedNode = $em->getRepository('AppBundle\Entity\Products')->findBy(array('groups'=>$nodeIDs));
+        return $internalProductsOfSelectedNode;
+    }
+
+    private function compare($a,$b){
+        if ($a == $b) {
+            return 0;
+        }
+        return ($a < $b) ? -1 : 1;
+    }
+
+
+     /*delete element from array*/
+     private function delete_element_from_array($array, $element){
+         if(($key = array_search($element, $array)) !== false) {
+             unset($array[$key]);
+         }
+         return $array;
+     }
+
+    /*function delete nodes that don't have children*/
+    private function delete_node_have_children($arrayOfDescandentNodes){
+        $em = $this->getDoctrine()->getEntityManager();
+        $groups = $em->getRepository('AppBundle\Entity\Groups')->findAll();
+
+        foreach ($arrayOfDescandentNodes as $element){
+            if($this->isParent($element, $groups)){
+                $arrayOfDescandentNodes = $this->delete_element_from_array($arrayOfDescandentNodes, $element);
+            }
+        }
+
+        return $arrayOfDescandentNodes;
+    }
+
+    /*return true if node is parent*/
+    private function isParent($element, $groups){
+        foreach ($groups as $group){
+            if($group->getParentid() == $element->getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
   /*  algorithm is like algjoritm of function generatePageTree
@@ -100,20 +148,20 @@ class UserController extends Controller
 
     this function returns all descandants + $parent (ID which represent start point of search)
   */
-    private function listOfDescendants($datas, $parent, $depth=0){
+    private function listOfDescendants($datas, $parentEntity, $depth=0){
         if($depth > 1000) return ''; // Make sure not to have an endless recursion
-        $descendantsIds = array();
+        $descendants = array();
         for($i=0, $ni=count($datas); $i < $ni; $i++){
-            if($datas[$i]['parent'] == $parent){
-                $parray = $this->listOfDescendants($datas, $datas[$i]['id'], $depth+1);
+            if($datas[$i]->getParentid() == $parentEntity->getId()){
+                $parray = $this->listOfDescendants($datas, $datas[$i], $depth+1);
                 foreach ($parray as $element){
-                    array_push($descendantsIds, $element);
+                    array_push($descendants, $element);
                 }
             }
         }
 
-        $descendantsIds[] = $parent;
-        return $descendantsIds;
+        $descendants[] = $parentEntity;
+        return $descendants;
     }
 
    /* private function mergeArrays($array1, $array2){
@@ -121,4 +169,44 @@ class UserController extends Controller
             $array1[] = $element;
         }
     }*/
+
+    /**
+     * @Route("/get_all_suppliers_external_products", name="get_all_suppliers_external_products")
+     */
+    public function getAllSuppliersExternalProductsAction(Request $request){
+        $em = $this->getDoctrine()->getEntityManager();
+
+        /*retrive id of internal product to find out all suppliers external products linked to internal product*/
+        /*NOTICE: $pid is ARRAY!!!!!*/
+        $pid = $request->request->get('productid');
+        $id = (int) $pid[0];
+
+        /*get entity Products by $id*/
+        $product = $em->getRepository('AppBundle\Entity\Products')->find($id);
+
+        /*get entity Internalexternal by $product*/
+        $internalExternal = $em->getRepository('AppBundle\Entity\InternalExternal')->findBy(array("internalproductid"=>$product));
+
+        /*this function returns all supplier(external) products from $internalExternal*/
+        $arrayOfSupplierProducts = $this->getSupplierProducts($internalExternal);
+
+        $message = '';
+        if(count($arrayOfSupplierProducts)>0) $message = "Fill suppliers external products table process is finished.";
+        else $message = "Fill suppliers external products table process is finished.. There is no suppliers external products linked to selected internal product.";
+
+        //serialize files array of object
+        $arrayOfSupplierProductsJson = $this->get('serializer')->serialize($arrayOfSupplierProducts, 'json');
+
+        $response = new JsonResponse();
+        $response->setData(array('externalProductsOfSelectedInternalProduct'=>$arrayOfSupplierProductsJson, 'message'=>$message));
+        return $response;
+    }
+
+    private function getSupplierProducts($internalExternal){
+        $arrayOfSupplierProducts = array();
+        foreach ($internalExternal as $product){
+            $arrayOfSupplierProducts[] = $product->getExternalproductid();
+        }
+        return $arrayOfSupplierProducts;
+    }
 }
