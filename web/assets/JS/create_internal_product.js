@@ -9,7 +9,11 @@
 var table = null;
 $(document).ready(function () {
     //apply
-    table = $("#internal_table").DataTable();
+    table = $("#internal_table").DataTable({
+           "scrollY":        "200px",
+            "scrollCollapse": true,
+            "paging":         true
+        });
 
     // create new internal product
     create_internal_product();

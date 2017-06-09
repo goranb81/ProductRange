@@ -6,8 +6,16 @@ var table_internal = null;
 var table_external = null;
 $(document).ready(function () {
     //apply jQuery datatable
-    table_internal = $("#internal_table").DataTable();
-    table_external = $("#external_table").DataTable();
+    table_internal = $("#internal_table").DataTable({
+        "scrollY":        "600px",
+        "scrollCollapse": true,
+        "paging":         true
+    });
+    table_external = $("#external_table").DataTable({
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         true
+    });
 
     /*apply jstree*/
     $('#jstree_div').jstree(
@@ -55,6 +63,9 @@ function clear_and_fill_internal_product_table(){
              which represent products belongs to selected node group*/
             table_internal.clear().draw();
 
+            /*clear the external table*/
+            table_external.clear().draw();
+
             /*add all internal products with selected node group*/
             for(i=0;i<products.length;i++){
                 // add new product like column into table
@@ -97,6 +108,7 @@ function prepare_to_close_dialog_info(modalStatus, response){
     $("#status").text(response.message + ' ' + modalStatus);
     $(".progress-bar").removeClass('progress-bar-striped');
     $(".progress-bar").removeClass('active');
+    $("#progressbar").modal('hide');
 }
 
 //true - there is selected row in the table

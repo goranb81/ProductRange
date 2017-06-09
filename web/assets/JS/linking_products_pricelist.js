@@ -6,9 +6,17 @@ var external_table = null;
 var internal_table = null;
 $(document).ready(function (){
     // table that represent pricelist table in DB (pricelists products)
-  external_table = $("#external_table").DataTable();
+  external_table = $("#external_table").DataTable({
+      "scrollY":        "200px",
+      "scrollCollapse": true,
+      "paging":         true
+  });
     // table that represent products table in DB. products which we record like our internal products
-  internal_table = $("#internal_table").DataTable();
+  internal_table = $("#internal_table").DataTable({
+      "scrollY":        "200px",
+      "scrollCollapse": true,
+      "paging":         true
+  });
 
     // this function apply: when we change supplier in suuplier's select element
     // external products table change it's content with appropriate supplirs content

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/base.css') }}"/>
     <link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_united.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/jsTree/themes/default/style.min.css') }} " />
     <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
@@ -9,30 +10,21 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-
-                <h1>Welcome to User page. Choose option and continue...</h1>
-                <button type="button" class="btn btn-info btn-lg active"><a href="{{  path('homepage') }}">Home</a></button>
+    <div class="container" id="container">
+        <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+            <div class="col-md-12 col-md-offset-11">
+                {#<h1>Welcome to User page. Choose option and continue...</h1>#}
+                <button type="button" class="btn active"><strong><a href="{{  path('admin_index') }}">Admin</a></strong></button>
             </div>
         </div>
-        <br>
-        <br>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3 well">
                 {#contener for tree#}
                 <div id="jstree_div">\
                     {{ tree | raw }}
                 </div>
             </div>
-        </div>
-
-        <br>
-        <br>
-
-        <div class="row">
-            <div class="col-md-12" id="ids">
+            <div class="col-md-9 well" id="ids">
                 <h3>Internal products table</h3>
 
                 <table class="table-responsive table table-bordered" id="internal_table">
@@ -56,7 +48,11 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12" id="ids">
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 well" id="ids">
                 <h3>Suppliers products</h3>
                 <table class="table-responsive table table-bordered" id="external_table">
                     <thead>

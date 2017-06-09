@@ -1,0 +1,22 @@
+html,body{
+    height: 100%;
+    weight: 100%;
+    margin: 0;
+}
+
+#container{
+    height: 100%;
+    weight: 100%;
+}
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}

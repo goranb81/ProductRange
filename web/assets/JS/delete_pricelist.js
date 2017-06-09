@@ -16,7 +16,11 @@ $(document).ready(function(){
     fill_table();
 
     //apply DataTable jQuery on file table
-    table = $("#ftable").DataTable();
+    table = $("#ftable").DataTable({
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         true
+    });
 
     //select more than one row from table
     //and get data from that row
