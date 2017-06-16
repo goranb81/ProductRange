@@ -5,6 +5,41 @@
 var table_internal = null;
 var table_external = null;
 $(document).ready(function () {
+    //set web page height and width
+    // console.log($(window).height());   // returns height of browser viewport
+    // console.log($(document).height()); // returns height of HTML document (same as pageHeight in screenshot)
+    // console.log($(window).width());   // returns width of browser viewport
+    // console.log($(document).width()); // returns width of HTML document (same as pageWidth in screenshot)
+    //
+    // $("#d_tree").width($(document).width()/4);
+    // $("#internal_table").width((3*($(document).width()/4))-50);
+    //
+    // console.log($(document).width()/4);
+    // console.log(3*$(document).width()/4);
+    // console.log($(window).height());
+    // console.log($(window).width());
+    // $("#first").width($(document).width()/4);
+    // $("#first").height($(document).height());
+    // $("#second").width((3*$(document).width())/4);
+    // $("#second").height($(document).height());
+
+    // $("#first").width(100);
+    // $("#first").height(200);
+    // $("#second").width(300);
+    // $("#second").height(200);
+
+    // $("#first")
+    // $("#first").height(200);
+    // $("#second").width(300);
+    // $("#second").height(200);
+
+    resizeDiv();
+    window.onresize = function(event) {
+        resizeDiv();
+    }
+
+
+
     //apply jQuery datatable
     table_internal = $("#internal_table").DataTable({
         "scrollY":        "600px",
@@ -42,6 +77,13 @@ $(document).ready(function () {
     //select row from internal products table and fill the external product table
     select_row_internal_fill_external();
 });
+
+function resizeDiv() {
+    vpw = $(window).width();
+    vph = $(window).height();
+    $("#col1").css({'height': vph + 'px'});
+    $("#col2").css({'height': vph + 'px'});
+}
 
 function clear_and_fill_internal_product_table(){
     $('#jstree_div').on('select_node.jstree', function (e, data) {
@@ -152,37 +194,42 @@ function select_row_internal_fill_external(){
 }
 
 function fill_supplier_external_product_table(data){
-    console.log(data);
-    // open dialog modal - show information about start of fill supplier products
-    // after operation of fill products is finished it's show message that operation
-    // is finished
-    open_dialog_info("Please wait until fill supplier products table process is finish.", 'Fill supplier products process is running...');
+    //Check if internal table is empty
+    // then show bootbox alert and dont call Ajax
+    if(data == undefined || data == null) bootbox.alert("Internal product table is empty! Please select product group from product tree!");
+        else{
+        // open dialog modal - show information about start of fill supplier products
+        // after operation of fill products is finished it's show message that operation
+        // is finished
+        open_dialog_info("Please wait until fill supplier products table process is finish.", 'Fill supplier products process is running...');
 
-    // AJAX call
-    $.ajax({
-        url: route1,
-        type: 'post',
-        dataType: 'json',
-        data: {productid: data[0]}
-    }).done(function (response) {
-        var products = JSON.parse(response.externalProductsOfSelectedInternalProduct);
+        // AJAX call
+        $.ajax({
+            url: route1,
+            type: 'post',
+            dataType: 'json',
+            data: {productid: data[0]}
+        }).done(function (response) {
+            var products = JSON.parse(response.externalProductsOfSelectedInternalProduct);
 
-        /*clear table rows before fill table with new rows
-         which represent supplier external products belongs to selected internal product*/
-        table_external.clear().draw();
+            /*clear table rows before fill table with new rows
+             which represent supplier external products belongs to selected internal product*/
+            table_external.clear().draw();
 
-        /*add all supplier external products belong selected internal product*/
-        for(i=0;i<products.length;i++){
-            // add new product like column into table
-            var date = new Date(products[i].inputdate.timestamp*1000).toISOString().replace(/T.*/,'').split('-').reverse().join('-');
-            table_external.row.add([products[i].externalproductid, products[i].productname, products[i].price, products[i].supplierid, products[i].suppliername, date, products[i].status]).draw();
-        }
+            /*add all supplier external products belong selected internal product*/
+            for(i=0;i<products.length;i++){
+                // add new product like column into table
+                var date = new Date(products[i].inputdate.timestamp*1000).toISOString().replace(/T.*/,'').split('-').reverse().join('-');
+                table_external.row.add([products[i].externalproductid, products[i].productname, products[i].price, products[i].supplierid, products[i].suppliername, date, products[i].status]).draw();
+            }
 
-        // fill dialog info with status information of realized operation
-        // prepare dialog info to be able to close
-        prepare_to_close_dialog_info('You can close dialog box and continue your work.', response);
+            // fill dialog info with status information of realized operation
+            // prepare dialog info to be able to close
+            prepare_to_close_dialog_info('You can close dialog box and continue your work.', response);
 
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert('Error : ' + errorThrown);
-    });
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert('Error : ' + errorThrown);
+        });
+    }
+
 }

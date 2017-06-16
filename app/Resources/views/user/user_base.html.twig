@@ -10,93 +10,16 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container" id="container">
-        <div class="row" style="margin-top: 10px; margin-bottom: 10px">
-            <div class="col-md-12 col-md-offset-11">
-                {#<h1>Welcome to User page. Choose option and continue...</h1>#}
-                <button type="button" class="btn active"><strong><a href="{{  path('admin_index') }}">Admin</a></strong></button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 well">
-                {#contener for tree#}
-                <div id="jstree_div">\
-                    {{ tree | raw }}
-                </div>
-            </div>
-            <div class="col-md-9 well" id="ids">
-                <h3>Internal products table</h3>
+    {#<div>#}
+        {#<div id="first" style="display: inline-block; background: #2aabd2; width:50%">#}
 
-                <table class="table-responsive table table-bordered" id="internal_table">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>group id</th>
-                        <th>group name</th>
-                        <th>name</th>
-                        <th>manufacturer</th>
-                        <th>input date</th>
-                        <th>price</th>
-                    </tr>
-                    </thead>
+        {#</div>#}
+        {#<div id="second" style="display: inline-block; background: #4cae4c; width:50%">#}
 
-                    <tbody>
+        {#</div>#}
+    {#</div>#}
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="row">
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 well" id="ids">
-                <h3>Suppliers products</h3>
-                <table class="table-responsive table table-bordered" id="external_table">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>product name</th>
-                        <th>price</th>
-                        <th>supplier id</th>
-                        <th>supplier name</th>
-                        <th>input date</th>
-                        <th>status</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    {#Modal progress bar#}
-    <div class="modal fade in" id="progressbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content modal-edit">
-                <div class="modal-header">
-                    <button id="closebtn" type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
-
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Please wait until load of pricelist table element is finish.</h4>
-
-                </div>
-                <div class="modal-body">
-                    <div class="progress">
-                        <div id="prog-bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                            {#<span class="sr-only">70% Complete</span>#}
-                        </div>
-                    </div>
-                    <h4 id="status">Delete pricelist process is running...</h4>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="first">content</div><div id="second">content</div>
 {% endblock %}
 
 {% block javascripts %}

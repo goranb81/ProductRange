@@ -1,12 +1,7 @@
 html,body{
-    height: 100%;
-    weight: 100%;
+    min-height: 100%;
+    min-weight: 100%;
     margin: 0;
-}
-
-#container{
-    height: 100%;
-    weight: 100%;
 }
 
 .row {
@@ -19,4 +14,20 @@ html,body{
 .row > [class*='col-'] {
     display: flex;
     flex-direction: column;
+}
+
+
+
+ #col1 {
+     display: inline-block;
+     background-color: red;
+     width:33.5%;
+     height: 100%;
+ }
+
+#col2 {
+    display: inline-block;
+    background-color: green;
+    width:66.5%;
+    height: 100%;
 }
