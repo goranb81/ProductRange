@@ -18,16 +18,22 @@ html,body{
 
 
 
- #col1 {
+ #first {
      display: inline-block;
      background-color: red;
-     width:33.5%;
-     height: 100%;
  }
 
-#col2 {
+#second {
     display: inline-block;
     background-color: green;
-    width:66.5%;
-    height: 100%;
+}
+
+#third {
+    display: block;
+    background-color: beige;
+}
+
+#fourth {
+    display: block;
+    background-color: orange;
 }

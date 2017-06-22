@@ -6,39 +6,10 @@ var table_internal = null;
 var table_external = null;
 $(document).ready(function () {
     //set web page height and width
-    // console.log($(window).height());   // returns height of browser viewport
-    // console.log($(document).height()); // returns height of HTML document (same as pageHeight in screenshot)
-    // console.log($(window).width());   // returns width of browser viewport
-    // console.log($(document).width()); // returns width of HTML document (same as pageWidth in screenshot)
-    //
-    // $("#d_tree").width($(document).width()/4);
-    // $("#internal_table").width((3*($(document).width()/4))-50);
-    //
-    // console.log($(document).width()/4);
-    // console.log(3*$(document).width()/4);
-    // console.log($(window).height());
-    // console.log($(window).width());
-    // $("#first").width($(document).width()/4);
-    // $("#first").height($(document).height());
-    // $("#second").width((3*$(document).width())/4);
-    // $("#second").height($(document).height());
-
-    // $("#first").width(100);
-    // $("#first").height(200);
-    // $("#second").width(300);
-    // $("#second").height(200);
-
-    // $("#first")
-    // $("#first").height(200);
-    // $("#second").width(300);
-    // $("#second").height(200);
-
     resizeDiv();
     window.onresize = function(event) {
         resizeDiv();
     }
-
-
 
     //apply jQuery datatable
     table_internal = $("#internal_table").DataTable({
@@ -79,10 +50,26 @@ $(document).ready(function () {
 });
 
 function resizeDiv() {
-    vpw = $(window).width();
-    vph = $(window).height();
-    $("#col1").css({'height': vph + 'px'});
-    $("#col2").css({'height': vph + 'px'});
+    first_vpw = $(window).width()/4-2;
+    first_vph = $(window).height()-2;
+    second_vpw = 3*$(window).width()/4-2;
+    second_vph = $(window).height()-2;
+
+    // third_vpw = second_vpw-4;
+    // third_vph = 3*second_vph/4-4;
+    // fourth_vpw = second_vpw-4;
+    // fourth_vph = second_vph/4-4;
+
+    $("#first").css({'height': first_vph + 'px'});
+    $("#first").css({'width': first_vpw + 'px'});
+    $("#second").css({'height': second_vph + 'px'});
+    $("#second").css({'width': second_vpw + 'px'});
+
+    // $("#third").css({'height': third_vph + 'px'});
+    // $("#third").css({'width': third_vpw + 'px'});
+    // $("#fourth").css({'height': fourth_vph + 'px'});
+    // $("#fourth").css({'width': fourth_vpw + 'px'});
+
 }
 
 function clear_and_fill_internal_product_table(){
@@ -231,5 +218,4 @@ function fill_supplier_external_product_table(data){
             alert('Error : ' + errorThrown);
         });
     }
-
 }
