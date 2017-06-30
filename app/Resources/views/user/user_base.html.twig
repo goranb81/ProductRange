@@ -11,10 +11,93 @@
 
 {% block body %}
 
-    <div id="first" class="first"></div>
+    <div id="first" class="first">
+        {#contener for tree#}
+        <div id="jstree_div">\
+            {{ tree | raw }}
+        </div>
+    </div>
+
     <div id="second" class="second">
-        {#<div id="third" class="third"></div>#}
-        {#<div id="fourth" class="fourth"></div>#}
+        <div id="third" class="third">
+            <table class="table-responsive table table-bordered" id="internal_table" display="inline">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>group id</th>
+                    <th>group name</th>
+                    <th>name</th>
+                    <th>manufacturer</th>
+                    <th>input date</th>
+                    <th>price</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div id="fourth" class="fourth">
+            <table class="table-responsive table table-bordered" id="external_table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>product name</th>
+                    <th>price</th>
+                    <th>supplier id</th>
+                    <th>supplier name</th>
+                    <th>input date</th>
+                    <th>status</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {#<table id="table">#}
+        {#<tr>#}
+            {#<td style="background-color: #4cae4c" class="first">#}
+                {#Prvi#}
+            {#</td>#}
+            {#<td style="background-color: #2aabd2" class="second">#}
+                {#<table id="table1">#}
+                    {#<tr style="background-color: #2b2b2b" id="third" class="third">#}
+
+                    {#</tr>#}
+                    {#<tr style="background-color: #9d2118" id="fourth" class="fourth">#}
+
+                    {#</tr>#}
+                {#</table>#}
+            {#</td>#}
+        {#</tr>#}
+    {#</table>#}
+
+    {#Modal progress bar#}
+    <div class="modal fade in" id="progressbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content modal-edit">
+                <div class="modal-header">
+                    <button id="closebtn" type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Please wait until load of pricelist table element is finish.</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div id="prog-bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                            {#<span class="sr-only">70% Complete</span>#}
+                        </div>
+                    </div>
+                    <h4 id="status">Delete pricelist process is running...</h4>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

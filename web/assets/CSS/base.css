@@ -2,6 +2,7 @@ html,body{
     min-height: 100%;
     min-weight: 100%;
     margin: 0;
+    /*padding: 0;*/
 }
 
 .row {
@@ -21,19 +22,27 @@ html,body{
  #first {
      display: inline-block;
      background-color: red;
+     margin: 0px;
  }
 
 #second {
     display: inline-block;
-    background-color: green;
+    /*background-color: green;*/
+    margin: 0px;
 }
 
 #third {
     display: block;
     background-color: beige;
+    margin: 0px;
+    /*float: right;*/
+    overflow: scroll;
 }
 
 #fourth {
     display: block;
     background-color: orange;
+    margin: 0px;
+    /*float: left;*/
+    overflow: scroll;
 }

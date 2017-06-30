@@ -4,7 +4,23 @@
 
 var table_internal = null;
 var table_external = null;
+var pad = 5;
 $(document).ready(function () {
+
+    // console.dir(window);
+    // console.dir(document);
+    // console.dir(screen);
+    console.log("window_w ");
+    console.log($(window).width());
+    console.log("window_h");
+    console.log($(window).height());
+    //
+    // alert($(document).width());
+    // alert($(document).height());
+    //
+    // alert($(window.screen).width());
+    // alert($(window.screen).height());
+
     //set web page height and width
     resizeDiv();
     window.onresize = function(event) {
@@ -50,25 +66,69 @@ $(document).ready(function () {
 });
 
 function resizeDiv() {
-    first_vpw = $(window).width()/4-2;
-    first_vph = $(window).height()-2;
-    second_vpw = 3*$(window).width()/4-2;
-    second_vph = $(window).height()-2;
+    // first_vpw = $(window).width()/4-2;
+    // first_vph = $(window).height()-2;
+    // second_vpw = 3*$(window).width()/4-2;
+    // second_vph = $(window).height()-2;
 
     // third_vpw = second_vpw-4;
     // third_vph = 3*second_vph/4-4;
     // fourth_vpw = second_vpw-4;
     // fourth_vph = second_vph/4-4;
 
-    $("#first").css({'height': first_vph + 'px'});
-    $("#first").css({'width': first_vpw + 'px'});
-    $("#second").css({'height': second_vph + 'px'});
-    $("#second").css({'width': second_vpw + 'px'});
+    // $("#first").css({'height': first_vph + 'px'});
+    // $("#first").css({'width': first_vpw + 'px'});
+    // $("#second").css({'height': second_vph + 'px'});
+    // $("#second").css({'width': second_vpw + 'px'});
 
     // $("#third").css({'height': third_vph + 'px'});
     // $("#third").css({'width': third_vpw + 'px'});
     // $("#fourth").css({'height': fourth_vph + 'px'});
     // $("#fourth").css({'width': fourth_vpw + 'px'});
+
+    vpw = $(window).width();
+    vph = $(window).height();
+
+    // console.log(vpw);
+    // console.log(vph);
+    // $("table").css({'height': vph + 'px'});
+    // $("table").css({'width': vpw + 'px'});
+
+    first_vpw = $(window).width()/4 - pad;
+    first_vph = $(window).height() - pad;
+    second_vpw = 3*$(window).width()/4 - pad;
+    second_vph = $(window).height() - pad;
+
+    // console.log("first_h" . first_vph);
+    // console.log("first_w" . first_vpw);
+    // console.log("second_h" . second_vph);
+    // console.log("second_w" . second_vpw);
+
+    $("#first").css({'height': first_vph + 'px'});
+    $("#first").css({'width': first_vpw + 'px'});
+    $("#second").css({'height': second_vph + 'px'});
+    $("#second").css({'width': second_vpw + 'px'});
+
+
+    third_vpw = second_vpw;
+    third_vph = 3*second_vph/4;
+    fourth_vpw = second_vpw;
+    fourth_vph = second_vph/4;
+
+    // console.log("third_h");
+    // console.log(third_vph);
+    // console.log("third_w");
+    // console.log(third_vpw);
+    // console.log("fourth_h");
+    // console.log(fourth_vph);
+    // console.log("fourth_w");
+    // console.log(fourth_vpw);
+
+    $("#third").css({'height': third_vph + 'px'});
+    $("#third").css({'width': third_vpw + 'px'});
+    $("#fourth").css({'height': fourth_vph + 'px'});
+    $("#fourth").css({'width': fourth_vpw + 'px'});
+
 
 }
 

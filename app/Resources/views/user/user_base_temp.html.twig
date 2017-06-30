@@ -1,3 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/base.css') }}"/>
+    <link rel="stylesheet" href="{{  asset('assets/bootstrap-3.3.7-dist/css/bootstrap_united.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/jsTree/themes/default/style.min.css') }} " />
+    <link rel="stylesheet" href="{{  asset('assets/DataTables/css/jquery.dataTables.min.css') }}"/>
+    {#add style to DataTable#}
+    <link rel="stylesheet" href="{{  asset('assets/CSS/linking_products_pricelist.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
 <div class="container" id="container">
     <div class="row" style="margin-top: 10px; margin-bottom: 10px">
         <div class="col-md-12 col-md-offset-11">
@@ -85,3 +98,27 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {#var route contain URL of controller action get_all_descendants
+    we use this URL in AJAX call#}
+    <script>
+        var route = "{{ path('get_all_descendants') }}";
+    </script>
+
+    {#var route contain URL of controller action gget_all_suppliers_external_products
+    we use this URL in AJAX call#}
+    <script>
+        var route1 = "{{ path('get_all_suppliers_external_products') }}";
+    </script>
+
+    <script src="{{ asset('assets/jQuery-3.1.1/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/user_page.js') }}"></script>
+    <script src="{{ asset('assets/jsTree/jstree.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/bootstrap-confirmation.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/js/jquery.dataTables.min.js') }}"></script>
+{% endblock %}
